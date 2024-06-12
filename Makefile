@@ -1,13 +1,27 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/06/12 20:57:52 by aneekhra          #+#    #+#              #
+#    Updated: 2024/06/12 21:10:11 by aneekhra         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RE = \033[0m
+RED = \033[0;31m
+CYAN = \033[0;36m
+MAGENTA = \033[0;35m
+ENDCOLOR = \033[0m
 
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -Iincl
 LFLAGS = -lreadline -Ireadline -L$(LFT_F) -lft -I$(LFT_F)
-HEADERS = incl/minishell.h incl/execute.h incl/parsing.h
+# HEADERS = incl/minishell.h incl/execute.h incl/parsing.h
 LFT_F = libft
 FT_DES = ft_destructor
 
@@ -32,32 +46,30 @@ OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@printf "\n"
-	$(MAKE) -C $(FT_DES)
-	$(MAKE) -C $(LFT_F)
-	$(CC) -o $@ $(OBJ) $(LFLAGS) $(CFLAGS) ./ft_destructor/ft_alloc.a
-	@echo "$(GREEN)\n—————————————✣ MINISHELL COMPILED ✣—————————————\n$(RE)"
+	@$(MAKE) -C $(FT_DES) --silent
+	@$(MAKE) -C $(LFT_F) --silent
 
-$(OBJ_F)%.o: %.c $(HEADERS) Makefile
+	@printf "\n"
+	@echo "${MAGENTA}				🚀 Compiling $(NAME)... 🚀${ENDCOLOR}"
+	$(CC) -o $@ $(OBJ) $(LFLAGS) $(CFLAGS) ./ft_destructor/ft_alloc.a
+	@echo "${GREEN}\n			✅ $(NAME) Compilation completed successfully! ✅${ENDCOLOR}"
+	@echo "${CYAN}				🚀 Run with ./minishell 🚀\n${ENDCOLOR}"
+	
+$(OBJ_F)%.o: %.c  Makefile
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -o $@ -c $<
-	@printf "$(GREEN). $(RE)"
+	@$(CC) $(CFLAGS) -o $@ -c $<
+
 
 v: all
-	valgrind --leak-check=full ./minishell
+	@valgrind --leak-check=full ./minishell
 clean:
-	rm -rf $(OBJ_F)
+	@echo "${RED}🧹 Cleaning objects... 🧹${ENDCOLOR}"
+	@rm -rf $(OBJ_F)
 
 fclean: clean
-	rm -f $(NAME)
-	if [ -d "$(LFT_F)" ]; then \
-		$(MAKE) fclean -C $(LFT_F); \
-	fi
-	if [ -d "$(FT_DES)" ]; then \
-		$(MAKE) fclean -C $(FT_DES); \
-	fi
+	@echo "${RED}🧹 Cleaning $(NAME)... 🧹${ENDCOLOR}"
+	@rm -f $(NAME)
 
 re: fclean all
-	$(MAKE) -j 12 all
 
 .PHONY:	all clean fclean re bonus

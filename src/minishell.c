@@ -37,7 +37,7 @@ static void	minishell_loop(t_args *shell_data)
 	char	*input;
 	char	*path;
 	
-	load_history();
+	// load_history();
 	while (1)
 	{
 		// g_signal = 0;
@@ -56,7 +56,7 @@ static void	minishell_loop(t_args *shell_data)
 		ft_free(input);
 	}
 	ft_free(path);
-	save_history();
+	// save_history();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -64,6 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	t_args	shell_data;
 
+	load_history();
 	ft_alloc_init();
 	setup_signal_handlers();
 	if (argc == 1)
@@ -74,6 +75,7 @@ int	main(int argc, char **argv, char **envp)
 	else
 		exit(write(1, RED "No arguments accepted!\n" RE, 32));
 	ft_destructor();
+	save_history();
 	return (0);
 }
 

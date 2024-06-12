@@ -2,6 +2,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+
+# define _POSIX_C_SOURCE 200809L
 # define HISTORY_FILE "./.minishell_history"
 # define RE "\001\033[0m\002"
 # define RED "\001\033[1;31m\002"
@@ -15,12 +17,18 @@
 # include "../libft/libft.h"
 # include "execute.h"
 # include "parsing.h"
+# include <ctype.h>
 # include <dirent.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <sys/param.h>
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -77,10 +85,10 @@ void			init_mshell(t_args *shell_data, char **env);
 int				leave_heredoc(t_args *shell_data, int err_i);
 void			ft_lstadd_env(t_env_lst **lst, char *name, char *val);
 
-void	save_history(void);
-void	load_history(void);
-void	setup_signal_handlers(void);
-void	handle_sigquit(int sig);
-void	handle_sigint(int sig);
+void			save_history(void);
+void			load_history(void);
+void			setup_signal_handlers(void);
+void			handle_sigquit(int sig);
+void			handle_sigint(int sig);
 
 #endif
