@@ -30,13 +30,13 @@ void	init_cmd(int c, int *t, t_args *shell_data)
 			count.arg++;
 		else
 		{
-			if (shell_data->tokarr[*t].type == T_RED_INP
-				|| shell_data->tokarr[*t].type == T_HEREDOC)
+			if (shell_data->tokarr[*t].type == T_RED_FROM
+				|| shell_data->tokarr[*t].type == T_DLESS)
 				count.in++;
-			else if (shell_data->tokarr[*t].type == T_RED_OUT
-				|| shell_data->tokarr[*t].type == T_APPEND)
+			else if (shell_data->tokarr[*t].type == T_RED_TO
+				|| shell_data->tokarr[*t].type == T_DGREAT)
 				count.out++;
-			if (shell_data->tokarr[*t].type == T_RED_INP
+			if (shell_data->tokarr[*t].type == T_RED_FROM
 				&& spec_symb(shell_data->tokarr[*t].word) == 2)
 				count.out++;
 			(*t)++;

@@ -25,7 +25,7 @@ int	leave_heredoc(t_args *shell_data, int err_i)
 	heredoc = 0;
 	while (++i < err_i)
 	{
-		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_HEREDOC && (i + 1) < shell_data->tokarr_l
+		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_DLESS && (i + 1) < shell_data->tokarr_l
 			&& shell_data->tokarr[i + 1].type == T_WORD)
 			heredoc++;
 	}
@@ -38,7 +38,7 @@ int	leave_heredoc(t_args *shell_data, int err_i)
 	in = -1;
 	while (++i < err_i)
 	{
-		if (shell_data->tokarr[i].type == T_HEREDOC)
+		if (shell_data->tokarr[i].type == T_DLESS)
 			fill_redir_type(&shell_data->cmdarr[0].inp[++in], shell_data->tokarr, &i);
 	}
 	return (heredoc);

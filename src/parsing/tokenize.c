@@ -59,19 +59,36 @@ void	init_tokarr(char *s, t_args *shell_data)
 	shell_data->tokarr_l = len;
 }
 
-//arg - &s[i] ptr on needed str part
-t_type	token_typizator(char *s)
+//ZROBIONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+t_token_types	token_typizator(char *input_string)
 {
-	if (*s == '|')
+	if (*input_string == '|')
 		return (T_PIPE);
-	else if (*s == *(s + 1) && *s == '<')
-		return (T_HEREDOC);
-	else if (*s == '<')
-		return (T_RED_INP);
-	else if (*s == *(s + 1) && *s == '>')
-		return (T_APPEND);
-	else if (*s == '>')
-		return (T_RED_OUT);
+	else if (*input_string == *(input_string + 1) && *input_string == '<')
+		return (T_DLESS);
+	else if (*input_string == '<')
+		return (T_RED_FROM);
+	else if (*input_string == *(input_string + 1) && *input_string == '>')
+		return (T_DGREAT);
+	else if (*input_string == '>')
+		return (T_RED_TO);
 	else
 		return (T_WORD);
 }
+
+// //arg - &s[i] ptr on needed str part
+// t_type	token_typizator(char *s)
+// {
+// 	if (*s == '|')
+// 		return (T_PIPE);
+// 	else if (*s == *(s + 1) && *s == '<')
+// 		return (T_HEREDOC);
+// 	else if (*s == '<')
+// 		return (T_RED_INP);
+// 	else if (*s == *(s + 1) && *s == '>')
+// 		return (T_APPEND);
+// 	else if (*s == '>')
+// 		return (T_RED_OUT);
+// 	else
+// 		return (T_WORD);
+// }

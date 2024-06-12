@@ -5,21 +5,32 @@
 typedef struct s_args		t_args;
 typedef struct s_builtin	t_builtin;
 
-typedef enum e_type
+typedef enum e_token_types
 {
-	T_NDEF,		// *notdefined
 	T_WORD,		// word, string, file, cmd ...
+	T_RED_TO,	//>
+	T_RED_FROM,	//<
+	T_DLESS,	//<<
+	T_DGREAT,	//>>
+	T_UNDEFINED,// *notdefined - DO USUNIECIA< NIE UZYWANE
 	T_PIPE,		//|
-	T_HEREDOC,	//<<
-	T_RED_INP,	//<
-	T_APPEND,	//>>
-	T_RED_OUT,	//>
-}							t_type;
+}							t_token_types;
+
+// typedef enum e_type
+// {
+// 	T_NDEF,		// *notdefined
+// 	T_WORD,		// word, string, file, cmd ...
+// 	T_PIPE,		//|
+// 	T_HEREDOC,	//<<
+// 	T_RED_INP,	//<
+// 	T_APPEND,	//>>
+// 	T_RED_OUT,	//>
+// }							t_type;
 
 typedef struct s_token
 {
 	char					*word;
-	t_type					type;
+	t_token_types					type;
 }							t_token;
 
 typedef struct s_cmdarr
@@ -72,7 +83,7 @@ void						init_tokarr(char *s, t_args *shell_data);
 void						init_cmdarr(t_args *shell_data);
 void						init_cmd(int c, int *t, t_args *shell_data);
 void						alloc_cmd(t_count sizes, t_cmdarr *cmd);
-t_type						token_typizator(char *s);
+t_token_types				token_typizator(char *s);
 void						fill_redir_type(t_token *rdr, t_token *tarr,
 								int *t);
 void						print_cmds(t_args *shell_data);

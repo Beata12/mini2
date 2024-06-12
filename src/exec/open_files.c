@@ -49,7 +49,7 @@ void	heredoc_loop(t_args *shell_data, int i)
 	j = 0;
 	while (j < shell_data->cmdarr[i].inp_l)
 	{
-		if (shell_data->cmdarr[i].inp[j].type == T_HEREDOC)
+		if (shell_data->cmdarr[i].inp[j].type == T_DLESS)
 			heredoc(shell_data, i, j);
 		j++;
 	}
@@ -63,7 +63,7 @@ void	open_input_files(t_args *shell_data, int i)
 	j = 0;
 	while (j < shell_data->cmdarr[i].inp_l)
 	{
-		if (shell_data->cmdarr[i].inp[j].type == T_HEREDOC)
+		if (shell_data->cmdarr[i].inp[j].type == T_DLESS)
 			file = open_file("/tmp/heredoc_tmp", 2);
 		else
 			file = open_file(shell_data->cmdarr[i].inp[j].word, 2);
@@ -81,7 +81,7 @@ void	open_output_files(t_args *shell_data, int i)
 	j = 0;
 	while (j < shell_data->cmdarr[i].out_l)
 	{
-		if (shell_data->cmdarr[i].out[j].type == T_APPEND)
+		if (shell_data->cmdarr[i].out[j].type == T_DGREAT)
 			file = open_file(shell_data->cmdarr[i].out[j].word, 0);
 		else
 			file = open_file(shell_data->cmdarr[i].out[j].word, 1);
