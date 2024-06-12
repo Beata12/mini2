@@ -1,1 +1,1 @@
-# mini2
+Reproducing bahavior of bash
