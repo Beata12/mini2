@@ -57,21 +57,39 @@ static void	minishell_loop(t_args *shell_data)
 	ft_free(path);
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
+	(void)argv;
 	t_args	shell_data;
 
 	ft_alloc_init();
 	ignore_signals();
-	(void)av;
-	(void)ac;
-	if (ac != 1)
-		exit(write(1, RED "No arguments accepted!\n" RE, 32));
-	else
+	if (argc == 1)
 	{
 		init_mshell(&shell_data, get_envp(envp));
 		minishell_loop(&shell_data);
 	}
+	else
+		exit(write(1, RED "No arguments accepted!\n" RE, 32));
 	ft_destructor();
 	return (0);
 }
+
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_args	shell_data;
+
+// 	ft_alloc_init();
+// 	ignore_signals();
+// 	(void)av;
+// 	(void)ac;
+// 	if (ac != 1)
+// 		exit(write(1, RED "No arguments accepted!\n" RE, 32));
+// 	else
+// 	{
+// 		init_mshell(&shell_data, get_envp(envp));
+// 		minishell_loop(&shell_data);
+// 	}
+// 	ft_destructor();
+// 	return (0);
+// }
