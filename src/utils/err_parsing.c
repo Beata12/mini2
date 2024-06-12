@@ -1,25 +1,25 @@
 
 #include "../../incl/minishell.h"
 
-int	token_order_check(t_args *shell_data)
-{
-	int		i;
-	t_token	*arr;
+// int	token_order_check(t_args *shell_data)
+// {
+// 	int		i;
+// 	t_token	*arr;
 
-	i = -1;
-	arr = shell_data->tokarr;
-	while (++i < shell_data->tokarr_l)
-	{
-		if (arr[i].type == T_PIPE && ((i - 1) < 0 || (i
-					+ 1) >= shell_data->tokarr_l))
-			return (my_error(arr[i].word, shell_data->exit_status = 2), i);
-		else if (arr[i].type > 2 && (i + 1) >= shell_data->tokarr_l)
-			return (my_error("newline", 2), shell_data->exit_status = 2);
-		else if (arr[i].type > 2 && shell_data->tokarr[i + 1].type > 1)
-			return (my_error(arr[i + 1].word, shell_data->exit_status = 2), i);
-	}
-	return (-1);
-}
+// 	i = -1;
+// 	arr = shell_data->tokarr;
+// 	while (++i < shell_data->tokarr_l)
+// 	{
+// 		if (arr[i].type == T_PIPE && ((i - 1) < 0 || (i
+// 					+ 1) >= shell_data->tokarr_l))
+// 			return (my_error(arr[i].word, shell_data->exit_status = 2), i);
+// 		else if (arr[i].type > 2 && (i + 1) >= shell_data->tokarr_l)
+// 			return (my_error("newline", 2), shell_data->exit_status = 2);
+// 		else if (arr[i].type > 2 && shell_data->tokarr[i + 1].type > 1)
+// 			return (my_error(arr[i + 1].word, shell_data->exit_status = 2), i);
+// 	}
+// 	return (-1);
+// }
 // int	unvalid_quotes(char *input_string)
 // {
 // 	int	i;

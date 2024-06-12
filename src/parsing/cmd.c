@@ -20,7 +20,7 @@ void	double_redir_case(t_token *redir, t_token *tokarr, int *t)
 // returns token end i (where encounted pipe or end of arr)
 //NOWA NAZWA!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // void	process_command_tokens(int cmd, int *tok, t_args *shell_data)
-void	fill_cmd(int cmd, int *tok, t_args *shell_data)
+void	parse_and_fill_command(int cmd, int *tok, t_args *shell_data)
 {
 	int	a;
 	int	i;
@@ -32,7 +32,7 @@ void	fill_cmd(int cmd, int *tok, t_args *shell_data)
 	while (*tok < shell_data->tokarr_l && shell_data->tokarr[*tok].type != T_PIPE)
 	{
 		if (shell_data->tokarr[*tok].type == T_RED_FROM
-			&& spec_symb(shell_data->tokarr[*tok].word) == 2)
+			&& check_special_symbol(shell_data->tokarr[*tok].word) == 2)
 			double_redir_case(&shell_data->cmdarr[cmd].inp[++i], shell_data->tokarr,
 				tok);
 		if (shell_data->tokarr[*tok].type == T_RED_FROM

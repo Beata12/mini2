@@ -22,9 +22,9 @@ static char	*allocate_unquoted_string(t_token current_token)
 	{
 		char current_char = *current_token.word;
 
-		if (quote_status == current_char || (!quote_status && current_char != quote(current_char)))
-			quote_opened_type(current_char, &quote_status);
-		if (!(quote_status == current_char || (!quote_status && current_char == quote(current_char))))
+		if (quote_status == current_char || (!quote_status && current_char != track_quote(current_char)))
+			is_open_quote(current_char, &quote_status);
+		if (!(quote_status == current_char || (!quote_status && current_char == track_quote(current_char))))
 			i++;
 		current_token.word++;
 	}
@@ -53,12 +53,12 @@ static void	remove_token_quotes(t_token *current_token)
 	    if (quote_status == current_token->word[i])
 	    {
 	        // Zaktualizuj stan cudzysłowu i przejdź do następnego znaku
-	        quote_opened_type(current_token->word[i], &quote_status);
+	        is_open_quote(current_token->word[i], &quote_status);
 	    }
-	    else if (!quote_status && current_token->word[i] == quote(current_token->word[i]))
+	    else if (!quote_status && current_token->word[i] == track_quote(current_token->word[i]))
 	    {
 	        // Zaktualizuj stan cudzysłowu i przejdź do następnego znaku
-	        quote_opened_type(current_token->word[i], &quote_status);
+	        is_open_quote(current_token->word[i], &quote_status);
 	    }
 	    else
 	    {

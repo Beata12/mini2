@@ -36,10 +36,11 @@ static void	minishell_loop(t_args *shell_data)
 {
 	char	*input;
 	char	*path;
-
+	
+	load_history();
 	while (1)
 	{
-		g_signal = 0;
+		// g_signal = 0;
 		path = get_currect_path(shell_data);
 		input = readline(path);
 		if (check_input(input))
@@ -55,6 +56,7 @@ static void	minishell_loop(t_args *shell_data)
 		ft_free(input);
 	}
 	ft_free(path);
+	save_history();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -63,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	t_args	shell_data;
 
 	ft_alloc_init();
-	ignore_signals();
+	setup_signal_handlers();
 	if (argc == 1)
 	{
 		init_mshell(&shell_data, get_envp(envp));

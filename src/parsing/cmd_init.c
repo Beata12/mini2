@@ -74,7 +74,7 @@ static void update_count(t_token *token, t_count *count)
             count->out++;
         }
 
-        if (token->type == T_RED_FROM && spec_symb(token->word) == 2)
+        if (token->type == T_RED_FROM && check_special_symbol(token->word) == 2)
         {
             count->out++;
         }

@@ -31,7 +31,7 @@ void	ft_piping(t_args *shell_data, int **pipes)
 		pid = fork();
 		if (pid == 0)
 		{
-			signal(SIGINT, child_signal);
+			signal(SIGINT, handle_sigquit);
 			heredoc_loop(shell_data, i);
 			if (i != 0)
 				dup2(pipes[i - 1][0], 0);

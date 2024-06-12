@@ -56,40 +56,42 @@ typedef struct s_env_lst
 	struct s_env_lst		*next;
 }							t_env_lst;
 
-// err check
-void						my_error(char *c, int type);
-int							wrong_input(t_args *shell_data, char *input);
-int							token_order_check(t_args *shell_data);
 // parsing
 void						init_env(t_args *shell_data, char **env);
 int							fill_str(char *s, t_env_lst **lst);
-int							parse_input(char *input, t_args *shell_data);
 void						dollar_value_subst(char **s, char *q,
 								t_args *shell_data);
-void						open_quotes(t_args *shell_data);
-void						fill_cmd(int cmd, int *tok, t_args *shell_data);
-// parsing utils
-int							space(char c);
-int							quote(char c);
-int							spec_symb(char *s);
-void						quote_opened_type(char c, char *q);
-int							pass_str(char *s);
 int							ft_strchr_pos(char *s, int c);
-int							env_lst_len(t_env_lst *lst);
 t_env_lst					*find_env_node(char *name, t_env_lst *env);
 char						*cut_name(char *s);
-void						init_dst(char **dst, char *src);
-void						init_tokarr(char *s, t_args *shell_data);
-void						init_cmdarr(t_args *shell_data);
-void						init_cmd(int c, int *t, t_args *shell_data);
-void						alloc_cmd(t_count sizes, t_cmdarr *cmd);
-t_token_types				token_typizator(char *s);
 void						fill_redir_type(t_token *rdr, t_token *tarr,
 								int *t);
-void						print_cmds(t_args *shell_data);
-void						print_env(t_env_lst *env);
+
+// void						init_dst(char **dst, char *src);
+// int							env_lst_len(t_env_lst *lst);
+// void						fill_cmd(int cmd, int *tok, t_args *shell_data);
+// void						open_quotes(t_args *shell_data);
+// int							token_order_check(t_args *shell_data);
+// parsing utils
+// int							space(char c);
+// int							quote(char c);
+// int							spec_symb(char *s);
+// void						quote_opened_type(char c, char *q);
+// int							pass_str(char *s);
+// void						init_tokarr(char *s, t_args *shell_data);
+// void						init_cmdarr(t_args *shell_data);
+// void						init_cmd(int c, int *t, t_args *shell_data);
+
+// void						alloc_cmd(t_count sizes, t_cmdarr *cmd);
+// void						print_cmds(t_args *shell_data);
+// void						print_env(t_env_lst *env);
+
 
 //NOWE
+void						my_error(char *c, int type);
+int							parse_input(char *input, t_args *shell_data);
+int							wrong_input(t_args *shell_data, char *input);
+t_token_types				token_typizator(char *input_string);
 void						is_open_quote(char input_string, char *quote_flag);
 int							track_quote(char input_string);
 int							missing_bracccet(char *input_string);
@@ -111,5 +113,6 @@ void						remove_all_quotes(t_args *shell_data);
 void						initialize_command_array(t_args *shell_data);
 void						initialize_command(int command_counter, int *token_counter, t_args *shell_data);
 void 						allocate_command_memory(t_count cmd_sizes, t_cmdarr *command);
+void						parse_and_fill_command(int cmd, int *tok, t_args *shell_data);
 
 #endif

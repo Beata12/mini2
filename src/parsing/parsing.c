@@ -96,7 +96,7 @@ static void	split_tokens(char *input_string, t_args *shell_data)
 	// init_tokarr(input_string, shell_data);
 	while (input_string[++i])
 	{
-		if (space(input_string[i]))
+		if (is_whitespace(input_string[i]))
 			continue ;
 		shell_data->tokarr[token_index].type = token_typizator(&input_string[i]);
 		token_length = check_special_symbol(&input_string[i]);//DZIAŁA!!!!!!!!!!!!1
@@ -123,7 +123,7 @@ static void	create_and_fill_commands(t_args *shell_data)
 	command_counter = 0;
 	while (command_counter < shell_data->cmdarr_l)
 	{
-		fill_cmd(command_counter, &token_counter, shell_data);//tutaj
+		parse_and_fill_command(command_counter, &token_counter, shell_data);//tutaj
 		token_counter++;
 		command_counter++;
 	}

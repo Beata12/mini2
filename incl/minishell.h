@@ -2,6 +2,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define HISTORY_FILE "./.minishell_history"
 # define RE "\001\033[0m\002"
 # define RED "\001\033[1;31m\002"
 # define BLUE "\001\033[1;34m\002"
@@ -25,7 +26,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-extern int		g_signal;
+// extern int		g_signal;
 
 typedef struct s_args
 {
@@ -43,10 +44,10 @@ typedef struct s_args
 }				t_args;
 
 //*UTILS
-void			ignore_signals(void);
+// void			ignore_signals(void);
 char			**get_envp(char **envp);
-void			child_signal(int signal);
-void			handle_sigint(int signals);
+// void			child_signal(int signal);
+// void			handle_sigint(int signals);
 void			tmp_sort_env(t_env_lst *env);
 int				return_builtin_num(char *cmd);
 char			**convert_env(t_env_lst *env);
@@ -75,4 +76,11 @@ char			**split_save_divider(char *s, char c);
 void			init_mshell(t_args *shell_data, char **env);
 int				leave_heredoc(t_args *shell_data, int err_i);
 void			ft_lstadd_env(t_env_lst **lst, char *name, char *val);
+
+void	save_history(void);
+void	load_history(void);
+void	setup_signal_handlers(void);
+void	handle_sigquit(int sig);
+void	handle_sigint(int sig);
+
 #endif

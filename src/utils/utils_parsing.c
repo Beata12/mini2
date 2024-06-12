@@ -48,32 +48,33 @@ int	empty_str(char *s)
 {
 	if (!s)
 		return (1);
-	while (*s && space(*s))
+	while (*s && is_whitespace(*s))
 		s++;
 	if (*s)
 		return (0);
 	return (1);
 }
 
-void	init_dst(char **dst, char *src)
-{
-	char	q;
-	int		i;
-	int		d;
+// void	init_dst(char **dst, char *src)
+// {
+// 	char	q;
+// 	int		i;
+// 	int		d;
 
-	i = -1;
-	d = 0;
-	q = '\0';
-	if (!src)
-		return ;
-	while (src[++i])
-	{
-		quote_opened_type(src[i], &q);
-		if (!(((space(src[i]) && space(src[i + 1])) || (space(src[i]) && (!d
-							|| !src[i + 1]))) && !q))
-			d++;
-	}
-	*dst = (char *)ft_calloc(sizeof(char), d + 1);
-	if (!*dst)
-		alloc_err();
-}
+// 	i = -1;
+// 	d = 0;
+// 	q = '\0';
+// 	if (!src)
+// 		return ;
+// 	while (src[++i])
+// 	{
+// 		is_open_quote(src[i], &q);
+// 		// quote_opened_type(src[i], &q);
+// 		if (!(((is_whitespace(src[i]) && is_whitespace(src[i + 1])) || (is_whitespace(src[i]) && (!d
+// 							|| !src[i + 1]))) && !q))
+// 			d++;
+// 	}
+// 	*dst = (char *)ft_calloc(sizeof(char), d + 1);
+// 	if (!*dst)
+// 		alloc_err();
+// }

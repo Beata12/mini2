@@ -1,18 +1,18 @@
 
 #include "../../incl/minishell.h"
 
-int	env_lst_len(t_env_lst *lst)
-{
-	int	size;
+// int	env_lst_len(t_env_lst *lst)
+// {
+// 	int	size;
 
-	size = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		size++;
-	}
-	return (size);
-}
+// 	size = 0;
+// 	while (lst)
+// 	{
+// 		lst = lst->next;
+// 		size++;
+// 	}
+// 	return (size);
+// }
 
 void	ft_lstadd_env(t_env_lst **lst, char *name, char *val)
 {

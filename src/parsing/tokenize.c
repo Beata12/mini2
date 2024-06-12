@@ -9,31 +9,35 @@ int	pass_quoted_str(char *s, char *q)
 	i++;
 	while (s[i] && s[i] != *q)
 		i++;
-	quote_opened_type(s[i], q);
+	is_open_quote(s[i], q);
+	// quote_opened_type(s[i], q);
 	return (i);
 }
 
-int	pass_str(char *s)
-{
-	int		i;
-	char	q;
+// int	pass_str(char *s)
+// {
+// 	int		i;
+// 	char	q;
 
-	q = '\0';
-	i = 0;
-	while (s[i] && !spec_symb(&s[i]) && !space(s[i]))
-	{
-		quote_opened_type(s[i], &q);
-		if (q)
-		{
-			i++;
-			while (s[i] && s[i] != q)
-				i++;
-			quote_opened_type(s[i], &q);
-		}
-		i++;
-	}
-	return (i);
-}
+// 	q = '\0';
+// 	i = 0;
+// 	while (s[i] && !check_special_symbol(&s[i]) && !is_whitespace(s[i]))
+// 	// while (s[i] && !spec_symb(&s[i]) && !is_whitespace(s[i]))
+// 	{
+// 		is_open_quote(s[i], &q);
+// 		// quote_opened_type(s[i], &q);
+// 		if (q)
+// 		{
+// 			i++;
+// 			while (s[i] && s[i] != q)
+// 				i++;
+// 			is_open_quote(s[i], &q);
+// 			// quote_opened_type(s[i], &q);
+// 		}
+// 		i++;
+// 	}
+// 	return (i);
+// }
 
 //ZROBIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void	initialize_token_array(char *input_string, t_args *shell_data)
