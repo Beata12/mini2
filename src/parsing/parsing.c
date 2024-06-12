@@ -113,18 +113,19 @@ static void	split_tokens(char *input_string, t_args *shell_data)
 // cmdarr [{args - arr[char *],
 // inp - arr[word - file, type - type red_inp/heredoc],
 // out - arr[word - file, type - type red_out/append]}, {args, inp, out}];
-static void	create_cmdarr(t_args *shell_data)
+static void	create_and_fill_commands(t_args *shell_data)
 {
-	int	c;
-	int	t;
+	int	token_counter;
+	int	command_counter;
 
-	init_cmdarr(shell_data);
-	c = -1;
-	t = 0;
-	while (++c < shell_data->cmdarr_l)
+	initialize_command_array(shell_data);//SKONCNZONE i dziala
+	token_counter = 0;
+	command_counter = 0;
+	while (command_counter < shell_data->cmdarr_l)
 	{
-		fill_cmd(c, &t, shell_data);
-		t++;
+		fill_cmd(command_counter, &token_counter, shell_data);//tutaj
+		token_counter++;
+		command_counter++;
 	}
 }
 
@@ -147,7 +148,7 @@ int	parse_input(char *input, t_args *shell_data)
 	}
 	remove_all_quotes(shell_data);// ZROBIONE I DZIALA
 	if (token_status < 0)
-		create_cmdarr(shell_data);
+		create_and_fill_commands(shell_data);//ROBIE TERAZ
 	shell_data->exit_status = 0;
 	return (ft_free(processed_input), 1);
 }

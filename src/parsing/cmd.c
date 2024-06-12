@@ -18,6 +18,8 @@ void	double_redir_case(t_token *redir, t_token *tokarr, int *t)
 
 // takes curr cmd, and token start i for this cmd
 // returns token end i (where encounted pipe or end of arr)
+//NOWA NAZWA!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// void	process_command_tokens(int cmd, int *tok, t_args *shell_data)
 void	fill_cmd(int cmd, int *tok, t_args *shell_data)
 {
 	int	a;

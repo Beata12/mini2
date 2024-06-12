@@ -20,13 +20,13 @@ char	*find_path(char *cmd, char *path)
 		if (fd != -1)
 		{
 			close(fd);
-			ft_free_array(paths);
+			free_string_array(paths);
 			return (c);
 		}
 		free(c);
 		i++;
 	}
-	ft_free_array(paths);
+	free_string_array(paths);
 	return (NULL);
 }
 

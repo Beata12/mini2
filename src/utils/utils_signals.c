@@ -1,4 +1,4 @@
-
+//ANJALI changed it
 #include "../../incl/minishell.h"
 
 int		g_signal;

@@ -96,7 +96,6 @@ int							missing_bracccet(char *input_string);
 char						*combine_strings(char **string_array);
 int							is_whitespace(char input_string);
 void						initialize_trimmed_string(char **result_str, char *input_str);
-void						is_open_quote(char input_string, char *quote_flag);
 int							check_special_symbol(char *input_string);
 void						memory_allocation_error(void);
 char						**divide_and_store(char *input_string, char separator);
@@ -109,5 +108,8 @@ int							skip_special_characters(char *input_string);
 int							validate_token_order(t_args *shell_data);
 int							handle_heredoc_tokens(t_args *shell_data, int err_i);
 void						remove_all_quotes(t_args *shell_data);
+void						initialize_command_array(t_args *shell_data);
+void						initialize_command(int command_counter, int *token_counter, t_args *shell_data);
+void 						allocate_command_memory(t_count cmd_sizes, t_cmdarr *command);
 
 #endif

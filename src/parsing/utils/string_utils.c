@@ -7,7 +7,7 @@ void	free_string_array(char **string_array)
 	
 	i = 0;
 	if (string_array == NULL)
-		return;
+		return ;
 	while (string_array[i] != NULL)
 	{
 		ft_free(string_array[i]);
