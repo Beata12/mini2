@@ -13,9 +13,10 @@ FT_DES = ft_destructor
 
 SRC =	minishell.c \
 		execute.c builtins1.c builtins2.c echo.c open_files.c \
-		env_init.c parsing.c dollar_parse.c tokenize.c open_quotes.c cmd.c cmd_init.c \
+		env_init.c parsing.c dollar_parse.c tokenize.c cmd.c cmd_init.c \
 		utils_signals.c  utils_parsing.c utils_symbol.c utils_path.c utils_execute.c \
 		utils_env.c err.c err_parsing.c env_lst.c arr.c split_save_divider.c clean.c print.c \
+		parsing/quote_handler.c \
 		parsing/utils/input_validation.c \
 		parsing/utils/validation_utils.c \
 		parsing/utils/utils.c \

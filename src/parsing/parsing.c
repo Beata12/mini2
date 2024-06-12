@@ -145,7 +145,7 @@ int	parse_input(char *input, t_args *shell_data)
 		if (!handle_heredoc_tokens(shell_data, token_status))//ZROBIONE I DZIALA
 			return(0);
 	}
-	open_quotes(shell_data);
+	remove_all_quotes(shell_data);
 	if (token_status < 0)
 		create_cmdarr(shell_data);
 	shell_data->exit_status = 0;
