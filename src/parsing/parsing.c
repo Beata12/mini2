@@ -132,7 +132,7 @@ int	parse_input(char *input, t_args *shell_data)
 	if (wrong_input(shell_data, input))
 		return (0);
 	processed_input = remove_extra_spaces(input);
-	expand_env_variables(&processed_input, shell_data);
+	expand_env_variables(&processed_input, shell_data);//ZROBIONE
 	split_tokens(processed_input, shell_data);
 	token_status = token_order_check(shell_data);
 	if (token_status >= 0)
