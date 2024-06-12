@@ -82,27 +82,27 @@ static void	expand_env_variables(char **input_string, t_args *shell_data)
 // 	ft_free_array(dllr_arr);
 // }
 
-// word - text or pipe/redir symb, type - number of type
-static void	split_tokens(char *s, t_args *shell_data)
+//ZROBIONE I DZIALA!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+static void	split_tokens(char *input_string, t_args *shell_data)
 {
 	int	i;
-	int	a_i;
-	int	w_l;
+	int	token_index;
+	int	token_length;
 
 	i = -1;
-	a_i = 0;
-	init_tokarr(s, shell_data);
-	while (s[++i])
+	token_index = 0;
+	init_tokarr(input_string, shell_data);
+	while (input_string[++i])
 	{
-		if (space(s[i]))
+		if (space(input_string[i]))
 			continue ;
-		shell_data->tokarr[a_i].type = token_typizator(&s[i]);
-		w_l = spec_symb(&s[i]);
-		if (!w_l)
-			w_l = pass_str(&s[i]);
-		shell_data->tokarr[a_i].word = ft_substr(s, i, w_l--);
-		i += w_l;
-		a_i++;
+		shell_data->tokarr[token_index].type = token_typizator(&input_string[i]);
+		token_length = spec_symb(&input_string[i]);
+		if (!token_length)
+			token_length = pass_str(&input_string[i]);
+		shell_data->tokarr[token_index].word = ft_substr(input_string, i, token_length--);
+		i += token_length;
+		token_index++;
 	}
 }
 
