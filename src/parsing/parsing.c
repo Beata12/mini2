@@ -142,10 +142,8 @@ int	parse_input(char *input, t_args *shell_data)
 	// token_status = token_order_check(shell_data);
 	if (token_status >= 0)
 	{
-		if (!leave_heredoc(shell_data, token_status))
-		{
+		if (!handle_heredoc_tokens(shell_data, token_status))//ZROBIONE I DZIALA
 			return(0);
-		}
 	}
 	open_quotes(shell_data);
 	if (token_status < 0)

@@ -15,34 +15,34 @@ int	ft_strchr_pos(char *s, int c)
 	return (-1);
 }
 
-int	leave_heredoc(t_args *shell_data, int err_i)
-{
-	int	i;
-	int	in;
-	int	heredoc;
+// int	leave_heredoc(t_args *shell_data, int err_i)
+// {
+// 	int	i;
+// 	int	in;
+// 	int	heredoc;
 
-	i = -1;
-	heredoc = 0;
-	while (++i < err_i)
-	{
-		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_DLESS && (i + 1) < shell_data->tokarr_l
-			&& shell_data->tokarr[i + 1].type == T_WORD)
-			heredoc++;
-	}
-	if (!heredoc)
-		return (0);
-	shell_data->cmdarr = ft_malloc(sizeof(t_cmdarr) * 1);
-	shell_data->cmdarr_l = 1;
-	alloc_cmd((t_count){.arg = 0, .in = heredoc, .out = 0}, shell_data->cmdarr);
-	i = -1;
-	in = -1;
-	while (++i < err_i)
-	{
-		if (shell_data->tokarr[i].type == T_DLESS)
-			fill_redir_type(&shell_data->cmdarr[0].inp[++in], shell_data->tokarr, &i);
-	}
-	return (heredoc);
-}
+// 	i = -1;
+// 	heredoc = 0;
+// 	while (++i < err_i)
+// 	{
+// 		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_DLESS && (i + 1) < shell_data->tokarr_l
+// 			&& shell_data->tokarr[i + 1].type == T_WORD)
+// 			heredoc++;
+// 	}
+// 	if (!heredoc)
+// 		return (0);
+// 	shell_data->cmdarr = ft_malloc(sizeof(t_cmdarr) * 1);
+// 	shell_data->cmdarr_l = 1;
+// 	alloc_cmd((t_count){.arg = 0, .in = heredoc, .out = 0}, shell_data->cmdarr);
+// 	i = -1;
+// 	in = -1;
+// 	while (++i < err_i)
+// 	{
+// 		if (shell_data->tokarr[i].type == T_DLESS)
+// 			fill_redir_type(&shell_data->cmdarr[0].inp[++in], shell_data->tokarr, &i);
+// 	}
+// 	return (heredoc);
+// }
 
 int	empty_str(char *s)
 {

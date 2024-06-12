@@ -184,3 +184,105 @@ int	validate_token_order(t_args *shell_data)
 // 	else
 // 		return (T_WORD);
 // }
+
+
+//UTILS TOKENIZATION
+//ZROBIONE I DZIAŁA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+int	handle_heredoc_tokens(t_args *shell_data, int end_index)
+{
+	int	i;
+	int	heredoc_index;
+	int	heredoc_count;
+
+	// Inicjalizacja liczników
+	i = 0;
+	heredoc_count = 0;
+
+	// Zliczanie ilości heredoc
+	while (i < end_index)
+	{
+	    // Sprawdź, czy indeks i jest w zakresie tokarr
+	    if (shell_data->tokarr_l > i) 
+	    {
+	        // Sprawdź, czy aktualny token jest heredoc (T_DLESS)
+	        if (shell_data->tokarr[i].type == T_DLESS)
+	        {
+	            // Sprawdź, czy następny token istnieje i jest typu T_WORD
+	            if ((i + 1) < shell_data->tokarr_l && shell_data->tokarr[i + 1].type == T_WORD)
+	                heredoc_count++;
+	        }
+	    }
+	    i++;
+	}
+	// while (i < end_index)
+	// {
+	// 	if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_DLESS 
+	// 		&& (i + 1) < shell_data->tokarr_l
+	// 		&& shell_data->tokarr[i + 1].type == T_WORD)
+	// 		heredoc_count++;
+	// 	i++;
+	// }
+
+	// Jeśli nie znaleziono heredoc, zakończ funkcję
+	if (!heredoc_count)
+		return (0);
+
+	// Alokowanie pamięci dla cmdarr i ustawienie wartości
+	shell_data->cmdarr = ft_malloc(sizeof(t_cmdarr) * 1);
+	shell_data->cmdarr_l = 1;
+	alloc_cmd((t_count){.arg = 0, .in = heredoc_count, .out = 0}, shell_data->cmdarr);
+
+	// Wypełnianie cmdarr danymi z heredoc
+	i = 0;
+	heredoc_index = -1;
+	while (i < end_index)
+	{
+	    // Sprawdź, czy aktualny token jest typu T_DLESS
+	    if (shell_data->tokarr[i].type == T_DLESS)
+	    {
+	        // Zwiększ licznik heredoc_index przed wywołaniem funkcji fill_redir_type
+	        heredoc_index++;
+	        // Wywołaj funkcję fill_redir_type
+	        fill_redir_type(&shell_data->cmdarr[0].inp[heredoc_index], shell_data->tokarr, &i);
+	    }
+	    // Przejdź do następnego tokena
+	    i++;
+	}
+	// while (i < end_index)
+	// {
+	// 	if (shell_data->tokarr[i].type == T_DLESS)
+	// 		fill_redir_type(&shell_data->cmdarr[0].inp[++heredoc_index], shell_data->tokarr, &i);
+	// 	i++;
+	// }
+	return (heredoc_count);
+}
+// int	handle_heredoc_tokens(t_args *shell_data, int token_limit)
+// {
+// 	int	i;
+// 	int	in;
+// 	int	heredoc;
+
+// 	i = 0;
+// 	heredoc = 0;
+// 	while (i < token_limit)
+// 	{
+// 		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_DLESS && (i + 1) < shell_data->tokarr_l
+// 			&& shell_data->tokarr[i + 1].type == T_WORD)
+// 			heredoc++;
+// 		i++;
+// 	}
+// 	if (!heredoc)
+// 		return (0);
+// 	shell_data->cmdarr = ft_malloc(sizeof(t_cmdarr) * 1);
+// 	shell_data->cmdarr_l = 1;
+// 	alloc_cmd((t_count){.arg = 0, .in = heredoc, .out = 0}, shell_data->cmdarr);
+// 	i = 0;
+// 	in = -1;
+// 	while (i < token_limit)
+// 	{
+// 		if (shell_data->tokarr[i].type == T_DLESS)
+// 			fill_redir_type(&shell_data->cmdarr[0].inp[++in], shell_data->tokarr, &i);
+// 		i++;
+// 	}
+// 	return (heredoc);
+// }
