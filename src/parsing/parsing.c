@@ -82,6 +82,7 @@ static void	expand_env_variables(char **input_string, t_args *shell_data)
 // 	ft_free_array(dllr_arr);
 // }
 
+
 //ZROBIONE I DZIALA!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 static void	split_tokens(char *input_string, t_args *shell_data)
 {
@@ -91,15 +92,18 @@ static void	split_tokens(char *input_string, t_args *shell_data)
 
 	i = -1;
 	token_index = 0;
-	init_tokarr(input_string, shell_data);
+	initialize_token_array(input_string, shell_data);//nie działa poprawnie
+	// init_tokarr(input_string, shell_data);
 	while (input_string[++i])
 	{
 		if (space(input_string[i]))
 			continue ;
 		shell_data->tokarr[token_index].type = token_typizator(&input_string[i]);
-		token_length = spec_symb(&input_string[i]);
+		token_length = check_special_symbol(&input_string[i]);//DZIAŁA!!!!!!!!!!!!1
+		// token_length = spec_symb(&input_string[i]);
 		if (!token_length)
-			token_length = pass_str(&input_string[i]);
+			// token_length = pass_str(&input_string[i]);
+			token_length = skip_special_characters(&input_string[i]);//DZIAŁA!!!!!!!!!!!!!!!!!!
 		shell_data->tokarr[token_index].word = ft_substr(input_string, i, token_length--);
 		i += token_length;
 		token_index++;

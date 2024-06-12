@@ -35,29 +35,65 @@ int	pass_str(char *s)
 	return (i);
 }
 
-void	init_tokarr(char *s, t_args *shell_data)
+//ZROBIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+void	initialize_token_array(char *input_string, t_args *shell_data)
 {
-	int		len;
 	int		i;
+	int		len;
 
+	i = 0;
 	len = 0;
-	i = -1;
-	while (s[++i])
+	// while (input_string[++i])
+	// {
+	// 	if (!is_whitespace(input_string[i]))
+	// 	{
+	// 		if (check_special_symbol(&input_string[i]) && check_special_symbol(&input_string[i]) == 2)
+	// 			i++;
+	// 		else
+	// 			i += skip_special_characters(&input_string[i]) - 1;
+	// 		len++;
+	// 	}
+	// }
+	while (input_string[++i])
 	{
-		if (space(s[i]))
+		if (is_whitespace(input_string[i]))
 			continue ;
-		if (spec_symb(&s[i]))
+		if (check_special_symbol(&input_string[i]))
 		{
-			if (spec_symb(&s[i]) == 2)
+			if (check_special_symbol(&input_string[i]) == 2)
 				i++;
 		}
 		else
-			i += pass_str(&s[i]) - 1;
+			i += skip_special_characters(&input_string[i]) - 1;
 		len++;
 	}
 	shell_data->tokarr = ft_malloc(sizeof(t_token) * len);
 	shell_data->tokarr_l = len;
 }
+
+// void	init_tokarr(char *s, t_args *shell_data)
+// {
+// 	int		len;
+// 	int		i;
+
+// 	len = 0;
+// 	i = -1;
+// 	while (s[++i])
+// 	{
+// 		if (space(s[i]))
+// 			continue ;
+// 		if (spec_symb(&s[i]))
+// 		{
+// 			if (spec_symb(&s[i]) == 2)
+// 				i++;
+// 		}
+// 		else
+// 			i += pass_str(&s[i]) - 1;
+// 		len++;
+// 	}
+// 	shell_data->tokarr = ft_malloc(sizeof(t_token) * len);
+// 	shell_data->tokarr_l = len;
+// }
 
 //ZROBIONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 t_token_types	token_typizator(char *input_string)
@@ -74,6 +110,29 @@ t_token_types	token_typizator(char *input_string)
 		return (T_RED_TO);
 	else
 		return (T_WORD);
+}
+
+//ZROBIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+int	skip_special_characters(char *input_string)
+{
+	int		i;
+	char	quote_status;
+
+	i = 0;
+	quote_status = '\0';
+	while (input_string[i] && !check_special_symbol(&input_string[i]) && !is_whitespace(input_string[i]))
+	{
+		is_open_quote(input_string[i], &quote_status);
+		if (quote_status)
+		{
+			i++;
+			while (input_string[i] && input_string[i] != quote_status)
+				i++;
+			is_open_quote(input_string[i], &quote_status);
+		}
+		i++;
+	}
+	return (i);
 }
 
 // //arg - &s[i] ptr on needed str part

@@ -104,5 +104,7 @@ void						free_string_array(char **string_array);
 void						expand_dollar_variables(char **input_string, char *quote_status, t_args *shell_data);
 char						*find_variable_name(char *input_string);
 t_env_lst					*find_environment_variable(char *name, t_env_lst *env);
+void						initialize_token_array(char *input_string, t_args *shell_data);
+int							skip_special_characters(char *input_string);
 
 #endif
