@@ -135,6 +135,39 @@ int	skip_special_characters(char *input_string)
 	return (i);
 }
 
+//ZROBIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+int	validate_token_order(t_args *shell_data)
+{
+	int		i;
+	t_token	*token_array;
+
+	i = 0;
+	token_array = shell_data->tokarr;
+	// while (i < shell_data->tokarr_l)
+	// {
+	// 	if ((i + 1) >= shell_data->tokarr_l && token_array[i].type == T_PIPE)
+	// 		return (my_error(token_array[i].word, shell_data->execution_result = 2), i);
+	// 	else if ((i + 1) >= shell_data->tokarr_l && token_array[i].type > 2)
+	// 		return (my_error("newline", 2), shell_data->execution_result = 2);
+	// 	else if (token_array[i].type > 2 && shell_data->tokarr[i + 1].type > 1)
+	// 		return (my_error(token_array[i + 1].word, shell_data->execution_result = 2), i);
+	// 	i++;
+	// }
+	while (i < shell_data->tokarr_l)
+	{
+		if (token_array[i].type == T_PIPE && ((i - 1) < 0 || (i
+					+ 1) >= shell_data->tokarr_l))
+			return (my_error(token_array[i].word, shell_data->execution_result = 2), i);
+		else if (token_array[i].type > 2 && (i + 1) >= shell_data->tokarr_l)
+			return (my_error("newline", 2), shell_data->execution_result = 2);
+		else if (token_array[i].type > 2 && shell_data->tokarr[i + 1].type > 1)
+			return (my_error(token_array[i + 1].word, shell_data->execution_result = 2), i);
+		i++;
+	}
+	return (-1);
+}
+
+
 // //arg - &s[i] ptr on needed str part
 // t_type	token_typizator(char *s)
 // {

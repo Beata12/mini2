@@ -137,8 +137,9 @@ int	parse_input(char *input, t_args *shell_data)
 		return (0);
 	processed_input = remove_extra_spaces(input);
 	expand_env_variables(&processed_input, shell_data);//ZROBIONE
-	split_tokens(processed_input, shell_data);
-	token_status = token_order_check(shell_data);
+	split_tokens(processed_input, shell_data);//ZROBIONE I Dziala
+	token_status = validate_token_order(shell_data);// dzIALA NO LEAKS, ok
+	// token_status = token_order_check(shell_data);
 	if (token_status >= 0)
 	{
 		if (!leave_heredoc(shell_data, token_status))

@@ -106,5 +106,6 @@ char						*find_variable_name(char *input_string);
 t_env_lst					*find_environment_variable(char *name, t_env_lst *env);
 void						initialize_token_array(char *input_string, t_args *shell_data);
 int							skip_special_characters(char *input_string);
+int							validate_token_order(t_args *shell_data);
 
 #endif
