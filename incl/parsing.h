@@ -30,17 +30,17 @@ typedef enum e_token_types
 typedef struct s_token
 {
 	char					*word;
-	t_token_types					type;
+	t_token_types			type;
 }							t_token;
 
-typedef struct s_cmdarr
+typedef struct s_cmd_arr_str
 {
 	char					**args;
-	t_token					*inp; // arr[struct{word, type}];
-	t_token					*out; // arr[struct{word, type}];
+	t_token					*input_tokens;
+	t_token					*output_tokens;
 	int						inp_l;
 	int						out_l;
-}							t_cmdarr;
+}							t_cmd_arr_str;
 
 typedef struct s_count
 {
@@ -115,7 +115,7 @@ int				handle_heredoc_tokens(t_args *shell_data, int err_i);
 void			remove_all_quotes(t_args *shell_data);
 void			initialize_command_array(t_args *shell_data);
 void			initialize_command(int command_counter, int *token_counter, t_args *shell_data);
-void 			allocate_command_memory(t_count cmd_sizes, t_cmdarr *command);
+void 			allocate_command_memory(t_count cmd_sizes, t_cmd_arr_str *command);
 void			parse_and_fill_command(int cmd, int *tok, t_args *shell_data);
 void 			handle_double_redirection(t_token *redirection_token, t_token *token_array, int *token_index);
 void			set_redirection_type(t_token *redirection_token, t_token *token_array, int *token_index);

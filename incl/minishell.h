@@ -38,16 +38,16 @@
 
 typedef struct s_args
 {
-	t_env_lst	*export;
-	t_env_lst	*env;
-	t_token		*tokarr;
-	t_cmdarr	*cmdarr;
-	t_builtin	*builtin;
-	int			execution_result;
-	int			exit_status;//to do usuniecia, bo to to samo co execution result tylko zamien wszystkie
-	int			tokarr_l;
-	int			cmdarr_l;
-	int			cmd_num;
+	t_env_lst		*export;
+	t_env_lst		*env;
+	t_token			*tokarr;
+	t_cmd_arr_str	*cmdarr;
+	t_builtin		*builtin;
+	int				execution_result;
+	int				exit_status;//to do usuniecia, bo to to samo co execution result tylko zamien wszystkie
+	int				tokarr_l;
+	int				cmdarr_l;
+	int				cmd_num;
 
 }				t_args;
 

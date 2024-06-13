@@ -29,11 +29,11 @@ static void process_token(int command_index, int *token_index, t_args *shell_dat
     t_token *current_token = &shell_data->tokarr[*token_index];
     
     if (current_token->type == T_RED_FROM && check_special_symbol(current_token->word) == 2)
-        handle_double_redirection(&shell_data->cmdarr[command_index].inp[++(*current_input)], shell_data->tokarr, token_index);
+        handle_double_redirection(&shell_data->cmdarr[command_index].input_tokens[++(*current_input)], shell_data->tokarr, token_index);
     else if (current_token->type == T_RED_FROM || current_token->type == T_DLESS)
-        set_redirection_type(&shell_data->cmdarr[command_index].inp[++(*current_input)], shell_data->tokarr, token_index);
+        set_redirection_type(&shell_data->cmdarr[command_index].input_tokens[++(*current_input)], shell_data->tokarr, token_index);
     else if (current_token->type == T_RED_TO || current_token->type == T_DGREAT)
-        set_redirection_type(&shell_data->cmdarr[command_index].out[++(*current_output)], shell_data->tokarr, token_index);
+        set_redirection_type(&shell_data->cmdarr[command_index].output_tokens[++(*current_output)], shell_data->tokarr, token_index);
     else
         shell_data->cmdarr[command_index].args[++(*current_arg)] = current_token->word;
     (*token_index)++;

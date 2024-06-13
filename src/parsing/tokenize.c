@@ -232,7 +232,7 @@ int	handle_heredoc_tokens(t_args *shell_data, int end_index)
 		return (0);
 
 	// Alokowanie pamięci dla cmdarr i ustawienie wartości
-	shell_data->cmdarr = ft_malloc(sizeof(t_cmdarr) * 1);
+	shell_data->cmdarr = ft_malloc(sizeof(t_cmd_arr_str) * 1);
 	shell_data->cmdarr_l = 1;
 	allocate_command_memory((t_count){.arg = 0, .in = heredoc_count, .out = 0}, shell_data->cmdarr);
 
@@ -247,7 +247,7 @@ int	handle_heredoc_tokens(t_args *shell_data, int end_index)
 	        // Zwiększ licznik heredoc_index przed wywołaniem funkcji fill_redir_type
 	        heredoc_index++;
 	        // Wywołaj funkcję fill_redir_type
-	        set_redirection_type(&shell_data->cmdarr[0].inp[heredoc_index], shell_data->tokarr, &i);
+	        set_redirection_type(&shell_data->cmdarr[0].input_tokens[heredoc_index], shell_data->tokarr, &i);
 	    }
 	    // Przejdź do następnego tokena
 	    i++;

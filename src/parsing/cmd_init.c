@@ -27,7 +27,7 @@ static void	reset_count(t_count *token_counter)
 // 	cmd->out_l = sizes.out;
 // }
 //to to samo co alloc_cmd, ale musze pozmieniac w innych miejscach jeszcze
-void allocate_command_memory(t_count cmd_sizes, t_cmdarr *command)
+void allocate_command_memory(t_count cmd_sizes, t_cmd_arr_str *command)
 {
     command->args = ft_malloc(sizeof(char *) * (cmd_sizes.arg + 1));
     if (!command->args)
@@ -36,15 +36,15 @@ void allocate_command_memory(t_count cmd_sizes, t_cmdarr *command)
         perror("Failed to allocate memory for command arguments");
         exit(EXIT_FAILURE);
     }
-    command->inp = ft_malloc(sizeof(t_token) * cmd_sizes.in);
-    if (!command->inp)
+    command->input_tokens = ft_malloc(sizeof(t_token) * cmd_sizes.in);
+    if (!command->input_tokens)
     {
         // Obsługa błędu alokacji pamięci
         perror("Failed to allocate memory for input redirections");
         exit(EXIT_FAILURE);
     }
-    command->out = ft_malloc(sizeof(t_token) * cmd_sizes.out);
-    if (!command->out)
+    command->output_tokens = ft_malloc(sizeof(t_token) * cmd_sizes.out);
+    if (!command->output_tokens)
     {
         // Obsługa błędu alokacji pamięci
         perror("Failed to allocate memory for output redirections");
@@ -136,7 +136,7 @@ void	initialize_command_array(t_args *shell_data)
 			command_counter++;
 		token_counter++;
 	}
-	shell_data->cmdarr = ft_malloc(sizeof(t_cmdarr) * command_counter);
+	shell_data->cmdarr = ft_malloc(sizeof(t_cmd_arr_str) * command_counter);
 	shell_data->cmdarr_l = command_counter;
 	command_counter = 0;
 	token_counter = 0;

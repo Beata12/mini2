@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:40 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 15:03:18 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 17:27:16 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	execute_heredoc(t_args *shell_data, int command_index, int input_index)
 	char	*user_input;
 	int		heredoc_file;
 
-	delimiter = shell_data->cmdarr[command_index].inp[input_index].word;
+	delimiter = shell_data->cmdarr[command_index].input_tokens[input_index].word;
 	heredoc_file = manage_file_access("/tmp/heredoc_tmp", 3);
 	while (1)
 	{
@@ -60,7 +60,7 @@ void	process_all_heredocs(t_args *shell_data, int command_index)
 	input_index = 0;
 	while (input_index < shell_data->cmdarr[command_index].inp_l)
 	{
-		if (shell_data->cmdarr[command_index].inp[input_index].type == T_DLESS)
+		if (shell_data->cmdarr[command_index].input_tokens[input_index].type == T_DLESS)
 			execute_heredoc(shell_data, command_index, input_index);
 		input_index++;
 	}
@@ -74,10 +74,10 @@ void	setup_input_redirection(t_args *shell_data, int command_index)
 	input_index = 0;
 	while (input_index < shell_data->cmdarr[command_index].inp_l)
 	{
-		if (shell_data->cmdarr[command_index].inp[input_index].type == T_DLESS)
+		if (shell_data->cmdarr[command_index].input_tokens[input_index].type == T_DLESS)
 			file = manage_file_access("/tmp/heredoc_tmp", 2);
 		else
-			file = manage_file_access(shell_data->cmdarr[command_index].inp[input_index].word, 2);
+			file = manage_file_access(shell_data->cmdarr[command_index].input_tokens[input_index].word, 2);
 		dup2(file, 0);
 		close(file);
 		input_index++;
@@ -92,10 +92,10 @@ void	setup_output_redirection(t_args *shell_data, int command_index)
 	input_index = 0;
 	while (input_index < shell_data->cmdarr[command_index].out_l)
 	{
-		if (shell_data->cmdarr[command_index].out[input_index].type == T_DGREAT)
-			file = manage_file_access(shell_data->cmdarr[command_index].out[input_index].word, 0);
+		if (shell_data->cmdarr[command_index].output_tokens[input_index].type == T_DGREAT)
+			file = manage_file_access(shell_data->cmdarr[command_index].output_tokens[input_index].word, 0);
 		else
-			file = manage_file_access(shell_data->cmdarr[command_index].out[input_index].word, 1);
+			file = manage_file_access(shell_data->cmdarr[command_index].output_tokens[input_index].word, 1);
 		dup2(file, 1);
 		close(file);
 		input_index++;
