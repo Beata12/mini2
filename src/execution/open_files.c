@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:40 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/12 21:12:59 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:24:49 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	open_file(char *argv, int i)
 	else if (i == 3)
 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (file < 0)
-		ft_error_exit(argv, ": No such file or directory", 1);
+		exit_with_error(argv, ": No such file or directory", 1);
 	return (file);
 }
 

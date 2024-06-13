@@ -68,10 +68,11 @@ void			open_fds(t_args *shell_data, int **pipes);
 void			close_fds(t_args *shell_data, int **pipes);
 void			copy_list(t_env_lst *env, t_env_lst **new);
 void			remove_one_node(char *str, t_env_lst **env);
-void			ft_error_exit(char *str, char *str2, int status);
+void			exit_with_error(char *str, char *str2, int status);
 void			export_loop(t_args *shell_data, char **args, int i);
-void			ft_error_return(char *str, t_args *shell_data, int status, \
-				int modif);
+void			handle_error(const char *error_message, t_args *shell_state, int exit_status_code, int modification_flag);// zmienione
+// void			ft_error_return(char *str, t_args *shell_data, int status,
+// 				int modif);
 	// struct.c
 void			alloc_err(void);
 int				empty_str(char *s);

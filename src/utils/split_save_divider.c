@@ -17,7 +17,7 @@ static int	init_split_save_divider(char ***dst, char *s, char c)
 	}
 	*dst = (char **)ft_calloc(sizeof(char *), len + 1);
 	if (!*dst)
-		alloc_err();
+		memory_allocation_error();
 	return (len);
 }
 
@@ -42,7 +42,7 @@ char	**split_save_divider(char *s, char c)
 			w_l = ft_strchr_pos(&s[i + 1], c);
 		arr[a_i] = ft_substr(s, i, w_l);
 		if (!arr[a_i])
-			alloc_err();
+			memory_allocation_error();
 		i += w_l;
 		a_i++;
 	}

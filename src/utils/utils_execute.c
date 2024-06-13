@@ -78,16 +78,16 @@ void	ft_execve(t_args *shell_data)
 	if (ft_strchr(cmds[0], '/') == NULL)
 	{
 		if (!env)
-			ft_error_exit(cmds[0], ": command not found", 127);
+			exit_with_error(cmds[0], ": command not found", 127);
 		path = find_path(cmds[0], env->val);
 	}
 	else
 		path = ft_strdup(cmds[0]);
 	if (path == NULL)
-		ft_error_exit(cmds[0], ": command not found", 127);
+		exit_with_error(cmds[0], ": command not found", 127);
 	execve(path, cmds, envp);
 	if (cmds[0] != NULL)
-		ft_error_exit(cmds[0], ": command not found", 127);
+		exit_with_error(cmds[0], ": command not found", 127);
 	exit(0);
 }
 

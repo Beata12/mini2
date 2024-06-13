@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+         #
+#    By: beata <beata@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 20:57:52 by aneekhra          #+#    #+#              #
-#    Updated: 2024/06/12 21:10:11 by aneekhra         ###   ########.fr        #
+#    Updated: 2024/06/13 10:35:09 by beata            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,12 @@ SRC =	minishell.c \
 		parsing/utils/errors_utils.c \
 		parsing/utils/string_separator.c \
 		parsing/utils/string_utils.c \
+		execution/utils/handle_errors.c \
+		# execution/shell_commands/cd.c
 
 SRC_F = src/
 OBJ_F = obj/
-VPATH = $(SRC_F) $(SRC_F)exec/ $(SRC_F)utils/ $(SRC_F)parsing/ 
+VPATH = $(SRC_F) $(SRC_F)execution/ $(SRC_F)utils/ $(SRC_F)parsing/ 
 OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 
 all: $(NAME)

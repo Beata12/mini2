@@ -12,7 +12,7 @@ char	*cut_name(char *s)
 		i++;
 	name = ft_substr(s, 0, i);
 	if (!name)
-		alloc_err();
+		memory_allocation_error();
 	return (name);
 }
 

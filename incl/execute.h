@@ -23,9 +23,9 @@ typedef struct s_builtin
 }							t_builtin;
 
 // builtins
-void						ft_cd(t_args *shell_data);
+void						shell_cd(t_args *shell_data);
 void						ft_env(t_args *shell_data);
-void						ft_pwd(t_args *shell_data);
+void						shell_pwd(t_args *shell_data);
 void						ft_echo(t_args *shell_data);
 void						ft_unset(t_args *shell_data);
 void						ft_execve(t_args *shell_data);
