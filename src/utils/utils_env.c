@@ -35,10 +35,10 @@ t_env_variable	*find_env_var(char *name, t_env_variable *env_list)
 {
 	while (env_list)
 	{
-		if (ft_strlen(name) == ft_strlen(env_list->name) && !ft_strncmp(name,
-				env_list->name, ft_strlen(name)))
+		if (ft_strlen(name) == ft_strlen(env_list->env_name) && !ft_strncmp(name,
+				env_list->env_name, ft_strlen(name)))
 			return (env_list);
-		env_list = env_list->next;
+		env_list = env_list->next_env_var;
 	}
 	return (NULL);
 }
@@ -55,18 +55,18 @@ char **generate_envp_array(t_env_variable *env_list)
 	while (current_env)
 	{
 		i++;
-		current_env = current_env->next;
+		current_env = current_env->next_env_var;
 	}
 	env_array = ft_malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	current_env = env_list;
 	while (current_env)
 	{
-		env_array[i] = ft_strjoin(current_env->name, "=");
-		if (current_env->val)
-			env_array[i] = ft_strjoin(env_array[i], current_env->val);
+		env_array[i] = ft_strjoin(current_env->env_name, "=");
+		if (current_env->value)
+			env_array[i] = ft_strjoin(env_array[i], current_env->value);
 		i++;
-		current_env = current_env->next;
+		current_env = current_env->next_env_var;
 	}
 	env_array[i] = NULL;
 	return env_array;

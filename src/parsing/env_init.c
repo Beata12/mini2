@@ -7,14 +7,14 @@ static void	set_shlvl(t_args *shell_data)
 	int			shlvl;
 
 	shlvl_node = find_env_var("SHLVL", shell_data->env);
-	shlvl = ft_atoi(shlvl_node->val);
+	shlvl = ft_atoi(shlvl_node->value);
 	if (shlvl == 999)
 	{
 		my_error("", 0);
 		shlvl = 0;
 	}
-	ft_free(shlvl_node->val);
-	shlvl_node->val = ft_itoa(shlvl + 1);
+	ft_free(shlvl_node->value);
+	shlvl_node->value = ft_itoa(shlvl + 1);
 }
 
 int	process_and_store_env_var(char *input_str, t_env_variable **env_list)

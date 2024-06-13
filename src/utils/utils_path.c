@@ -128,7 +128,7 @@ char *get_prompt_path(t_args *shell_data)
 	if (home_env == NULL)
 		home_directory = "/";
 	else
-		home_directory = home_env->val;
+		home_directory = home_env->value;
 	intermediate_path = ft_strjoin(ft_remove_substr(working_directory, home_directory), "$ ");
 	ft_free(working_directory);
 	cached_prompt_path = generate_command_prompt(intermediate_path);

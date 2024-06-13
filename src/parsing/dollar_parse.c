@@ -91,10 +91,10 @@ static char	*get_env_var_value(char *input_string, int *i, t_env_variable *env)
 	target_list = find_environment_variable(target_variable, env);
 	*i += ft_strlen(target_variable);
 	ft_free(target_variable);
-	if (!target_list || !target_list->val)
+	if (!target_list || !target_list->value)
 		target_variable = ft_calloc(sizeof(char), 1);
 	else
-		target_variable = ft_strdup(target_list->val);
+		target_variable = ft_strdup(target_list->value);
 	return (target_variable);
 }
 

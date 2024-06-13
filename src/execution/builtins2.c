@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 18:06:26 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:20:30 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 			separator_position = get_char_position(input_arguments[i], '=');
 			if (separator_position >= 0)
 			{
-				if (env_node->val)
-					ft_free(env_node->val);
-				env_node->val = ft_strdup(&input_arguments[i][separator_position]);
+				if (env_node->value)
+					ft_free(env_node->value);
+				env_node->value = ft_strdup(&input_arguments[i][separator_position]);
 			}
 		}
 		i++;

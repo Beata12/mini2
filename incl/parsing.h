@@ -44,16 +44,16 @@ typedef struct s_cmd_arr_str
 
 typedef struct s_data_counter
 {
-	int						arg_count;//arg;
-	int						input_count;//in;
-	int						output_count;//out;
+	int						arg_count;
+	int						input_count;
+	int						output_count;
 }							t_data_counter;
 
 typedef struct s_env_variable
 {
-	char					*val;
-	char					*name;
-	struct s_env_variable	*next;
+	char					*value;
+	char					*env_name;
+	struct s_env_variable	*next_env_var;
 }							t_env_variable;
 
 

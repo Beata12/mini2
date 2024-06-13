@@ -60,7 +60,7 @@ void	ft_execve(t_args *shell_data)
     {
         if (!env_node)
             exit_with_error(command_args[0], ": command not found", 127);
-        executable_path = locate_file_in_path(command_args[0], env_node->val);
+        executable_path = locate_file_in_path(command_args[0], env_node->value);
     }
     else
         executable_path = ft_strdup(command_args[0]);

@@ -101,10 +101,10 @@ t_env_variable	*find_environment_variable(char *name, t_env_variable *env)
 {
 	while (env)
 	{
-		if (ft_strlen(name) == ft_strlen(env->name) && !ft_strncmp(name,
-				env->name, ft_strlen(name)))
+		if (ft_strlen(name) == ft_strlen(env->env_name) && !ft_strncmp(name,
+				env->env_name, ft_strlen(name)))
 			return (env);
-		env = env->next;
+		env = env->next_env_var;
 	}
 	return (NULL);
 }

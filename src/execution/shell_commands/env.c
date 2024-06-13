@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:40 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 18:09:16 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:30:57 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	shell_env(t_args *shell_data)
 	{
 		while (tmp)
 		{
-			if (tmp->val)
-				printf("%s=%s\n", tmp->name, tmp->val);
-			tmp = tmp->next;
+			if (tmp->value)
+				printf("%s=%s\n", tmp->env_name, tmp->value);
+			tmp = tmp->next_env_var;
 		}
 		shell_data->exit_status = 0;
 		return ;
@@ -48,11 +48,11 @@ void	shell_env(t_args *shell_data)
 	tmp = shell_data->export;
 	while (tmp)
 	{
-		if (tmp->val)
-			printf("declare -x %s=\"%s\"\n", tmp->name, tmp->val);
+		if (tmp->value)
+			printf("declare -x %s=\"%s\"\n", tmp->env_name, tmp->value);
 		else
-			printf("declare -x %s\n", tmp->name);
-		tmp = tmp->next;
+			printf("declare -x %s\n", tmp->env_name);
+		tmp = tmp->next_env_var;
 	}
 	shell_data->exit_status = 0;
 }

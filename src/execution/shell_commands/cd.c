@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:35 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 18:08:46 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:21:06 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void shell_cd(t_args *shell_data)
         // Handle 'cd' without arguments
         home_node = find_env_var("HOME", shell_data->env);
         if (home_node)
-            target_path = ft_strdup(home_node->val);
+            target_path = ft_strdup(home_node->value);
         else
 		{
             handle_error("", shell_data, 1, 1);
