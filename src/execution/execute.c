@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:31 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 15:09:57 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 15:38:57 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	identify_builtin_command(char *builtin_command)
 		return (5);
 	return (-1);
 }
-
+//zrobione
 void	execute(t_args *shell_data)
 {
 	int	i;
@@ -47,10 +47,10 @@ void	execute(t_args *shell_data)
 		initialize_pipes(shell_data, pipe_array);
 		execute_pipeline(shell_data, pipe_array);
 		close_pipe_descriptors(shell_data, pipe_array);
-		wait_in_parent(shell_data);
+		wait_for_child_processes(shell_data);
 	}
 }
-
+//zrobione
 void	execute_pipeline(t_args *shell_data, int **pipe_array)
 {
 	int		i;
@@ -79,7 +79,7 @@ void	execute_pipeline(t_args *shell_data, int **pipe_array)
 		i++;
 	}
 }
-
+//zrobione
 void	ft_execute(t_args *shell_data)
 {
 	int	i;

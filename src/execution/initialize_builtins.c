@@ -6,12 +6,12 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:09 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 11:59:46 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 15:46:44 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
-
+//zrobione
 void	initialize_builtins(t_args *shell_data)
 {
 	int i;

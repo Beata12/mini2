@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:45 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:51:48 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 16:31:37 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@
 
 void	shell_export(t_args *shell_data)
 {
-	char	**args;
+	char	**export_arguments;
 
-	args = shell_data->cmdarr[shell_data->cmd_num].args;
-	if (args[1] == NULL)
+	export_arguments = shell_data->cmdarr[shell_data->cmd_num].args;
+	if (export_arguments[1] == NULL)
 	{
-		copy_list(shell_data->env, &shell_data->export);
-		remove_one_node("_", &shell_data->export);
-		tmp_sort_env(shell_data->export);
+		copy_environment_list(shell_data->env, &shell_data->export);
+		remove_env_var("_", &shell_data->export);
+		sort_environment_variables(shell_data->export);
 		shell_env(shell_data);
-		clean_lst_env(&shell_data->export);
+		clear_environment_list(&shell_data->export);
 		shell_data->exit_status = 0;
 	}
 	else
-		export_loop(shell_data, args, 1);
+		process_environment_variables(shell_data, export_arguments, 1);
 }
 
 // void shell_export(t_args *shell_data)

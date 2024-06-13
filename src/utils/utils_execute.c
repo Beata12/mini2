@@ -1,18 +1,18 @@
 
 #include "../../incl/minishell.h"
-
-void	wait_in_parent(t_args *shell_data)
+//zrobione
+void	wait_for_child_processes(t_args *shell_data)
 {
-	int	status;
 	int	i;
+	int	child_status;
 
-	status = 0;
 	i = 0;
+	child_status = 0;
 	while (i < shell_data->cmdarr_l)
 	{
-		wait(&status);
-		if (WIFEXITED(status))
-			shell_data->exit_status = WEXITSTATUS(status);
+		wait(&child_status);
+		if (WIFEXITED(child_status))
+			shell_data->exit_status = WEXITSTATUS(child_status);
 		i++;
 	}
 }
@@ -29,7 +29,7 @@ void	initialize_pipes(t_args *shell_data, int **pipe_array)
 		i++;
 	}
 }
-
+//zrobione
 void	close_pipe_descriptors(t_args *shell_data, int **pipe_array)
 {
 	int	i;
@@ -43,8 +43,7 @@ void	close_pipe_descriptors(t_args *shell_data, int **pipe_array)
 		i++;
 	}
 }
-
-
+//zrobione
 void	ft_execve(t_args *shell_data)
 {
 	char *executable_path;
@@ -61,7 +60,7 @@ void	ft_execve(t_args *shell_data)
     {
         if (!env_node)
             exit_with_error(command_args[0], ": command not found", 127);
-        executable_path = find_path(command_args[0], env_node->val);
+        executable_path = locate_file_in_path(command_args[0], env_node->val);
     }
     else
         executable_path = ft_strdup(command_args[0]);

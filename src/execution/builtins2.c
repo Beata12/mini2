@@ -6,44 +6,44 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 14:09:32 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 16:35:41 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-static int	check_var_validity(char *var, char *name)
+//zrobione
+static int	is_variable_valid(char *variable_value, char *target_name)
 {
-	int	n_l;
+	int	name_length;
 
-	n_l = ft_strlen(name);
-	if (var[n_l] && var[n_l] != '=')
+	name_length = ft_strlen(target_name);
+	if (variable_value[name_length] && variable_value[name_length] != '=')
 		return (0);
 	return (1);
 }
-
-void	export_loop(t_args *shell_data, char **args, int i)
+//zrobione//to do exekucji jest
+void	process_environment_variables(t_args *shell_data, char **input_arguments, int i)
 {
 	char		*name;
 	t_env_lst	*env_node;
-	int			divider_pos;
+	int			separator_position;
 
-	while (args[i])
+	while (input_arguments[i])
 	{
-		name = cut_name(args[i]);
-		if (!check_var_validity(args[i], name))
-			return (handle_error(args[i], shell_data, 1, 0), ft_free(name));
+		name = cut_name(input_arguments[i]);
+		if (!is_variable_valid(input_arguments[i], name))
+			return (handle_error(input_arguments[i], shell_data, 1, 0), ft_free(name));
 		env_node = find_env_var(name, shell_data->env);
 		if (!env_node)
-			process_and_store_env_var(args[i], &shell_data->env);
+			process_and_store_env_var(input_arguments[i], &shell_data->env);
 		else
 		{
-			divider_pos = get_char_position(args[i], '=');
-			if (divider_pos >= 0)
+			separator_position = get_char_position(input_arguments[i], '=');
+			if (separator_position >= 0)
 			{
 				if (env_node->val)
 					ft_free(env_node->val);
-				env_node->val = ft_strdup(&args[i][divider_pos]);
+				env_node->val = ft_strdup(&input_arguments[i][separator_position]);
 			}
 		}
 		i++;

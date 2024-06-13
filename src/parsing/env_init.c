@@ -54,7 +54,7 @@ void	initialize_environment(t_args *shell_data, char **env)
 	{
 		if (process_and_store_env_var(env[i], &shell_data->env))
 		{
-			clean_lst_env(&shell_data->env);
+			clear_environment_list(&shell_data->env);
 			memory_allocation_error();
 		}
 		i++;

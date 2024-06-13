@@ -1,33 +1,32 @@
 
 #include "../../incl/minishell.h"
-
-
-char	*find_path(char *cmd, char *path)
+//zrobione
+char	*locate_file_in_path(char *file_name, char *path_to_search)
 {
-	char	*c;
-	char	*tmp;
-	char	**paths;
 	int		i;
 	int		fd;
+	char	*full_path;//full_path
+	char	*current_path;//current_path
+	char	**search_paths;//search_path
 
 	i = 0;
-	paths = ft_split(path, ':');
-	while (paths[i] != NULL)
+	search_paths = ft_split(path_to_search, ':');
+	while (search_paths[i] != NULL)
 	{
-		tmp = ft_strjoin(paths[i], "/");
-		c = ft_strjoin(tmp, cmd);
-		ft_free(tmp);
-		fd = open(c, O_RDONLY);
+		current_path = ft_strjoin(search_paths[i], "/");
+		full_path = ft_strjoin(current_path, file_name);
+		ft_free(current_path);
+		fd = open(full_path, O_RDONLY);
 		if (fd != -1)
 		{
 			close(fd);
-			free_string_array(paths);
-			return (c);
+			free_string_array(search_paths);
+			return (full_path);
 		}
-		free(c);
+		free(full_path);
 		i++;
 	}
-	free_string_array(paths);
+	free_string_array(search_paths);
 	return (NULL);
 }
 //ZROBIONE
@@ -92,11 +91,11 @@ char	**initialize_envp(char **environment)
 // 	ft_free(tmp);
 // 	return (str);
 // }
-
-char	*append_prompt_prefix(char *tmp2)
+//zrobione
+static char	*generate_command_prompt(char *exit_code)
 {
-	char	*tmp;
-	char	*tmp1;
+	char	*prompt;
+	char	*prefix_part;
 	char	*exit_status;
 
 	exit_status = NULL;
@@ -104,13 +103,13 @@ char	*append_prompt_prefix(char *tmp2)
 	// 	exit_status = get_brackets(ft_itoa(shell_data->exit_status), 1);
 	// else
 	// 	exit_status = get_brackets(ft_itoa(shell_data->exit_status), 0);
-	tmp1 = ft_strjoin(exit_status, YELLOW "Minishell:" RE);
-	tmp = ft_strjoin(tmp1, tmp2);
-	ft_free(tmp1);
+	prefix_part = ft_strjoin(exit_status, YELLOW "Minishell:" RE);
+	prompt = ft_strjoin(prefix_part, exit_code);
+	ft_free(prefix_part);
 	ft_free(exit_status);
-	return (tmp);
+	return (prompt);
 }
-
+//zrobione
 char *get_prompt_path(t_args *shell_data)
 {
 	t_env_lst	*home_env;
@@ -132,7 +131,7 @@ char *get_prompt_path(t_args *shell_data)
 		home_directory = home_env->val;
 	intermediate_path = ft_strjoin(ft_remove_substr(working_directory, home_directory), "$ ");
 	ft_free(working_directory);
-	cached_prompt_path = append_prompt_prefix(intermediate_path);
+	cached_prompt_path = generate_command_prompt(intermediate_path);
 	ft_free(intermediate_path);
 	return (cached_prompt_path);
 }

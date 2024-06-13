@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:51:48 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:44:33 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 16:13:22 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	shell_unset(t_args *shell_data)
 		i = 1;
 		while (rm_names[i] != NULL)
 		{
-			remove_one_node(rm_names[i], &shell_data->env);
+			remove_env_var(rm_names[i], &shell_data->env);
 			i++;
 		}
 	}
