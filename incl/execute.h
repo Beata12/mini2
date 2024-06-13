@@ -15,11 +15,12 @@
 typedef struct s_args			t_args;
 typedef struct s_env_variable	t_env_variable;
 
-typedef						void(exec_fn)(t_args *shell_data);
+typedef					void(command_executor)(t_args *shell_data);
+
 typedef struct s_builtin
 {
-	char					*name;
-	exec_fn					*fn_ptr;
+	char				*env_name;//jak bedxzie blad to zmien na builtin_name
+	command_executor	*command_executor;//fn_ptr;
 }							t_builtin;
 
 // builtins

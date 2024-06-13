@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:31 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 19:00:51 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:21:53 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	execute(t_args *shell_data)
 	i = identify_builtin_command(shell_data->command_array[0].args[0]);
 	if (shell_data->command_count == 1 && i != -1 && (shell_data->command_array[0].input_length == 0)
 		&& (shell_data->command_array[0].output_length == 0))
-		shell_data->builtin_cmds[i].fn_ptr(shell_data);
+		shell_data->builtin_cmds[i].command_executor(shell_data);
 	else
 	{
 		initialize_pipes(shell_data, pipe_array);
@@ -88,5 +88,5 @@ void	ft_execute(t_args *shell_data)
 	if (i == -1)
 		ft_execve(shell_data);
 	else
-		shell_data->builtin_cmds[i].fn_ptr(shell_data);
+		shell_data->builtin_cmds[i].command_executor(shell_data);
 }
