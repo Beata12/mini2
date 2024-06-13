@@ -57,7 +57,7 @@ typedef struct s_env_lst
 }							t_env_lst;
 
 // parsing
-void						init_env(t_args *shell_data, char **env);
+void						initialize_environment(t_args *shell_data, char **env);
 int							fill_str(char *s, t_env_lst **lst);
 void						dollar_value_subst(char **s, char *q,
 								t_args *shell_data);

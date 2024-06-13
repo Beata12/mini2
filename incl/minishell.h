@@ -81,7 +81,7 @@ void			clean_lst_env(t_env_lst **lst);
 void			clean_node_env(t_env_lst **lst);
 void			clean_command_data(t_args *shell_data);
 char			**split_save_divider(char *s, char c);
-void			init_mshell(t_args *shell_data, char **env);
+void			initialize_shell(t_args *shell_state, char **environment);//poprawione
 int				leave_heredoc(t_args *shell_data, int err_i);
 void			ft_lstadd_env(t_env_lst **lst, char *name, char *val);
 

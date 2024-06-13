@@ -1,63 +1,107 @@
 
 #include "../incl/minishell.h"
-
-void	init_mshell(t_args *shell_data, char **env)
+//ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
+void initialize_shell(t_args *shell_state, char **environment)
 {
-	shell_data->env = NULL;
-	shell_data->export = NULL;
-	shell_data->exit_status = 0;
-	shell_data->builtin = NULL;
-	shell_data->tokarr = NULL;
-	shell_data->cmdarr = NULL;
-	shell_data->tokarr_l = 0;
-	shell_data->cmdarr_l = 0;
-	shell_data->cmd_num = 0;
-	init_env(shell_data, env);
-	init_builtin_arr(shell_data);
+	shell_state->env = NULL;
+	shell_state->export = NULL;
+	shell_state->builtin = NULL;
+	shell_state->tokarr = NULL;
+	shell_state->cmdarr = NULL;
+	// Inicjalizuj zmienne liczbowe na wartości początkowe
+	shell_state->exit_status = 0;
+	shell_state->tokarr_l = 0;
+	shell_state->cmdarr_l = 0;
+	shell_state->cmd_num = 0;
+	// Inicjalizacja środowiska i wbudowanych poleceń
+	initialize_environment(shell_state, environment);
+	initialize_builtins(shell_state);
+	// 	init_env(shell_data, env);
+// 	init_builtin_arr(shell_data);
 }
 
-int	check_input(char *input)
+//ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
+int validate_input(char *user_input)
 {
-	if (!input)
+	if (user_input == NULL)
 	{
-		ft_free(input);
 		printf("exit\n");
 		exit(0);
 	}
-	else if (!*input)
+	if (user_input[0] == '\0')
 	{
-		ft_free(input);
-		return (1);
+		free(user_input);
+		return 1;
 	}
-	return (0);
+	return 0;
 }
+// int	check_input(char *input)
+// {
+// 	if (!input)
+// 	{
+// 		ft_free(input);
+// 		printf("exit\n");
+// 		exit(0);
+// 	}
+// 	else if (!*input)
+// 	{
+// 		ft_free(input);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
-static void	minishell_loop(t_args *shell_data)
+//ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
+static void	display_prompt(t_args *shell_data)
 {
-	char	*input;
-	char	*path;
+	char	*user_input;
+	char	*current_directory;
 	
-	// load_history();
 	while (1)
 	{
-		// g_signal = 0;
-		path = get_prompt_path(shell_data);
-		input = readline(path);
-		if (check_input(input))
+		current_directory = get_prompt_path(shell_data);
+		user_input = readline(current_directory);
+		if (validate_input(user_input))
 			continue ;
-		add_history(input);
-		if (parse_input(input, shell_data))
+		add_history(user_input);
+		if (parse_input(user_input, shell_data))
 		{
-			if (ft_exit(shell_data, input))
+			if (ft_exit(shell_data, user_input))
 				continue ;
 			execute(shell_data);
 		}
 		clean_command_data(shell_data);
-		ft_free(input);
+		ft_free(user_input);
 	}
-	ft_free(path);
-	// save_history();
+	ft_free(current_directory);
 }
+
+// static void	display_prompt(t_args *shell_data)
+// {
+// 	char	*input;
+// 	char	*path;
+	
+// 	// load_history();
+// 	while (1)
+// 	{
+// 		// g_signal = 0;
+// 		path = get_prompt_path(shell_data);
+// 		input = readline(path);
+// 		if (check_input(input))
+// 			continue ;
+// 		add_history(input);
+// 		if (parse_input(input, shell_data))
+// 		{
+// 			if (ft_exit(shell_data, input))
+// 				continue ;
+// 			execute(shell_data);
+// 		}
+// 		clean_command_data(shell_data);
+// 		ft_free(input);
+// 	}
+// 	ft_free(path);
+// 	// save_history();
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -69,8 +113,8 @@ int	main(int argc, char **argv, char **envp)
 	setup_signal_handlers();
 	if (argc == 1)
 	{
-		init_mshell(&shell_data, get_envp(envp));
-		minishell_loop(&shell_data);
+		initialize_shell(&shell_data, get_envp(envp));
+		display_prompt(&shell_data);
 	}
 	else
 		exit(write(1, RED "No arguments accepted!\n" RE, 32));

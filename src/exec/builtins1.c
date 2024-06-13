@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:09 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/12 21:12:14 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/13 09:26:05 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
 
-void	init_builtin_arr(t_args *shell_data)
+void	initialize_builtins(t_args *shell_data)
 {
 	int	n_cmds;
 

@@ -45,7 +45,7 @@ int	fill_str(char *s, t_env_lst **lst)
 	return (err);
 }
 
-void	init_env(t_args *shell_data, char **env)
+void	initialize_environment(t_args *shell_data, char **env)
 {
 	int	i;
 
