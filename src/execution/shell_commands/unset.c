@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 09:58:48 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:06:16 by beata            ###   ########.fr       */
+/*   Created: 2024/05/16 09:51:48 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/13 11:34:11 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
 
-void	shell_pwd(t_args *shell_data)
+void	ft_unset(t_args *shell_data)
 {
-	char *current_directory_path = NULL;
+	int		i;
+	char	**rm_names;
 
-    current_directory_path = getcwd(NULL, 0);
-    if (!current_directory_path)
+	rm_names = shell_data->cmdarr[shell_data->cmd_num].args;
+	if (rm_names[1] == NULL)
 	{
-        handle_error("getcwd failed", shell_data, 1, 0);
-        return;
-    }
-    printf("%s\n", current_directory_path);
-    ft_free(current_directory_path);
-    shell_data->exit_status = 0;
+		printf("minishell: unset: not enough arguments\n");
+		shell_data->exit_status = 1;
+		return ;
+	}
+	else
+	{
+		i = 1;
+		while (rm_names[i] != NULL)
+		{
+			remove_one_node(rm_names[i], &shell_data->env);
+			i++;
+		}
+	}
+	shell_data->exit_status = 0;
 }

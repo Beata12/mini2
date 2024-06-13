@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 09:58:38 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/04 14:05:16 by aneekhra         ###   ########.fr       */
+/*   Created: 2024/05/16 09:58:38 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/13 11:06:25 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../incl/execute.h"
 
 char *expand_variable(const char *str) {
     if (str[0] == '$') {

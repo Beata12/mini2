@@ -66,7 +66,7 @@ static void	display_prompt(t_args *shell_data)
 		add_history(user_input);
 		if (parse_input(user_input, shell_data))
 		{
-			if (ft_exit(shell_data, user_input))
+			if (shell_exit(shell_data, user_input))
 				continue ;
 			execute(shell_data);
 		}

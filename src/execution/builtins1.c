@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:09 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 10:24:33 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:19:30 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	initialize_builtins(t_args *shell_data)
         {"cd", shell_cd},
         {"echo", ft_echo},
         {"unset", ft_unset},
-        {"export", ft_export},
-        {"env", ft_env},
+        {"export", shell_export},
+        {"env", shell_env},
         {NULL, NULL} // Zakończenie tablicy
     };
 
@@ -50,32 +50,32 @@ void	initialize_builtins(t_args *shell_data)
         i++;
     }
 }
+//TO TA FUNKCJA JEST POPRAWNA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// void shell_cd(t_args *shell_data)
+// {
+//     char *target_path = NULL;
+//     t_env_lst *home_node = NULL;
 
-void shell_cd(t_args *shell_data)
-{
-    char *target_path = NULL;
-    t_env_lst *home_node = NULL;
-
-    if (shell_data->cmdarr[shell_data->cmd_num].args[1] == NULL)
-	{
-        // Handle 'cd' without arguments
-        home_node = find_env_node("HOME", shell_data->env);
-        if (home_node)
-            target_path = ft_strdup(home_node->val);
-        else
-		{
-            handle_error("", shell_data, 1, 1);
-            return;
-        }
-	}
-    else// Handle 'cd' with arguments
-        target_path = ft_strdup(shell_data->cmdarr[shell_data->cmd_num].args[1]);
-    if (chdir(target_path) == -1)
-        handle_error(target_path, shell_data, 1, 0);
-    else
-        shell_data->exit_status = 0;
-    ft_free(target_path);
-}
+//     if (shell_data->cmdarr[shell_data->cmd_num].args[1] == NULL)
+// 	{
+//         // Handle 'cd' without arguments
+//         home_node = find_env_node("HOME", shell_data->env);
+//         if (home_node)
+//             target_path = ft_strdup(home_node->val);
+//         else
+// 		{
+//             handle_error("", shell_data, 1, 1);
+//             return;
+//         }
+// 	}
+//     else// Handle 'cd' with arguments
+//         target_path = ft_strdup(shell_data->cmdarr[shell_data->cmd_num].args[1]);
+//     if (chdir(target_path) == -1)
+//         handle_error(target_path, shell_data, 1, 0);
+//     else
+//         shell_data->exit_status = 0;
+//     ft_free(target_path);
+// }
 
 // void	shell_cd(t_args *shell_data)
 // {
@@ -105,20 +105,21 @@ void shell_cd(t_args *shell_data)
 // 	shell_data->exit_status = 0;
 // }
 
-void	shell_pwd(t_args *shell_data)
-{
-	char *current_directory_path = NULL;
+//PWD TA JEST POPRAWNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+// void	shell_pwd(t_args *shell_data)
+// {
+// 	char *current_directory_path = NULL;
 
-    current_directory_path = getcwd(NULL, 0);
-    if (!current_directory_path)
-	{
-        handle_error("getcwd failed", shell_data, 1, 0);
-        return;
-    }
-    printf("%s\n", current_directory_path);
-    ft_free(current_directory_path);
-    shell_data->exit_status = 0;
-}
+//     current_directory_path = getcwd(NULL, 0);
+//     if (!current_directory_path)
+// 	{
+//         handle_error("getcwd failed", shell_data, 1, 0);
+//         return;
+//     }
+//     printf("%s\n", current_directory_path);
+//     ft_free(current_directory_path);
+//     shell_data->exit_status = 0;
+// }
 // 	char	*path;
 
 // 	path = getcwd(NULL, 0);
@@ -129,22 +130,22 @@ void	shell_pwd(t_args *shell_data)
 // 	shell_data->exit_status = 0;
 // }
 
-int	ft_exit(t_args *shell_data, char *input)
-{
-	if (ft_strcmp("exit", shell_data->cmdarr[0].args[0]) == 0)
-	{
-		ft_free(input);
-		printf("exit\n");
-		if (!shell_data->cmdarr[0].args[1])
-			exit(shell_data->exit_status);
-		else if (shell_data->cmdarr[0].args[1]
-			&& !ft_isdigit_loop(shell_data->cmdarr[0].args[1]))
-			exit_with_error("exit: ", "numeric argument required", 2);
-		else if (ft_isdigit_loop(shell_data->cmdarr[0].args[1])
-			&& shell_data->cmdarr[0].args[2])
-			return (handle_error("", shell_data, 1, 0), 1);
-		else if (shell_data->cmdarr[0].args[1])
-			exit(ft_atoi(shell_data->cmdarr[0].args[1]));
-	}
-	return (0);
-}
+// int	ft_exit(t_args *shell_data, char *input)
+// {
+// 	if (ft_strcmp("exit", shell_data->cmdarr[0].args[0]) == 0)
+// 	{
+// 		ft_free(input);
+// 		printf("exit\n");
+// 		if (!shell_data->cmdarr[0].args[1])
+// 			exit(shell_data->exit_status);
+// 		else if (shell_data->cmdarr[0].args[1]
+// 			&& !ft_isdigit_loop(shell_data->cmdarr[0].args[1]))
+// 			exit_with_error("exit: ", "numeric argument required", 2);
+// 		else if (ft_isdigit_loop(shell_data->cmdarr[0].args[1])
+// 			&& shell_data->cmdarr[0].args[2])
+// 			return (handle_error("", shell_data, 1, 0), 1);
+// 		else if (shell_data->cmdarr[0].args[1])
+// 			exit(ft_atoi(shell_data->cmdarr[0].args[1]));
+// 	}
+// 	return (0);
+// }

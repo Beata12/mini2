@@ -6,7 +6,7 @@
 #    By: beata <beata@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 20:57:52 by aneekhra          #+#    #+#              #
-#    Updated: 2024/06/13 10:35:09 by beata            ###   ########.fr        #
+#    Updated: 2024/06/13 11:25:42 by beata            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC =	minishell.c \
 		execute.c builtins1.c builtins2.c echo.c open_files.c \
 		env_init.c parsing.c dollar_parse.c tokenize.c cmd.c cmd_init.c \
 		utils_signals.c  utils_parsing.c utils_symbol.c utils_path.c utils_execute.c \
-		utils_env.c err.c err_parsing.c env_lst.c split_save_divider.c clean.c print.c \
+		utils_env.c err_parsing.c env_lst.c split_save_divider.c clean.c print.c \
 		parsing/quote_handler.c \
 		parsing/utils/input_validation.c \
 		parsing/utils/validation_utils.c \
@@ -38,7 +38,13 @@ SRC =	minishell.c \
 		parsing/utils/string_separator.c \
 		parsing/utils/string_utils.c \
 		execution/utils/handle_errors.c \
-		# execution/shell_commands/cd.c
+		execution/shell_commands/cd.c \
+		execution/shell_commands/pwd.c \
+		execution/shell_commands/exit.c \
+		execution/shell_commands/env.c \
+		execution/shell_commands/unset.c \
+		# execution/shell_commands/export.c \
+
 
 SRC_F = src/
 OBJ_F = obj/

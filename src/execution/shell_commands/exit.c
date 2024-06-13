@@ -3,24 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 09:58:42 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/03 22:20:23 by bmarek           ###   ########.fr       */
+/*   Created: 2024/05/16 09:58:42 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/13 11:33:56 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
-#include "../../include/parsing.h"
+#include "../../../incl/execute.h"
 
-int shell_exit(Token *args)
+// int shell_exit(t_args *shell_data, char *user_input)
+// {
+// 	if (ft_strcmp("exit", shell_data->cmdarr[0].args[0]) == 0)
+// 	{
+// 		ft_free(user_input);
+// 		printf("exit\n");
+// 		if (!shell_data->cmdarr[0].args[1])
+// 			exit(shell_data->exit_status);
+// 		else if (shell_data->cmdarr[0].args[1]
+// 			&& !ft_isdigit_loop(shell_data->cmdarr[0].args[1]))
+// 			exit_with_error("exit: ", "numeric argument required", 2);
+// 		else if (ft_isdigit_loop(shell_data->cmdarr[0].args[1])
+// 			&& shell_data->cmdarr[0].args[2])
+// 			return (handle_error("", shell_data, 1, 0), 1);
+// 		else if (shell_data->cmdarr[0].args[1])
+// 			exit(ft_atoi(shell_data->cmdarr[0].args[1]));
+// 	}
+// 	return (0);
+// }
+
+// int shell_exit(t_args *shell_data)
+// {
+//     // Free memory allocated for each argument
+//     if (args != NULL) {
+//         for (int i = 0; args[i].value2 != NULL; i++) {
+//             free(args[i].value2);
+//         }
+//         //free(args);
+//     }
+//     exit(0);
+// }
+
+
+int	shell_exit(t_args *shell_data, char *input)
 {
-    // Free memory allocated for each argument
-    if (args != NULL) {
-        for (int i = 0; args[i].value2 != NULL; i++) {
-            free(args[i].value2);
-        }
-        //free(args);
-    }
-    exit(0);
+	if (ft_strcmp("exit", shell_data->cmdarr[0].args[0]) == 0)
+	{
+		ft_free(input);
+		printf("exit\n");
+		if (!shell_data->cmdarr[0].args[1])
+			exit(shell_data->exit_status);
+		else if (shell_data->cmdarr[0].args[1]
+			&& !ft_isdigit_loop(shell_data->cmdarr[0].args[1]))
+			exit_with_error("exit: ", "numeric argument required", 2);
+		else if (ft_isdigit_loop(shell_data->cmdarr[0].args[1])
+			&& shell_data->cmdarr[0].args[2])
+			return (handle_error("", shell_data, 1, 0), 1);
+		else if (shell_data->cmdarr[0].args[1])
+			exit(ft_atoi(shell_data->cmdarr[0].args[1]));
+	}
+	return (0);
 }
+

@@ -24,14 +24,14 @@ typedef struct s_builtin
 
 // builtins
 void						shell_cd(t_args *shell_data);
-void						ft_env(t_args *shell_data);
+void						shell_env(t_args *shell_data);
 void						shell_pwd(t_args *shell_data);
 void						ft_echo(t_args *shell_data);
 void						ft_unset(t_args *shell_data);
 void						ft_execve(t_args *shell_data);
-void						ft_export(t_args *shell_data);
+void						shell_export(t_args *shell_data);
 void						initialize_builtins(t_args *shell_data);
-int							ft_exit(t_args *shell_data, char *input);
+int							shell_exit(t_args *shell_data, char *input);
 
 // execute
 void						execute(t_args *shell_data);
