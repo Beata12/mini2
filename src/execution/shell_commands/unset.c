@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:51:48 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 18:58:14 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:26:07 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	shell_unset(t_args *shell_data)
 {
 	int		i;
-	char	**rm_names;
+	char	**variables_to_unset;
 
-	rm_names = shell_data->command_array[shell_data->command_index].args;
-	if (rm_names[1] == NULL)
+	variables_to_unset = shell_data->command_array[shell_data->command_index].args;
+	if (variables_to_unset[1] == NULL)
 	{
 		printf("minishell: unset: not enough arguments\n");
 		shell_data->exec_result = 1;
@@ -27,9 +27,9 @@ void	shell_unset(t_args *shell_data)
 	else
 	{
 		i = 1;
-		while (rm_names[i] != NULL)
+		while (variables_to_unset[i] != NULL)
 		{
-			remove_env_var(rm_names[i], &shell_data->env);
+			remove_env_var(variables_to_unset[i], &shell_data->env);
 			i++;
 		}
 	}

@@ -59,14 +59,14 @@ typedef struct s_env_variable
 
 //to nie do parsingu find_env, proccesss, initialize - do exec
 t_env_variable				*find_env_var(char *name, t_env_variable *env_list);
-void						initialize_environment(t_args *shell_data, char **env);
+void						initialize_environment(t_args *shell_data, char **env);//zrobione
 int							process_and_store_env_var(char *input_str, t_env_variable **env_list);
 void						dollar_value_subst(char **s, char *q,
 								t_args *shell_data);
 int							get_char_position(char *input_str, int target_char);
 // t_env_lst					*find_env_node(char *name, t_env_lst *env);
 
-char						*cut_name(char *s);
+char						*get_variable_name(char *input_str);
 void						fill_redir_type(t_token *rdr, t_token *tarr,
 								int *t);
 

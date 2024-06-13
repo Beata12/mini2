@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 18:20:30 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:22:40 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 
 	while (input_arguments[i])
 	{
-		name = cut_name(input_arguments[i]);
+		name = get_variable_name(input_arguments[i]);
 		if (!is_variable_valid(input_arguments[i], name))
 			return (handle_error(input_arguments[i], shell_data, 1, 0), ft_free(name));
 		env_node = find_env_var(name, shell_data->env);

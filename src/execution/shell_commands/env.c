@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:40 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 19:17:57 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:27:15 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,28 @@
 
 void	shell_env(t_args *shell_data)
 {
-	t_env_variable	*tmp;
+	t_env_variable	*current_var;
 
-	tmp = shell_data->env;
+	current_var = shell_data->env;
 	if (!shell_data->exported_vars)
 	{
-		while (tmp)
+		while (current_var)
 		{
-			if (tmp->value)
-				printf("%s=%s\n", tmp->env_name, tmp->value);
-			tmp = tmp->next_env_var;
+			if (current_var->value)
+				printf("%s=%s\n", current_var->env_name, current_var->value);
+			current_var = current_var->next_env_var;
 		}
 		shell_data->exec_result = 0;
 		return ;
 	}
-	tmp = shell_data->exported_vars;
-	while (tmp)
+	current_var = shell_data->exported_vars;
+	while (current_var)
 	{
-		if (tmp->value)
-			printf("declare -x %s=\"%s\"\n", tmp->env_name, tmp->value);
+		if (current_var->value)
+			printf("declare -x %s=\"%s\"\n", current_var->env_name, current_var->value);
 		else
-			printf("declare -x %s\n", tmp->env_name);
-		tmp = tmp->next_env_var;
+			printf("declare -x %s\n", current_var->env_name);
+		current_var = current_var->next_env_var;
 	}
 	shell_data->exec_result = 0;
 }

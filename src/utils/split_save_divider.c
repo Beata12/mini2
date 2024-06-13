@@ -1,50 +1,48 @@
 
 #include "../../incl/minishell.h"
 
-static int	init_split_save_divider(char ***dst, char *s, char c)
-{
-	int	i;
-	int	len;
+// static int	prepare_split_array(char ***result_array, char *input_str, char separator)
+// {
+// 	int	i;
+// 	int	array_length;
 
-	i = -1;
-	len = 1;
-	while (s[++i])
-	{
-		if (!i && s[0] == c)
-			i++;
-		if (s[i] == c)
-			len++;
-	}
-	*dst = (char **)ft_calloc(sizeof(char *), len + 1);
-	if (!*dst)
-		memory_allocation_error();
-	return (len);
-}
+// 	i = -1;
+// 	array_length = 1;
+// 	while (input_str[++i])
+// 	{
+// 		if (!i && input_str[0] == seperator)
+// 			i++;
+// 		if (input_str[i] == separator)
+// 			array_length++;
+// 	}
+// 	*result_array = (char **)ft_calloc(sizeof(char *), array_length + 1);
+// 	if (!*result_array)
+// 		memory_allocation_error();
+// 	return (array_length);
+// }
 
-// searches for divider and preserve it!
-//->put divider as a start of each arr[str] $part $part ...
-char	**split_save_divider(char *s, char c)
-{
-	int		i;
-	int		a_i;
-	int		w_l;
-	int		len;
-	char	**arr;
+// char	**split_with_separator(char *input_str, char separator)
+// {
+// 	int		i;
+// 	int		arr_index;
+// 	int		word_length;
+// 	int		array_length;
+// 	char	**output;
 
-	len = init_split_save_divider(&arr, s, c);
-	a_i = 0;
-	i = 0;
-	while (len--)
-	{
-		if (!i && s[i] != c)
-			w_l = get_char_position(&s[i], c) - 1;
-		else
-			w_l = get_char_position(&s[i + 1], c);
-		arr[a_i] = ft_substr(s, i, w_l);
-		if (!arr[a_i])
-			memory_allocation_error();
-		i += w_l;
-		a_i++;
-	}
-	return (arr);
-}
+// 	array_length = prepare_split_array(&output, input_str, separator);
+// 	arr_index = 0;
+// 	i = 0;
+// 	while (array_length--)
+// 	{
+// 		if (!i && input_str[i] != separator)
+// 			word_length = get_char_position(&input_str[i], separator) - 1;
+// 		else
+// 			word_length = get_char_position(&input_str[i + 1], separator);
+// 		output[arr_index] = ft_substr(input_str, i, word_length);
+// 		if (!arr[arr_index])
+// 			memory_allocation_error();
+// 		i += word_length;
+// 		arr_index++;
+// 	}
+// 	return (output);
+// }

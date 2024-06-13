@@ -3,6 +3,8 @@
 
 // finds position from start of s.
 // Not iteration(from 0), iterates from 1!
+//zrobione
+//sprawdz ta iteracje od 0 i od 1
 int	get_char_position(char *input_str, int target_char)
 {
 	int	i;
@@ -14,6 +16,17 @@ int	get_char_position(char *input_str, int target_char)
 		return (++i);
 	return (-1);
 }
+
+// int	is_empty_str(char *input_string)
+// {
+// 	if (!input_string)
+// 		return (1);
+// 	while (*input_string && is_whitespace(*input_string))
+// 		input_string++;
+// 	if (*input_string)
+// 		return (0);
+// 	return (1);
+// }
 
 // int	leave_heredoc(t_args *shell_data, int err_i)
 // {
@@ -43,17 +56,6 @@ int	get_char_position(char *input_str, int target_char)
 // 	}
 // 	return (heredoc);
 // }
-
-int	empty_str(char *s)
-{
-	if (!s)
-		return (1);
-	while (*s && is_whitespace(*s))
-		s++;
-	if (*s)
-		return (0);
-	return (1);
-}
 
 // void	init_dst(char **dst, char *src)
 // {

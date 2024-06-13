@@ -1,6 +1,6 @@
 
 #include "../../incl/minishell.h"
-
+//zrobione
 static char	*remove_extra_spaces(char *src)
 {
 	int		i;
@@ -39,7 +39,7 @@ static char	*remove_extra_spaces(char *src)
 	}
 	return (result);
 }
-
+//zrobione
 static void	expand_env_variables(char **input_string, t_args *shell_data)
 {
 	int		i;
@@ -110,9 +110,7 @@ static void	split_tokens(char *input_string, t_args *shell_data)
 	}
 }
 
-// cmdarr [{args - arr[char *],
-// inp - arr[word - file, type - type red_inp/heredoc],
-// out - arr[word - file, type - type red_out/append]}, {args, inp, out}];
+//zrobione
 static void	create_and_fill_commands(t_args *shell_data)
 {
 	int	token_counter;
@@ -128,7 +126,7 @@ static void	create_and_fill_commands(t_args *shell_data)
 		command_counter++;
 	}
 }
-
+//zrobione
 int	parse_input(char *input, t_args *shell_data)
 {
 	char	*processed_input;

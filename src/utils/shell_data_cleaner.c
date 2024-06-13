@@ -1,22 +1,22 @@
 
 #include "../../incl/minishell.h"
-
-static void	free_token_array(t_token **token_array, int *size)
+//zrobione
+static void	free_token_array(t_token **token_array, int *array_size)
 {
 	int	i;
 
 	i = 0;
-	while (i < *size && (*token_array) && (*token_array)[i].word)
+	while (i < *array_size && (*token_array) && (*token_array)[i].word)
 	{
 		ft_free((*token_array)[i].word);
 		i++;
 	}
-	if (*size)
+	if (*array_size)
 		ft_free(*token_array);
 	*token_array = NULL;
-	*size = 0;
+	*array_size = 0;
 }
-
+//zrobione
 static void	free_command_array(t_args *shell_data)
 {
 	int	i;
@@ -31,7 +31,7 @@ static void	free_command_array(t_args *shell_data)
 	}
 	shell_data->command_count = 0;
 }
-
+//zrobione
 void	free_command_resources(t_args *shell_data)
 {
 	if (shell_data->token_array && shell_data->token_count)

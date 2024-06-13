@@ -1,18 +1,18 @@
 
 #include "../../incl/minishell.h"
 
-int	pass_quoted_str(char *s, char *q)
-{
-	int	i;
+// int	pass_quoted_str(char *s, char *q)
+// {
+// 	int	i;
 
-	i = 0;
-	i++;
-	while (s[i] && s[i] != *q)
-		i++;
-	is_open_quote(s[i], q);
-	// quote_opened_type(s[i], q);
-	return (i);
-}
+// 	i = 0;
+// 	i++;
+// 	while (s[i] && s[i] != *q)
+// 		i++;
+// 	is_open_quote(s[i], q);
+// 	// quote_opened_type(s[i], q);
+// 	return (i);
+// }
 
 // int	pass_str(char *s)
 // {

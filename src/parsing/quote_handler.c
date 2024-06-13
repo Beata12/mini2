@@ -1,6 +1,6 @@
 
 #include "../../incl/minishell.h"
-
+//zrobione
 static char	*allocate_unquoted_string(t_token current_token)
 {
 	int		i;
@@ -33,7 +33,7 @@ static char	*allocate_unquoted_string(t_token current_token)
 		memory_allocation_error();
 	return (processed_word);
 }
-
+//zrobione
 static void	remove_token_quotes(t_token *current_token)
 {
 	int		i;
@@ -83,7 +83,7 @@ static void	remove_token_quotes(t_token *current_token)
 	ft_free(current_token->word);
 	current_token->word = processed_word;
 }
-
+//zrobione
 void	remove_all_quotes(t_args *shell_data)
 {
 	int		i;

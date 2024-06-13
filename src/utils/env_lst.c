@@ -13,27 +13,27 @@
 // 	}
 // 	return (size);
 // }
-
-void	ft_lstadd_env(t_env_variable **lst, char *name, char *val)
+//zrobione
+void	add_environment_variable(t_env_variable **env_list, char *env_name, char *env_value)
 {
-	t_env_variable	*node;
-	t_env_variable	*head;
+	t_env_variable	*new_env_var;
+	t_env_variable	*current_node;
 
-	node = ft_malloc(sizeof(t_env_variable));
-	head = *lst;
-	if (!head)
-		*lst = node;
+	new_env_var = ft_malloc(sizeof(t_env_variable));
+	current_node = *env_list;
+	if (!current_node)
+		*env_list = new_env_var;
 	else
 	{
-		while (head->next_env_var)
-			head = head->next_env_var;
-		head->next_env_var = node;
+		while (current_node->next_env_var)
+			current_node = current_node->next_env_var;
+		current_node->next_env_var = new_env_var;
 	}
-	node->env_name = name;
-	node->value = val;
-	node->next_env_var = NULL;
+	new_env_var->env_name = env_name;
+	new_env_var->value = env_value;
+	new_env_var->next_env_var = NULL;
 }
-
+//zrobione
 void	free_environment_node(t_env_variable **env_list)
 {
 	t_env_variable	*next_node;
@@ -106,12 +106,12 @@ void	remove_env_var(char *target_variable, t_env_variable **env_list)
 		current_node = current_node->next_env_var;
 	}
 }
-
+//zrobione
 void	sort_environment_variables(t_env_variable *env_var)
 {
 	t_env_variable	*current_node;
-	char		*name_to_swap;
-	char		*value_to_swap;
+	char			*name_to_swap;
+	char			*value_to_swap;
 
 	while (env_var)
 	{

@@ -80,7 +80,7 @@ static void update_count(t_token *token, t_data_counter *count)
         }
     }
 }
-
+//zrobione
 void	initialize_command(int command_counter, int *token_counter, t_args *shell_data)
 {
 	t_data_counter	count;
@@ -121,8 +121,7 @@ void	initialize_command(int command_counter, int *token_counter, t_args *shell_d
 	allocate_command_memory(count, &shell_data->command_array[command_counter]);
 }
 
-//nowa nAzWa
-// void	initialize_command_array(t_args *shell_data)
+//zrobione
 void	initialize_command_array(t_args *shell_data)
 {
 	int	token_counter;

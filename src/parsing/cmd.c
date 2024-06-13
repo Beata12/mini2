@@ -1,6 +1,6 @@
 
 #include "../../incl/minishell.h"
-
+//zrobione
 void set_redirection_type(t_token *redirection_token, t_token *token_array, int *token_index)
 {
 	// Przypisz typ z aktualnego tokena do redirection_token
@@ -13,7 +13,7 @@ void set_redirection_type(t_token *redirection_token, t_token *token_array, int 
 	// Przypisz skopiowane słowo z token_array do redirection_token
 	redirection_token->word = ft_strdup(token_array[*token_index].word);
 }
-
+//zrobione
 void handle_double_redirection(t_token *redirection_token, t_token *token_array, int *token_index)
 {
 	// Wypełnij szczegóły przekierowania
@@ -23,7 +23,7 @@ void handle_double_redirection(t_token *redirection_token, t_token *token_array,
 	// Zmień typ tokena na T_RED_TO
 	token_array[*token_index].type = T_RED_TO;
 }
-
+//zrobione
 static void process_token(int command_index, int *token_index, t_args *shell_data, int *current_input, int *current_output, int *current_arg)
 {
     t_token *current_token = &shell_data->token_array[*token_index];
@@ -38,7 +38,7 @@ static void process_token(int command_index, int *token_index, t_args *shell_dat
         shell_data->command_array[command_index].args[++(*current_arg)] = current_token->word;
     (*token_index)++;
 }
-
+//zrobione
 void parse_and_fill_command(int command_index, int *token_index, t_args *shell_data)
 {
     int current_input = -1;

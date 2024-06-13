@@ -73,16 +73,16 @@ void			handle_error(const char *error_message, t_args *shell_state, int exit_sta
 // 				int modif);
 	// struct.c
 void			alloc_err(void);
-int				empty_str(char *s);
+int				is_empty_str(char *input_string);//zrobione
 char			*arrjoin(char **arr);
 void			ft_free_array(char **array);
 void			clear_environment_list(t_env_variable **env_list);//zrobione
 void			free_environment_node(t_env_variable **env_list);//zrobione
 void			free_command_resources(t_args *shell_data);
-char			**split_save_divider(char *s, char c);
+// char			**split_with_separator(char *input_str, char separator);//zrobione
 void			initialize_shell(t_args *shell_state, char **environment);//poprawione
 int				leave_heredoc(t_args *shell_data, int err_i);
-void			ft_lstadd_env(t_env_variable **lst, char *name, char *val);
+void			add_environment_variable(t_env_variable **env_list, char *env_name, char *env_value);//zrobione
 
 void			save_history(void);//poprawione
 void			load_history(void);//pooprawione

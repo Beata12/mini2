@@ -1,19 +1,19 @@
 
 #include "../../incl/minishell.h"
 
-// cut env name from str
-char	*cut_name(char *s)
+//zrobione
+char	*get_variable_name(char *input_str)
 {
 	int		i;
-	char	*name;
+	char	*var_name;
 
 	i = 0;
-	while (s[i] && (ft_isalnum(s[i]) || s[i] == '_'))
+	while (input_str[i] && (ft_isalnum(input_str[i]) || input_str[i] == '_'))
 		i++;
-	name = ft_substr(s, 0, i);
-	if (!name)
+	var_name = ft_substr(input_str, 0, i);
+	if (!var_name)
 		memory_allocation_error();
-	return (name);
+	return (var_name);
 }
 
 // takes name and returns node with name:val pair, or NULL

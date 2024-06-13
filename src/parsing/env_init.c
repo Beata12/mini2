@@ -1,22 +1,22 @@
 
 #include "../../incl/minishell.h"
-
-static void	set_shlvl(t_args *shell_data)
+//zrobione
+static void	update_shell_level(t_args *shell_data)
 {
-	t_env_variable	*shlvl_node;
-	int			shlvl;
+	int				shell_level_count;
+	t_env_variable	*shell_level_var;
 
-	shlvl_node = find_env_var("SHLVL", shell_data->env);
-	shlvl = ft_atoi(shlvl_node->value);
-	if (shlvl == 999)
+	shell_level_var = find_env_var("SHLVL", shell_data->env);
+	shell_level_count = ft_atoi(shell_level_var->value);
+	if (shell_level_count == 999)
 	{
 		my_error("", 0);
-		shlvl = 0;
+		shell_level_count = 0;
 	}
-	ft_free(shlvl_node->value);
-	shlvl_node->value = ft_itoa(shlvl + 1);
+	ft_free(shell_level_var->value);
+	shell_level_var->value = ft_itoa(shell_level_count + 1);
 }
-
+//zrobione
 int	process_and_store_env_var(char *input_str, t_env_variable **env_list)
 {
 	int		split_index;
@@ -32,7 +32,7 @@ int	process_and_store_env_var(char *input_str, t_env_variable **env_list)
 		env_value = ft_strdup(&(input_str[split_index]));
 		if (!env_value || !env_name)
 			error_flag = 1;
-		ft_lstadd_env(env_list, env_name, env_value);
+		add_environment_variable(env_list, env_name, env_value);
 	}
 	else
 	{
@@ -40,11 +40,11 @@ int	process_and_store_env_var(char *input_str, t_env_variable **env_list)
 		env_value = NULL;
 		if (!env_name)
 			error_flag = 1;
-		ft_lstadd_env(env_list, env_name, env_value);
+		add_environment_variable(env_list, env_name, env_value);
 	}
 	return (error_flag);
 }
-
+//zrobione
 void	initialize_environment(t_args *shell_data, char **env)
 {
 	int	i;
@@ -59,5 +59,5 @@ void	initialize_environment(t_args *shell_data, char **env)
 		}
 		i++;
 	}
-	set_shlvl(shell_data);
+	update_shell_level(shell_data);
 }
