@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:42 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 18:51:13 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:56:20 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
 
-int shell_exit(t_args *shell_data, char *user_input)
+int	shell_exit(t_args *shell_data, char *user_input)
 {
 	if (ft_strcmp("exit", shell_data->command_array[0].args[0]) == 0)
 	{
@@ -43,8 +43,6 @@ int shell_exit(t_args *shell_data, char *user_input)
 //     }
 //     exit(0);
 // }
-
-
 // int	shell_exit(t_args *shell_data, char *input)
 // {
 // 	if (ft_strcmp("exit", shell_data->cmdarr[0].args[0]) == 0)
@@ -64,4 +62,3 @@ int shell_exit(t_args *shell_data, char *user_input)
 // 	}
 // 	return (0);
 // }
-

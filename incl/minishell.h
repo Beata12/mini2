@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/13 20:35:37 by bmarek           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
 
 # define _POSIX_C_SOURCE 200809L
 # define HISTORY_FILE "./.minishell_history"
@@ -49,45 +59,40 @@ typedef struct s_args
 	int					command_index;
 }						t_args;
 
-//*UTILS
-// void			ignore_signals(void);
-char			**initialize_envp(char **environment);//poprawione
-// void			child_signal(int signal);
-// void			handle_sigint(int signals);
-void			sort_environment_variables(t_env_variable *env_var);//zrobione
-int				identify_builtin_command(char *cmd);//zrobione
-char			**generate_envp_array(t_env_variable *env_list);//poprawione
-void			wait_for_child_processes(t_args *shell_data);//poprawione
-char			*locate_file_in_path(char *file_name, char *path_to_search);//zrobione
-char			*get_prompt_path(t_args *shell_data);//poprawione
+char			**initialize_envp(char **environment);
+void			sort_environment_variables(t_env_variable *env_var);
+int				identify_builtin_command(char *cmd);
+char			**generate_envp_array(t_env_variable *env_list);
+void			wait_for_child_processes(t_args *shell_data);
+char			*locate_file_in_path(char *file_name, char *path_to_search);
+char			*get_prompt_path(t_args *shell_data);
 char			*find_env(t_env_variable *env, char *name);
 char			*ft_remove_substr(char *str, char *sub);
-void			initialize_pipes(t_args *shell_data, int **pipe_array);//poprawione
-void			close_pipe_descriptors(t_args *shell_data, int **pipes);//poprawione
-void			copy_environment_list(t_env_variable *env_list, t_env_variable **new_env_list);//zrobione
+void			initialize_pipes(t_args *shell_data, int **pipe_array);
+void			close_pipe_descriptors(t_args *shell_data, int **pipes);
+void			copy_environment_list(t_env_variable *env_list,
+					t_env_variable **new_env_list);
 void			remove_env_var(char *str, t_env_variable **env);
 void			exit_with_error(char *str, char *str2, int status);
-void			process_environment_variables(t_args *shell_data, char **args, int i);//zrobione
-void			handle_error(const char *error_message, t_args *shell_state, int exit_status_code, int modification_flag);// zmienione
-// void			ft_error_return(char *str, t_args *shell_data, int status,
-// 				int modif);
-	// struct.c
+void			process_environment_variables(t_args *shell_data,
+					char **args, int i);
+void			handle_error(const char *error_message, t_args *shell_state,
+					int exit_status_code, int modification_flag);
 void			alloc_err(void);
-int				is_empty_str(char *input_string);//zrobione
+int				is_empty_str(char *input_string);
 char			*arrjoin(char **arr);
 void			ft_free_array(char **array);
-void			clear_environment_list(t_env_variable **env_list);//zrobione
-void			free_environment_node(t_env_variable **env_list);//zrobione
+void			clear_environment_list(t_env_variable **env_list);
+void			free_environment_node(t_env_variable **env_list);
 void			free_command_resources(t_args *shell_data);
-// char			**split_with_separator(char *input_str, char separator);//zrobione
-void			initialize_shell(t_args *shell_state, char **environment);//poprawione
+void			initialize_shell(t_args *shell_state, char **environment);
 int				leave_heredoc(t_args *shell_data, int err_i);
-void			add_environment_variable(t_env_variable **env_list, char *env_name, char *env_value);//zrobione
-
-void			save_history(void);//poprawione
-void			load_history(void);//pooprawione
-void			setup_signal_handlers(void);//poprawione
-void			handle_sigquit(int sig);//poprawione
-void			handle_sigint(int sig);//poprawione
+void			add_environment_variable(t_env_variable **env_list,
+					char *env_name, char *env_value);
+void			save_history(void);
+void			load_history(void);
+void			setup_signal_handlers(void);
+void			handle_sigquit(int sig);
+void			handle_sigint(int sig);
 
 #endif

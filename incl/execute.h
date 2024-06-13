@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/16 15:30:07 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/13 20:33:53 by bmarek           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
@@ -20,7 +31,7 @@ typedef					void(command_executor)(t_args *shell_data);
 typedef struct s_builtin
 {
 	char				*env_name;//jak bedxzie blad to zmien na builtin_name
-	command_executor	*command_executor;//fn_ptr;
+	command_executor	*command_executor;
 }							t_builtin;
 
 // builtins
@@ -34,14 +45,19 @@ void						initialize_builtins(t_args *shell_data);
 int							shell_exit(t_args *shell_data, char *input);
 
 // execute
-void						ft_execve(t_args *shell_data);//zrobione
-void						execute(t_args *shell_data);//zrobione
-void						ft_execute(t_args *shell_data);//zrobione
-int							manage_file_access(char *file_path, int file_flags);//zrobione
-void						process_all_heredocs(t_args *shell_data, int command_index);//poprawione
-void						execute_heredoc(t_args *shell_data, int command_index, int input_index);//poprawione
-void						execute_pipeline(t_args *shell_data, int **pipe_array);//poprawione
-void						setup_input_redirection(t_args *shell_data, int command_index);//poprawione
-void						setup_output_redirection(t_args *shell_data, int command_index);//poprawione
+void						ft_execve(t_args *shell_data);
+void						execute(t_args *shell_data);
+void						ft_execute(t_args *shell_data);
+int							manage_file_access(char *file_path, int file_flags);
+void						process_all_heredocs(t_args *shell_data,
+								int command_index);
+void						execute_heredoc(t_args *shell_data,
+								int command_index, int input_index);
+void						execute_pipeline(t_args *shell_data,
+								int **pipe_array);
+void						setup_input_redirection(t_args *shell_data,
+								int command_index);
+void						setup_output_redirection(t_args *shell_data,
+								int command_index);
 
 #endif

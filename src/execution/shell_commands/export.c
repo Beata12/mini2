@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:45 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 19:06:08 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:56:26 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
+
+void	shell_export(t_args *shell_data)
+{
+	char	**export_arguments;
+
+	export_arguments = shell_data->command_array
+	[shell_data->command_index].args;
+	if (export_arguments[1] == NULL)
+	{
+		copy_environment_list(shell_data->env, &shell_data->exported_vars);
+		remove_env_var("_", &shell_data->exported_vars);
+		sort_environment_variables(shell_data->exported_vars);
+		shell_env(shell_data);
+		clear_environment_list(&shell_data->exported_vars);
+		shell_data->exec_result = 0;
+	}
+	else
+		process_environment_variables(shell_data, export_arguments, 1);
+}
 
 // void shell_export(t_args *shell_data)
 // {
@@ -20,12 +39,10 @@
 //         fprintf(stderr, "shell_export: cmdarr is NULL\n");
 //         return;
 //     }
-
 //     char **cmdarr = cmdarr_struct->args;
 //     int i = 1;
 //     char *key;
 //     char *value;
-
 //     while (cmdarr[i] != NULL) {
 //         key = strtok(cmdarr[i], "=");
 //         value = strtok(NULL, "=");
@@ -42,29 +59,9 @@
 //         i++;
 //     }
 // }
-
-void	shell_export(t_args *shell_data)
-{
-	char	**export_arguments;
-
-	export_arguments = shell_data->command_array[shell_data->command_index].args;
-	if (export_arguments[1] == NULL)
-	{
-		copy_environment_list(shell_data->env, &shell_data->exported_vars);
-		remove_env_var("_", &shell_data->exported_vars);
-		sort_environment_variables(shell_data->exported_vars);
-		shell_env(shell_data);
-		clear_environment_list(&shell_data->exported_vars);
-		shell_data->exec_result = 0;
-	}
-	else
-		process_environment_variables(shell_data, export_arguments, 1);
-}
-
 // void shell_export(t_args *shell_data)
 // {
 //     char **command_line_args;
-    
 //     command_line_args = shell_data->cmdarr[shell_data->cmd_num].args;
 //     if (command_line_args[1] == NULL)
 //     {
@@ -79,7 +76,6 @@ void	shell_export(t_args *shell_data)
 //     else
 //         export_loop(shell_data, command_line_args, 1);
 // }
-
 // void	shell_export(t_args *shell_data)
 // {
 // 	char	**args;
@@ -97,12 +93,8 @@ void	shell_export(t_args *shell_data)
 // 	else
 // 		export_loop(shell_data, args, 1);
 // }
-
-
-
 // void shell_export(Token *args) {
 //     extern char **environ;
-
 //     if (args[1].value == NULL) {
 //         // No argument, print all environment variables
 //         for (char **env = environ; *env != 0; env++) {
@@ -112,14 +104,13 @@ void	shell_export(t_args *shell_data)
 //         // Parse the argument
 //         char *name = strtok(args[1].value, "=");
 //         char *value = strtok(NULL, "=");
-
 //         if (name && value) {
 //             // Check for invalid name format (optional)
 //             if (strcspn(name, " \t\n=") != strlen(name)) {
-//                 fprintf(stderr, "minishell: export: invalid variable name\n");
+//                 fprintf(stderr, "minishell: 
+//					export: invalid variable name\n");
 //                 return;
 //             }
-
 //             // Find if the variable already exists
 //             int index = find_env_var(name);
 //             if (index != -1) {
@@ -133,13 +124,11 @@ void	shell_export(t_args *shell_data)
 //                 size_t len = strlen(name) + strlen(value) + 2;
 //                 char *new_env_var = malloc(len);
 //                 snprintf(new_env_var, len, "%s=%s", name, value);
-
 //                 // Count current environment variables
 //                 int env_count = 0;
 //                 while (environ[env_count] != NULL) {
 //                     env_count++;
 //                 }
-
 //                 // Allocate space for the new environment variable
 //                 environ = realloc(environ, (env_count + 2) * sizeof(char *));
 //                 environ[env_count] = new_env_var;
@@ -150,8 +139,6 @@ void	shell_export(t_args *shell_data)
 //         }
 //     }
 // }
-
-
 // {
 //	 char *equals = strchr(arg, '=');
 
@@ -161,7 +148,8 @@ void	shell_export(t_args *shell_data)
 //		 return 1;
 //	 }
 //	 *equals = '\0';  // Splitting the argument into variable name and value
-//	 int result = setenv(arg, equals + 1, 1); // Setting the environment variable
+//	 int result = setenv(arg, equals + 1, 1); 
+// Setting the environment variable
 //	 if (result != 0)
 // 	{
 //		 perror("setenv");
@@ -169,7 +157,6 @@ void	shell_export(t_args *shell_data)
 //	 }
 //	 return 0;
 // }
-
 // int main(int argc, char *argv[])
 // {
 //	 int result = shell_export(argv[1]);
@@ -187,10 +174,8 @@ void	shell_export(t_args *shell_data)
 //	 printf("Variable exported successfully\n");
 //	 return 0;
 // }
-
 //	check like this:
 //	./a.out MY_VAR=my_value
-
 // int shell_export(char **args) {
 //	 if (!args[1])
 // 	{
@@ -204,11 +189,9 @@ void	shell_export(t_args *shell_data)
 //	 }
 //	 return 0;
 // }
-
 // int main(int argc, char *argv[]) 
 // {
 //	 int result = shell_export(&argv[1]);
-
 //	 if (argc != 2) {
 //		 fprintf(stderr, "Usage: %s <variable=value>\n", argv[0]);
 //		 exit(1);

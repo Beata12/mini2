@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:51:48 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 19:26:07 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:56:36 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	shell_unset(t_args *shell_data)
 	int		i;
 	char	**variables_to_unset;
 
-	variables_to_unset = shell_data->command_array[shell_data->command_index].args;
+	variables_to_unset = shell_data->command_array
+	[shell_data->command_index].args;
 	if (variables_to_unset[1] == NULL)
 	{
 		printf("minishell: unset: not enough arguments\n");

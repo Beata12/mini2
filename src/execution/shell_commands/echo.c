@@ -3,36 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:12:22 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 18:58:01 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:56:01 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
 
+//*add_newline = 1;  // Zakładamy dodanie nowej 
+//linii, jeśli nie znajdziemy flagi -n
 static int	check_n_flag(t_args *shell_data, int *add_newline)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	*add_newline = 1;  // Zakładamy dodanie nowej linii, jeśli nie znajdziemy flagi -n
+	*add_newline = 1;
 	while (shell_data->command_array[shell_data->command_index].args[i])
 	{
-		if (shell_data->command_array[shell_data->command_index].args[i][0] != '-')
-			break;
+		if (shell_data->command_array[shell_data->command_index].args
+			[i][0] != '-')
+			break ;
 		j = 1;
-		while (shell_data->command_array[shell_data->command_index].args[i][j] == 'n')
+		while (shell_data->command_array[shell_data->command_index].args
+			[i][j] == 'n')
 			j++;
 		if (shell_data->command_array[shell_data->command_index].args[i][j])
-			break;
+			break ;
 		i++;
 	}
 	if (i > 1)
-		*add_newline = 0;  // Flaga -n została znaleziona, więc nie dodajemy nowej linii
-	return i;
+		*add_newline = 0;
+	return (i);
 }
 
 void	shell_echo(t_args *shell_data)
@@ -43,10 +47,13 @@ void	shell_echo(t_args *shell_data)
 	i = check_n_flag(shell_data, &add_newline);
 	while (shell_data->command_array[shell_data->command_index].args[i])
 	{
-		if (shell_data->command_array[shell_data->command_index].args[i + 1] != NULL)
-			printf("%s ", shell_data->command_array[shell_data->command_index].args[i]);
+		if (shell_data->command_array[shell_data->command_index].args
+			[i + 1] != NULL)
+			printf("%s ", shell_data->command_array
+			[shell_data->command_index].args[i]);
 		else
-			printf("%s", shell_data->command_array[shell_data->command_index].args[i]);
+			printf("%s", shell_data->command_array
+			[shell_data->command_index].args[i]);
 		i++;
 	}
 	if (add_newline)

@@ -3,14 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:40 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 19:27:15 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 20:56:12 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
+
+void	shell_env(t_args *shell_data)
+{
+	t_env_variable	*cur_var;
+
+	cur_var = shell_data->env;
+	if (!shell_data->exported_vars)
+	{
+		while (cur_var)
+		{
+			if (cur_var->value)
+				printf("%s=%s\n", cur_var->env_name, cur_var->value);
+			cur_var = cur_var->next_env_var;
+		}
+		shell_data->exec_result = 0;
+		return ;
+	}
+	cur_var = shell_data->exported_vars;
+	while (cur_var)
+	{
+		if (cur_var->value)
+			printf("declare -x %s=\"%s\"\n", cur_var->env_name, cur_var->value);
+		else
+			printf("declare -x %s\n", cur_var->env_name);
+		cur_var = cur_var->next_env_var;
+	}
+	shell_data->exec_result = 0;
+}
 
 // void	shell_env(t_args *shell_data)
 // {
@@ -29,34 +57,6 @@
 // 	shell_data->exit_status = 0;
 // }
 
-void	shell_env(t_args *shell_data)
-{
-	t_env_variable	*current_var;
-
-	current_var = shell_data->env;
-	if (!shell_data->exported_vars)
-	{
-		while (current_var)
-		{
-			if (current_var->value)
-				printf("%s=%s\n", current_var->env_name, current_var->value);
-			current_var = current_var->next_env_var;
-		}
-		shell_data->exec_result = 0;
-		return ;
-	}
-	current_var = shell_data->exported_vars;
-	while (current_var)
-	{
-		if (current_var->value)
-			printf("declare -x %s=\"%s\"\n", current_var->env_name, current_var->value);
-		else
-			printf("declare -x %s\n", current_var->env_name);
-		current_var = current_var->next_env_var;
-	}
-	shell_data->exec_result = 0;
-}
-
 // int shell_env(void)
 // {
 //     extern char **environ;
@@ -70,7 +70,8 @@ void	shell_env(t_args *shell_data)
 //     {
 //         if (*env == NULL)
 //         {
-//             fprintf(stderr, "Warning: Null environment variable encountered\n");
+//             fprintf(stderr, "Warning: Null environment 
+//				variable encountered\n");
 //             continue;
 //         }
 //         printf("%s\n", *env);
