@@ -5,68 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 09:58:38 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:06:25 by beata            ###   ########.fr       */
+/*   Created: 2024/05/21 21:12:22 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/06/13 11:43:11 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
 
-char *expand_variable(const char *str) {
-    if (str[0] == '$') {
-        const char *var_name = str + 1; // Skip the '$' character
-        char *value = getenv(var_name);
-        if (value) {
-            return value;
-        }
-    }
-    return (char *)str;
+static int	handle_n_flag(t_args *shell_data, int *n_line)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (shell_data->cmdarr[shell_data->cmd_num].args[i])
+	{
+		if (shell_data->cmdarr[shell_data->cmd_num].args[i][0] != '-')
+			break ;
+		j = 1;
+		while (shell_data->cmdarr[shell_data->cmd_num].args[i][j] == 'n')
+			j++;
+		if (shell_data->cmdarr[shell_data->cmd_num].args[i][j])
+			break ;
+		i++;
+	}
+	if (i > 1)
+		*n_line = 0;
+	else
+		*n_line = 1;
+	return (i);
 }
 
-int shell_echo(Token *args) {
-    int i = 1;
-    int newline = 1;
+void	shell_echo(t_args *shell_data)
+{
+	int	i;
+	int	n_line;
 
-    if (args[i].value[0] != '\0' && strcmp(args[i].value, "-n") == 0) {
-        newline = 0;
-        i++;
-    }
-
-    while (args[i].value[0] != '\0') {
-        char *expanded_value = expand_variable(args[i].value);
-        printf("%s", expanded_value);
-        if (args[++i].value[0] != '\0') {
-            printf(" ");
-        }
-    }
-
-    if (newline) {
-        printf("\n");
-    }
-
-    return 0;
+	i = handle_n_flag(shell_data, &n_line);
+	while (shell_data->cmdarr[shell_data->cmd_num].args[i])
+	{
+		if (shell_data->cmdarr[shell_data->cmd_num].args[i + 1] != NULL)
+			printf("%s ", shell_data->cmdarr[shell_data->cmd_num].args[i]);
+		else
+			printf("%s", shell_data->cmdarr[shell_data->cmd_num].args[i]);
+		i++;
+	}
+	if (n_line)
+		printf("\n");
+	shell_data->exit_status = 0;
 }
-
-// int shell_echo(Token tokens[], int token_count)
-// {
-// 	int i;
-
-// 	i = 1;
-// 	while (i < token_count)
-// 	{
-// 		printf("%s ", tokens[i].value);
-// 		i++;
-// 	}
-
-//     printf("\n");
-//     return 0; // Success
-// }
-
-// int main(int argc, char *argv[])
-// {
-//	 if (argc > 1)
-//		 shell_echo(&argv[1]);
-//	 else
-//		 printf("Usage: %s [options] [text]\n", argv[0]);
-//	 return (0);
-// }

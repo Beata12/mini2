@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:09 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 11:19:30 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:44:29 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	initialize_builtins(t_args *shell_data)
 	t_builtin builtins[] = {
         {"pwd", shell_pwd},
         {"cd", shell_cd},
-        {"echo", ft_echo},
-        {"unset", ft_unset},
+        {"echo", shell_echo},
+        {"unset", shell_unset},
         {"export", shell_export},
         {"env", shell_env},
         {NULL, NULL} // Zakończenie tablicy

@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:45 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:34:04 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:40:10 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,42 @@
 //     }
 // }
 
-
-void shell_export(t_args *shell_data)
+void	shell_export(t_args *shell_data)
 {
-    char **command_line_args;
-    
-    command_line_args = shell_data->cmdarr[shell_data->cmd_num].args;
-    if (command_line_args[1] == NULL)
-    {
-        // Handle export without arguments
-        copy_list(shell_data->env, &shell_data->export);
-        remove_one_node("_", &shell_data->export);
-        tmp_sort_env(shell_data->export);
-        shell_env(shell_data);
-        clean_lst_env(&shell_data->export);
-        shell_data->exit_status = 0;
-    }
-    else
-        export_loop(shell_data, command_line_args, 1);
+	char	**args;
+
+	args = shell_data->cmdarr[shell_data->cmd_num].args;
+	if (args[1] == NULL)
+	{
+		copy_list(shell_data->env, &shell_data->export);
+		remove_one_node("_", &shell_data->export);
+		tmp_sort_env(shell_data->export);
+		shell_env(shell_data);
+		clean_lst_env(&shell_data->export);
+		shell_data->exit_status = 0;
+	}
+	else
+		export_loop(shell_data, args, 1);
 }
+
+// void shell_export(t_args *shell_data)
+// {
+//     char **command_line_args;
+    
+//     command_line_args = shell_data->cmdarr[shell_data->cmd_num].args;
+//     if (command_line_args[1] == NULL)
+//     {
+//         // Handle export without arguments
+//         copy_list(shell_data->env, &shell_data->export);
+//         remove_one_node("_", &shell_data->export);
+//         tmp_sort_env(shell_data->export);
+//         shell_env(shell_data);
+//         clean_lst_env(&shell_data->export);
+//         shell_data->exit_status = 0;
+//     }
+//     else
+//         export_loop(shell_data, command_line_args, 1);
+// }
 
 // void	shell_export(t_args *shell_data)
 // {

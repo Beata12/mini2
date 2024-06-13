@@ -6,13 +6,13 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:51:48 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:34:11 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:44:33 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/execute.h"
 
-void	ft_unset(t_args *shell_data)
+void	shell_unset(t_args *shell_data)
 {
 	int		i;
 	char	**rm_names;

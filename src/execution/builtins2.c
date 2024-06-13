@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 11:21:57 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:40:03 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,23 @@ static int	check_var_validity(char *var, char *name)
 	return (1);
 }
 
-void	shell_export(t_args *shell_data)
-{
-	char	**args;
+// void	shell_export(t_args *shell_data)
+// {
+// 	char	**args;
 
-	args = shell_data->cmdarr[shell_data->cmd_num].args;
-	if (args[1] == NULL)
-	{
-		copy_list(shell_data->env, &shell_data->export);
-		remove_one_node("_", &shell_data->export);
-		tmp_sort_env(shell_data->export);
-		shell_env(shell_data);
-		clean_lst_env(&shell_data->export);
-		shell_data->exit_status = 0;
-	}
-	else
-		export_loop(shell_data, args, 1);
-}
+// 	args = shell_data->cmdarr[shell_data->cmd_num].args;
+// 	if (args[1] == NULL)
+// 	{
+// 		copy_list(shell_data->env, &shell_data->export);
+// 		remove_one_node("_", &shell_data->export);
+// 		tmp_sort_env(shell_data->export);
+// 		shell_env(shell_data);
+// 		clean_lst_env(&shell_data->export);
+// 		shell_data->exit_status = 0;
+// 	}
+// 	else
+// 		export_loop(shell_data, args, 1);
+// }
 
 // void	ft_unset(t_args *shell_data)
 // {
