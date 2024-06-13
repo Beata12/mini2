@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:12:22 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 11:58:10 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:58:01 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int	check_n_flag(t_args *shell_data, int *add_newline)
 
 	i = 1;
 	*add_newline = 1;  // Zakładamy dodanie nowej linii, jeśli nie znajdziemy flagi -n
-	while (shell_data->cmdarr[shell_data->cmd_num].args[i])
+	while (shell_data->command_array[shell_data->command_index].args[i])
 	{
-		if (shell_data->cmdarr[shell_data->cmd_num].args[i][0] != '-')
+		if (shell_data->command_array[shell_data->command_index].args[i][0] != '-')
 			break;
 		j = 1;
-		while (shell_data->cmdarr[shell_data->cmd_num].args[i][j] == 'n')
+		while (shell_data->command_array[shell_data->command_index].args[i][j] == 'n')
 			j++;
-		if (shell_data->cmdarr[shell_data->cmd_num].args[i][j])
+		if (shell_data->command_array[shell_data->command_index].args[i][j])
 			break;
 		i++;
 	}
@@ -41,17 +41,17 @@ void	shell_echo(t_args *shell_data)
 	int	add_newline;
 
 	i = check_n_flag(shell_data, &add_newline);
-	while (shell_data->cmdarr[shell_data->cmd_num].args[i])
+	while (shell_data->command_array[shell_data->command_index].args[i])
 	{
-		if (shell_data->cmdarr[shell_data->cmd_num].args[i + 1] != NULL)
-			printf("%s ", shell_data->cmdarr[shell_data->cmd_num].args[i]);
+		if (shell_data->command_array[shell_data->command_index].args[i + 1] != NULL)
+			printf("%s ", shell_data->command_array[shell_data->command_index].args[i]);
 		else
-			printf("%s", shell_data->cmdarr[shell_data->cmd_num].args[i]);
+			printf("%s", shell_data->command_array[shell_data->command_index].args[i]);
 		i++;
 	}
 	if (add_newline)
 		printf("\n");
-	shell_data->exit_status = 0;
+	shell_data->exec_result = 0;
 }
 
 // static int	check_n_flag(t_args *shell_data, int *newline_flag)

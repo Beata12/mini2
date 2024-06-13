@@ -89,9 +89,9 @@ void	remove_all_quotes(t_args *shell_data)
 	int		i;
 
 	i = 0;
-	while (i < shell_data->tokarr_l)
+	while (i < shell_data->token_count)
 	{
-		remove_token_quotes(&shell_data->tokarr[i]);
+		remove_token_quotes(&shell_data->token_array[i]);
 		i++;
 	}
 }

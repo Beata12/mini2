@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:45 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 16:31:37 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:06:08 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ void	shell_export(t_args *shell_data)
 {
 	char	**export_arguments;
 
-	export_arguments = shell_data->cmdarr[shell_data->cmd_num].args;
+	export_arguments = shell_data->command_array[shell_data->command_index].args;
 	if (export_arguments[1] == NULL)
 	{
-		copy_environment_list(shell_data->env, &shell_data->export);
-		remove_env_var("_", &shell_data->export);
-		sort_environment_variables(shell_data->export);
+		copy_environment_list(shell_data->env, &shell_data->exported_vars);
+		remove_env_var("_", &shell_data->exported_vars);
+		sort_environment_variables(shell_data->exported_vars);
 		shell_env(shell_data);
-		clear_environment_list(&shell_data->export);
-		shell_data->exit_status = 0;
+		clear_environment_list(&shell_data->exported_vars);
+		shell_data->exec_result = 0;
 	}
 	else
 		process_environment_variables(shell_data, export_arguments, 1);

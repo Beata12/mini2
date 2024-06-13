@@ -38,18 +38,16 @@
 
 typedef struct s_args
 {
-	t_env_variable		*export;
+	t_env_variable		*exported_vars;
 	t_env_variable		*env;
-	t_token			*tokarr;
-	t_cmd_arr_str	*cmdarr;
-	t_builtin		*builtin;
-	int				execution_result;
-	int				exit_status;//to do usuniecia, bo to to samo co execution result tylko zamien wszystkie
-	int				tokarr_l;
-	int				cmdarr_l;
-	int				cmd_num;
-
-}				t_args;
+	t_token				*token_array;
+	t_cmd_arr_str		*command_array;
+	t_builtin			*builtin_cmds;
+	int					exec_result;
+	int					token_count;
+	int					command_count;
+	int					command_index;
+}						t_args;
 
 //*UTILS
 // void			ignore_signals(void);

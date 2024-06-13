@@ -22,21 +22,21 @@ static void	free_command_array(t_args *shell_data)
 	int	i;
 
 	i = 0;
-	while (i < shell_data->cmdarr_l && shell_data->cmdarr)
+	while (i < shell_data->command_count && shell_data->command_array)
 	{
-		ft_free(shell_data->cmdarr[i].args);
-		free_token_array(&shell_data->cmdarr[i].input_tokens, &shell_data->cmdarr[i].input_length);
-		free_token_array(&shell_data->cmdarr[i].output_tokens, &shell_data->cmdarr[i].output_length);
+		ft_free(shell_data->command_array[i].args);
+		free_token_array(&shell_data->command_array[i].input_tokens, &shell_data->command_array[i].input_length);
+		free_token_array(&shell_data->command_array[i].output_tokens, &shell_data->command_array[i].output_length);
 		i++;
 	}
-	shell_data->cmdarr_l = 0;
+	shell_data->command_count = 0;
 }
 
 void	free_command_resources(t_args *shell_data)
 {
-	if (shell_data->tokarr && shell_data->tokarr_l)
-		free_token_array(&shell_data->tokarr, &shell_data->tokarr_l);
-	if (shell_data->cmdarr && shell_data->cmdarr_l)
+	if (shell_data->token_array && shell_data->token_count)
+		free_token_array(&shell_data->token_array, &shell_data->token_count);
+	if (shell_data->command_array && shell_data->command_count)
 		free_command_array(shell_data);
-	shell_data->cmd_num = 0;
+	shell_data->command_index = 0;
 }

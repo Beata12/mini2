@@ -98,13 +98,13 @@ static void	split_tokens(char *input_string, t_args *shell_data)
 	{
 		if (is_whitespace(input_string[i]))
 			continue ;
-		shell_data->tokarr[token_index].type = token_typizator(&input_string[i]);
+		shell_data->token_array[token_index].type = token_typizator(&input_string[i]);
 		token_length = check_special_symbol(&input_string[i]);//DZIAŁA!!!!!!!!!!!!1
 		// token_length = spec_symb(&input_string[i]);
 		if (!token_length)
 			// token_length = pass_str(&input_string[i]);
 			token_length = skip_special_characters(&input_string[i]);//DZIAŁA!!!!!!!!!!!!!!!!!!
-		shell_data->tokarr[token_index].word = ft_substr(input_string, i, token_length--);
+		shell_data->token_array[token_index].word = ft_substr(input_string, i, token_length--);
 		i += token_length;
 		token_index++;
 	}
@@ -121,7 +121,7 @@ static void	create_and_fill_commands(t_args *shell_data)
 	initialize_command_array(shell_data);//SKONCNZONE i dziala
 	token_counter = 0;
 	command_counter = 0;
-	while (command_counter < shell_data->cmdarr_l)
+	while (command_counter < shell_data->command_count)
 	{
 		parse_and_fill_command(command_counter, &token_counter, shell_data);//tutaj
 		token_counter++;
@@ -149,7 +149,7 @@ int	parse_input(char *input, t_args *shell_data)
 	remove_all_quotes(shell_data);// ZROBIONE I DZIALA
 	if (token_status < 0)
 		create_and_fill_commands(shell_data);//ROBIE TERAZ
-	shell_data->exit_status = 0;
+	shell_data->exec_result = 0;
 	return (ft_free(processed_input), 1);
 }
 

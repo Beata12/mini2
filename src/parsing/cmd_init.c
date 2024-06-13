@@ -86,10 +86,10 @@ void	initialize_command(int command_counter, int *token_counter, t_args *shell_d
 	t_data_counter	count;
 
 	reset_count(&count);
-	while (shell_data->tokarr && *token_counter < shell_data->tokarr_l && shell_data->tokarr[*token_counter].word
-    && shell_data->tokarr[*token_counter].type != T_PIPE)
+	while (shell_data->token_array && *token_counter < shell_data->token_count && shell_data->token_array[*token_counter].word
+    && shell_data->token_array[*token_counter].type != T_PIPE)
 	{
-	    t_token current_token = shell_data->tokarr[*token_counter];
+	    t_token current_token = shell_data->token_array[*token_counter];
 	    update_count(&current_token, &count);
 	    // Przejście do następnego tokena
 	    (*token_counter)++;
@@ -118,7 +118,7 @@ void	initialize_command(int command_counter, int *token_counter, t_args *shell_d
 	// 	(*token_counter)++;
 	// }
 	//tutaj była alloc_cmd
-	allocate_command_memory(count, &shell_data->cmdarr[command_counter]);
+	allocate_command_memory(count, &shell_data->command_array[command_counter]);
 }
 
 //nowa nAzWa
@@ -130,17 +130,17 @@ void	initialize_command_array(t_args *shell_data)
 
 	token_counter = 0;
 	command_counter = 1;
-	while (token_counter < shell_data->tokarr_l)
+	while (token_counter < shell_data->token_count)
 	{
-		if (shell_data->tokarr[token_counter].type == T_PIPE)
+		if (shell_data->token_array[token_counter].type == T_PIPE)
 			command_counter++;
 		token_counter++;
 	}
-	shell_data->cmdarr = ft_malloc(sizeof(t_cmd_arr_str) * command_counter);
-	shell_data->cmdarr_l = command_counter;
+	shell_data->command_array = ft_malloc(sizeof(t_cmd_arr_str) * command_counter);
+	shell_data->command_count = command_counter;
 	command_counter = 0;
 	token_counter = 0;
-	while (command_counter < shell_data->cmdarr_l && token_counter < shell_data->tokarr_l)
+	while (command_counter < shell_data->command_count && token_counter < shell_data->token_count)
 	{
 		initialize_command(command_counter, &token_counter, shell_data);
 		command_counter++;

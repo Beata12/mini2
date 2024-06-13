@@ -8,11 +8,11 @@ void	wait_for_child_processes(t_args *shell_data)
 
 	i = 0;
 	child_status = 0;
-	while (i < shell_data->cmdarr_l)
+	while (i < shell_data->command_count)
 	{
 		wait(&child_status);
 		if (WIFEXITED(child_status))
-			shell_data->exit_status = WEXITSTATUS(child_status);
+			shell_data->exec_result = WEXITSTATUS(child_status);
 		i++;
 	}
 }
@@ -22,7 +22,7 @@ void	initialize_pipes(t_args *shell_data, int **pipe_array)
 	int	i;
 
 	i = 0;
-	while (i < shell_data->cmdarr_l - 1)
+	while (i < shell_data->command_count - 1)
 	{
 		pipe_array[i] = ft_malloc(sizeof(int) * 2);
 		pipe(pipe_array[i]);
@@ -35,7 +35,7 @@ void	close_pipe_descriptors(t_args *shell_data, int **pipe_array)
 	int	i;
 
 	i = 0;
-	while (i < shell_data->cmdarr_l - 1)
+	while (i < shell_data->command_count - 1)
 	{
 		close(pipe_array[i][0]);
 		close(pipe_array[i][1]);
@@ -53,7 +53,7 @@ void	ft_execve(t_args *shell_data)
 
     executable_path = NULL;
     envp_array = generate_envp_array(shell_data->env);
-    command_args = shell_data->cmdarr[shell_data->cmd_num].args;
+    command_args = shell_data->command_array[shell_data->command_index].args;
     env_node = find_env_var("PATH", shell_data->env);
 
     if (ft_strchr(command_args[0], '/') == NULL)

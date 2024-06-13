@@ -117,7 +117,7 @@ static char	*substitute_special_cases(char *input_string, t_args *shell_data)
 	if (input_string[1] == '?')
 	{
 		i = process_question_mark(input_string);
-		modified_string = ft_itoa(shell_data->execution_result);
+		modified_string = ft_itoa(shell_data->exec_result);
 	}
 	else
 	{

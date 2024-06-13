@@ -26,16 +26,16 @@ void handle_double_redirection(t_token *redirection_token, t_token *token_array,
 
 static void process_token(int command_index, int *token_index, t_args *shell_data, int *current_input, int *current_output, int *current_arg)
 {
-    t_token *current_token = &shell_data->tokarr[*token_index];
+    t_token *current_token = &shell_data->token_array[*token_index];
     
     if (current_token->type == T_RED_FROM && check_special_symbol(current_token->word) == 2)
-        handle_double_redirection(&shell_data->cmdarr[command_index].input_tokens[++(*current_input)], shell_data->tokarr, token_index);
+        handle_double_redirection(&shell_data->command_array[command_index].input_tokens[++(*current_input)], shell_data->token_array, token_index);
     else if (current_token->type == T_RED_FROM || current_token->type == T_DLESS)
-        set_redirection_type(&shell_data->cmdarr[command_index].input_tokens[++(*current_input)], shell_data->tokarr, token_index);
+        set_redirection_type(&shell_data->command_array[command_index].input_tokens[++(*current_input)], shell_data->token_array, token_index);
     else if (current_token->type == T_RED_TO || current_token->type == T_DGREAT)
-        set_redirection_type(&shell_data->cmdarr[command_index].output_tokens[++(*current_output)], shell_data->tokarr, token_index);
+        set_redirection_type(&shell_data->command_array[command_index].output_tokens[++(*current_output)], shell_data->token_array, token_index);
     else
-        shell_data->cmdarr[command_index].args[++(*current_arg)] = current_token->word;
+        shell_data->command_array[command_index].args[++(*current_arg)] = current_token->word;
     (*token_index)++;
 }
 
@@ -45,7 +45,7 @@ void parse_and_fill_command(int command_index, int *token_index, t_args *shell_d
     int current_output = -1;
     int current_arg = -1;
 
-    while (*token_index < shell_data->tokarr_l && shell_data->tokarr[*token_index].type != T_PIPE)
+    while (*token_index < shell_data->token_count && shell_data->token_array[*token_index].type != T_PIPE)
 	{
         process_token(command_index, token_index, shell_data, &current_input, &current_output, &current_arg);
     }

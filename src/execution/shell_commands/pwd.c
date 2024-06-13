@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:48 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:06:16 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:52:47 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	shell_pwd(t_args *shell_data)
     }
     printf("%s\n", current_directory_path);
     ft_free(current_directory_path);
-    shell_data->exit_status = 0;
+    shell_data->exec_result = 0;
 }

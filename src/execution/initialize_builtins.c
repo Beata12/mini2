@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:09 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 15:46:44 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:03:13 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	initialize_builtins(t_args *shell_data)
 
 	i = 0;
 	num_builtins  = 6;
-	shell_data->builtin = ft_malloc(sizeof(t_builtin) * (num_builtins  + 1));
+	shell_data->builtin_cmds = ft_malloc(sizeof(t_builtin) * (num_builtins  + 1));
 	// shell_data->builtin[0].name = "pwd";
 	// shell_data->builtin[0].fn_ptr = ft_pwd;
 	// shell_data->builtin[1].name = "cd";
@@ -46,7 +46,7 @@ void	initialize_builtins(t_args *shell_data)
 
     while (i <= num_builtins)
 	{
-        shell_data->builtin[i] = builtins[i];
+        shell_data->builtin_cmds[i] = builtins[i];
         i++;
     }
 }

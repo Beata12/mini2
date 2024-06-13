@@ -29,7 +29,7 @@ static void print_shell_error(const char *cmd_name, const char *arg_value, const
 void handle_error(const char *error_message, t_args *shell_state, int exit_status_code, int modification_flag)
 {
     // Logic to determine error content based on command name
-    char *command_name = shell_state->cmdarr[shell_state->cmd_num].args[0];
+    char *command_name = shell_state->command_array[shell_state->command_index].args[0];
     const char *error_content = NULL;
 
     // Determine error content based on command name
@@ -53,5 +53,5 @@ void handle_error(const char *error_message, t_args *shell_state, int exit_statu
     print_shell_error(command_name, error_message, error_content);
 
     // Set exit status
-    shell_state->exit_status = exit_status_code;
+    shell_state->exec_result = exit_status_code;
 }

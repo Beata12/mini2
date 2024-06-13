@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:40 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 18:30:57 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 19:05:42 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	shell_env(t_args *shell_data)
 	t_env_variable	*tmp;
 
 	tmp = shell_data->env;
-	if (!shell_data->export)
+	if (!shell_data->exported_vars)
 	{
 		while (tmp)
 		{
@@ -42,10 +42,10 @@ void	shell_env(t_args *shell_data)
 				printf("%s=%s\n", tmp->env_name, tmp->value);
 			tmp = tmp->next_env_var;
 		}
-		shell_data->exit_status = 0;
+		shell_data->exec_result = 0;
 		return ;
 	}
-	tmp = shell_data->export;
+	tmp = shell_data->exported_vars;
 	while (tmp)
 	{
 		if (tmp->value)
@@ -54,7 +54,7 @@ void	shell_env(t_args *shell_data)
 			printf("declare -x %s\n", tmp->env_name);
 		tmp = tmp->next_env_var;
 	}
-	shell_data->exit_status = 0;
+	shell_data->exec_result = 0;
 }
 
 // int shell_env(void)

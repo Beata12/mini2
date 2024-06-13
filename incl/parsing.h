@@ -7,12 +7,12 @@ typedef struct s_builtin	t_builtin;
 
 typedef enum e_token_types
 {
-	T_WORD,		// word, string, file, cmd ...
+	T_WORD,
 	T_RED_TO,	//>
 	T_RED_FROM,	//<
 	T_DLESS,	//<<
 	T_DGREAT,	//>>
-	T_UNDEFINED,// *notdefined - DO USUNIECIA< NIE UZYWANE
+	// T_UNDEFINED,// *notdefined - DO USUNIECIA< NIE UZYWANE
 	T_PIPE,		//|
 }						t_token_types;
 

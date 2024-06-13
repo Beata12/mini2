@@ -4,15 +4,15 @@
 void initialize_shell(t_args *shell_state, char **environment)
 {
 	shell_state->env = NULL;
-	shell_state->export = NULL;
-	shell_state->builtin = NULL;
-	shell_state->tokarr = NULL;
-	shell_state->cmdarr = NULL;
+	shell_state->exported_vars = NULL;
+	shell_state->builtin_cmds = NULL;
+	shell_state->token_array = NULL;
+	shell_state->command_array = NULL;
 	// Inicjalizuj zmienne liczbowe na wartości początkowe
-	shell_state->exit_status = 0;
-	shell_state->tokarr_l = 0;
-	shell_state->cmdarr_l = 0;
-	shell_state->cmd_num = 0;
+	shell_state->exec_result = 0;
+	shell_state->token_count = 0;
+	shell_state->command_count = 0;
+	shell_state->command_index = 0;
 	// Inicjalizacja środowiska i wbudowanych poleceń
 	initialize_environment(shell_state, environment);
 	initialize_builtins(shell_state);
