@@ -6,12 +6,13 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:31 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 12:51:09 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 15:09:57 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
 
+//zrobione
 int	identify_builtin_command(char *builtin_command)
 {
 	if (!builtin_command)
@@ -34,42 +35,42 @@ int	identify_builtin_command(char *builtin_command)
 void	execute(t_args *shell_data)
 {
 	int	i;
-	int	**pipes;
+	int	**pipe_array;
 
-	pipes = ft_malloc(sizeof(int *) * (shell_data->cmdarr_l - 1));
+	pipe_array = ft_malloc(sizeof(int *) * (shell_data->cmdarr_l - 1));
 	i = identify_builtin_command(shell_data->cmdarr[0].args[0]);
 	if (shell_data->cmdarr_l == 1 && i != -1 && (shell_data->cmdarr[0].inp_l == 0)
 		&& (shell_data->cmdarr[0].out_l == 0))
 		shell_data->builtin[i].fn_ptr(shell_data);
 	else
 	{
-		open_fds(shell_data, pipes);
-		ft_piping(shell_data, pipes);
-		close_fds(shell_data, pipes);
+		initialize_pipes(shell_data, pipe_array);
+		execute_pipeline(shell_data, pipe_array);
+		close_pipe_descriptors(shell_data, pipe_array);
 		wait_in_parent(shell_data);
 	}
 }
 
-void	ft_piping(t_args *shell_data, int **pipes)
+void	execute_pipeline(t_args *shell_data, int **pipe_array)
 {
 	int		i;
-	pid_t	pid;
+	pid_t	process_id;
 
 	i = 0;
 	while (i < shell_data->cmdarr_l)
 	{
-		pid = fork();
-		if (pid == 0)
+		process_id = fork();
+		if (process_id == 0)
 		{
 			signal(SIGINT, handle_sigquit);
-			heredoc_loop(shell_data, i);
+			process_all_heredocs(shell_data, i);
 			if (i != 0)
-				dup2(pipes[i - 1][0], 0);
+				dup2(pipe_array[i - 1][0], 0);
 			if (i != shell_data->cmdarr_l - 1)
-				dup2(pipes[i][1], 1);
-			close_fds(shell_data, pipes);
-			open_input_files(shell_data, i);
-			open_output_files(shell_data, i);
+				dup2(pipe_array[i][1], 1);
+			close_pipe_descriptors(shell_data, pipe_array);
+			setup_input_redirection(shell_data, i);
+			setup_output_redirection(shell_data, i);
 			shell_data->cmd_num = i;
 			signal(SIGINT, SIG_DFL);
 			ft_execute(shell_data);

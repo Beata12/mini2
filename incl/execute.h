@@ -36,11 +36,11 @@ int							shell_exit(t_args *shell_data, char *input);
 // execute
 void						execute(t_args *shell_data);
 void						ft_execute(t_args *shell_data);
-int							open_file(char *argv, int i);
-void						heredoc_loop(t_args *shell_data, int i);
-void						heredoc(t_args *shell_data, int i, int j);
-void						ft_piping(t_args *shell_data, int **pipes);
-void						open_input_files(t_args *shell_data, int i);
-void						open_output_files(t_args *shell_data, int i);
+int							manage_file_access(char *file_path, int file_flags);
+void						process_all_heredocs(t_args *shell_data, int command_index);//poprawione
+void						execute_heredoc(t_args *shell_data, int command_index, int input_index);//poprawione
+void						execute_pipeline(t_args *shell_data, int **pipe_array);//poprawione
+void						setup_input_redirection(t_args *shell_data, int command_index);//poprawione
+void						setup_output_redirection(t_args *shell_data, int command_index);//poprawione
 
 #endif

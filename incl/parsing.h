@@ -63,7 +63,7 @@ void						initialize_environment(t_args *shell_data, char **env);
 int							process_and_store_env_var(char *input_str, t_env_lst **env_list);
 void						dollar_value_subst(char **s, char *q,
 								t_args *shell_data);
-int							ft_strchr_pos(char *s, int c);
+int							get_char_position(char *input_str, int target_char);
 // t_env_lst					*find_env_node(char *name, t_env_lst *env);
 
 char						*cut_name(char *s);

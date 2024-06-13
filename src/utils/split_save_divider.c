@@ -37,9 +37,9 @@ char	**split_save_divider(char *s, char c)
 	while (len--)
 	{
 		if (!i && s[i] != c)
-			w_l = ft_strchr_pos(&s[i], c) - 1;
+			w_l = get_char_position(&s[i], c) - 1;
 		else
-			w_l = ft_strchr_pos(&s[i + 1], c);
+			w_l = get_char_position(&s[i + 1], c);
 		arr[a_i] = ft_substr(s, i, w_l);
 		if (!arr[a_i])
 			memory_allocation_error();

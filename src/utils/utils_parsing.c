@@ -3,14 +3,14 @@
 
 // finds position from start of s.
 // Not iteration(from 0), iterates from 1!
-int	ft_strchr_pos(char *s, int c)
+int	get_char_position(char *input_str, int target_char)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != (unsigned char)c && s[i])
+	while (input_str[i] != (unsigned char)target_char && input_str[i])
 		i++;
-	if (s[i] == (unsigned char)c)
+	if (input_str[i] == (unsigned char)target_char)
 		return (++i);
 	return (-1);
 }

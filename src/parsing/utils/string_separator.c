@@ -45,11 +45,10 @@ char	**divide_and_store(char *input_string, char separator)
 	length = initialize_and_count_divisions(&string_array, input_string, separator);
 	while (length)
 	{
-		//string_pos musisz poprawic!!!!!!!!!!!!!!!!!!!!!!
 		if (!i && input_string[i] != separator)
-			word_length = ft_strchr_pos(&input_string[i], separator) - 1;
+			word_length = get_char_position(&input_string[i], separator) - 1;
 		else
-			word_length = ft_strchr_pos(&input_string[i + 1], separator);
+			word_length = get_char_position(&input_string[i + 1], separator);
 		string_array[array_index] = ft_substr(input_string, i, word_length);
 		if (!string_array[array_index])
 			memory_allocation_error();

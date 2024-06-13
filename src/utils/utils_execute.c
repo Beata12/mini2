@@ -16,30 +16,30 @@ void	wait_in_parent(t_args *shell_data)
 		i++;
 	}
 }
-
-void	open_fds(t_args *shell_data, int **pipes)
+//zrobione
+void	initialize_pipes(t_args *shell_data, int **pipe_array)
 {
 	int	i;
 
 	i = 0;
 	while (i < shell_data->cmdarr_l - 1)
 	{
-		pipes[i] = ft_malloc(sizeof(int) * 2);
-		pipe(pipes[i]);
+		pipe_array[i] = ft_malloc(sizeof(int) * 2);
+		pipe(pipe_array[i]);
 		i++;
 	}
 }
 
-void	close_fds(t_args *shell_data, int **pipes)
+void	close_pipe_descriptors(t_args *shell_data, int **pipe_array)
 {
 	int	i;
 
 	i = 0;
 	while (i < shell_data->cmdarr_l - 1)
 	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
-		ft_free(pipes[i]);
+		close(pipe_array[i][0]);
+		close(pipe_array[i][1]);
+		ft_free(pipe_array[i]);
 		i++;
 	}
 }

@@ -25,7 +25,7 @@ int	process_and_store_env_var(char *input_str, t_env_lst **env_list)
 	char	*env_name;
 
 	error_flag = 0;
-	split_index = ft_strchr_pos(input_str, '=');
+	split_index = get_char_position(input_str, '=');
 	if (split_index >= 0)
 	{
 		env_name = ft_substr(input_str, 0, split_index - 1);

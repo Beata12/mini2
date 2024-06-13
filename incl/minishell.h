@@ -64,8 +64,8 @@ char			*find_path(char *cmd, char *path);
 char			*get_prompt_path(t_args *shell_data);//poprawione
 char			*find_env(t_env_lst *env, char *name);
 char			*ft_remove_substr(char *str, char *sub);
-void			open_fds(t_args *shell_data, int **pipes);
-void			close_fds(t_args *shell_data, int **pipes);
+void			initialize_pipes(t_args *shell_data, int **pipe_array);//poprawione
+void			close_pipe_descriptors(t_args *shell_data, int **pipes);//poprawione
 void			copy_list(t_env_lst *env, t_env_lst **new);
 void			remove_one_node(char *str, t_env_lst **env);
 void			exit_with_error(char *str, char *str2, int status);

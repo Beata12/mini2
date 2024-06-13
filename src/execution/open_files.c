@@ -6,98 +6,98 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:40 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 10:24:49 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 15:03:18 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
-
-int	open_file(char *argv, int i)
+//zrobione
+int	manage_file_access(char *file_path, int file_flags)
 {
 	int	file;
 
 	file = 0;
-	if (i == 0)
-		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else if (i == 1)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (i == 2)
-		file = open(argv, O_RDONLY, 0644);
-	else if (i == 3)
-		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (file_flags == 0)
+		file = open(file_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else if (file_flags == 1)
+		file = open(file_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (file_flags == 2)
+		file = open(file_path, O_RDONLY, 0644);
+	else if (file_flags == 3)
+		file = open(file_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (file < 0)
-		exit_with_error(argv, ": No such file or directory", 1);
+		exit_with_error(file_path, ": No such file or directory", 1);
 	return (file);
 }
-
-void	heredoc(t_args *shell_data, int i, int j)
+//zrobione
+void	execute_heredoc(t_args *shell_data, int command_index, int input_index)
 {
-	char	*line;
-	char	*limiter;
-	int		tmp_fd;
+	char	*delimiter;
+	char	*user_input;
+	int		heredoc_file;
 
-	limiter = shell_data->cmdarr[i].inp[j].word;
-	tmp_fd = open_file("/tmp/heredoc_tmp", 3);
+	delimiter = shell_data->cmdarr[command_index].inp[input_index].word;
+	heredoc_file = manage_file_access("/tmp/heredoc_tmp", 3);
 	while (1)
 	{
-		line = readline("heredoc> ");
-		if (!line || ft_strcmp(line, limiter) == 0)
+		user_input = readline("heredoc> ");
+		if (!user_input || ft_strcmp(user_input, delimiter) == 0)
 		{
-			free(line);
+			free(user_input);
 			break ;
 		}
-		write(tmp_fd, line, ft_strlen(line));
-		write(tmp_fd, "\n", 1);
-		free(line);
+		write(heredoc_file, user_input, ft_strlen(user_input));
+		write(heredoc_file, "\n", 1);
+		free(user_input);
 	}
-	close(tmp_fd);
+	close(heredoc_file);
 }
-
-void	heredoc_loop(t_args *shell_data, int i)
+//zrobione
+void	process_all_heredocs(t_args *shell_data, int command_index)
 {
-	int	j;
+	int	input_index;
 
-	j = 0;
-	while (j < shell_data->cmdarr[i].inp_l)
+	input_index = 0;
+	while (input_index < shell_data->cmdarr[command_index].inp_l)
 	{
-		if (shell_data->cmdarr[i].inp[j].type == T_DLESS)
-			heredoc(shell_data, i, j);
-		j++;
+		if (shell_data->cmdarr[command_index].inp[input_index].type == T_DLESS)
+			execute_heredoc(shell_data, command_index, input_index);
+		input_index++;
 	}
 }
-
-void	open_input_files(t_args *shell_data, int i)
+//zrobione
+void	setup_input_redirection(t_args *shell_data, int command_index)
 {
-	int	j;
+	int	input_index;
 	int	file;
 
-	j = 0;
-	while (j < shell_data->cmdarr[i].inp_l)
+	input_index = 0;
+	while (input_index < shell_data->cmdarr[command_index].inp_l)
 	{
-		if (shell_data->cmdarr[i].inp[j].type == T_DLESS)
-			file = open_file("/tmp/heredoc_tmp", 2);
+		if (shell_data->cmdarr[command_index].inp[input_index].type == T_DLESS)
+			file = manage_file_access("/tmp/heredoc_tmp", 2);
 		else
-			file = open_file(shell_data->cmdarr[i].inp[j].word, 2);
+			file = manage_file_access(shell_data->cmdarr[command_index].inp[input_index].word, 2);
 		dup2(file, 0);
 		close(file);
-		j++;
+		input_index++;
 	}
 }
-
-void	open_output_files(t_args *shell_data, int i)
+//zrobione
+void	setup_output_redirection(t_args *shell_data, int command_index)
 {
-	int	j;
+	int	input_index;
 	int	file;
 
-	j = 0;
-	while (j < shell_data->cmdarr[i].out_l)
+	input_index = 0;
+	while (input_index < shell_data->cmdarr[command_index].out_l)
 	{
-		if (shell_data->cmdarr[i].out[j].type == T_DGREAT)
-			file = open_file(shell_data->cmdarr[i].out[j].word, 0);
+		if (shell_data->cmdarr[command_index].out[input_index].type == T_DGREAT)
+			file = manage_file_access(shell_data->cmdarr[command_index].out[input_index].word, 0);
 		else
-			file = open_file(shell_data->cmdarr[i].out[j].word, 1);
+			file = manage_file_access(shell_data->cmdarr[command_index].out[input_index].word, 1);
 		dup2(file, 1);
 		close(file);
-		j++;
+		input_index++;
 	}
 }
