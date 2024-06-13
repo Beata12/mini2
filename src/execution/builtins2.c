@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 16:35:41 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:06:26 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static int	is_variable_valid(char *variable_value, char *target_name)
 		return (0);
 	return (1);
 }
-//zrobione//to do exekucji jest
+//zrobione//to do exekucji
 void	process_environment_variables(t_args *shell_data, char **input_arguments, int i)
 {
-	char		*name;
-	t_env_lst	*env_node;
-	int			separator_position;
+	char			*name;
+	t_env_variable	*env_node;
+	int				separator_position;
 
 	while (input_arguments[i])
 	{

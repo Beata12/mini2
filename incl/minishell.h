@@ -38,8 +38,8 @@
 
 typedef struct s_args
 {
-	t_env_lst		*export;
-	t_env_lst		*env;
+	t_env_variable		*export;
+	t_env_variable		*env;
 	t_token			*tokarr;
 	t_cmd_arr_str	*cmdarr;
 	t_builtin		*builtin;
@@ -56,18 +56,18 @@ typedef struct s_args
 char			**initialize_envp(char **environment);//poprawione
 // void			child_signal(int signal);
 // void			handle_sigint(int signals);
-void			sort_environment_variables(t_env_lst *env_var);//zrobione
+void			sort_environment_variables(t_env_variable *env_var);//zrobione
 int				identify_builtin_command(char *cmd);//zrobione
-char			**generate_envp_array(t_env_lst *env_list);//poprawione
+char			**generate_envp_array(t_env_variable *env_list);//poprawione
 void			wait_for_child_processes(t_args *shell_data);//poprawione
 char			*locate_file_in_path(char *file_name, char *path_to_search);//zrobione
 char			*get_prompt_path(t_args *shell_data);//poprawione
-char			*find_env(t_env_lst *env, char *name);
+char			*find_env(t_env_variable *env, char *name);
 char			*ft_remove_substr(char *str, char *sub);
 void			initialize_pipes(t_args *shell_data, int **pipe_array);//poprawione
 void			close_pipe_descriptors(t_args *shell_data, int **pipes);//poprawione
-void			copy_environment_list(t_env_lst *env_list, t_env_lst **new_env_list);//zrobione
-void			remove_env_var(char *str, t_env_lst **env);
+void			copy_environment_list(t_env_variable *env_list, t_env_variable **new_env_list);//zrobione
+void			remove_env_var(char *str, t_env_variable **env);
 void			exit_with_error(char *str, char *str2, int status);
 void			process_environment_variables(t_args *shell_data, char **args, int i);//zrobione
 void			handle_error(const char *error_message, t_args *shell_state, int exit_status_code, int modification_flag);// zmienione
@@ -78,13 +78,13 @@ void			alloc_err(void);
 int				empty_str(char *s);
 char			*arrjoin(char **arr);
 void			ft_free_array(char **array);
-void			clear_environment_list(t_env_lst **env_list);//zrobione
-void			free_environment_node(t_env_lst **env_list);//zrobione
+void			clear_environment_list(t_env_variable **env_list);//zrobione
+void			free_environment_node(t_env_variable **env_list);//zrobione
 void			free_command_resources(t_args *shell_data);
 char			**split_save_divider(char *s, char c);
 void			initialize_shell(t_args *shell_state, char **environment);//poprawione
 int				leave_heredoc(t_args *shell_data, int err_i);
-void			ft_lstadd_env(t_env_lst **lst, char *name, char *val);
+void			ft_lstadd_env(t_env_variable **lst, char *name, char *val);
 
 void			save_history(void);//poprawione
 void			load_history(void);//pooprawione

@@ -12,8 +12,8 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_args		t_args;
-typedef struct s_env_lst	t_env_lst;
+typedef struct s_args			t_args;
+typedef struct s_env_variable	t_env_variable;
 
 typedef						void(exec_fn)(t_args *shell_data);
 typedef struct s_builtin

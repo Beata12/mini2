@@ -112,11 +112,11 @@ static char	*generate_command_prompt(char *exit_code)
 //zrobione
 char *get_prompt_path(t_args *shell_data)
 {
-	t_env_lst	*home_env;
-	char		*home_directory;
-	char		*working_directory;
-	char		*intermediate_path;
-	static char	*cached_prompt_path;
+	t_env_variable	*home_env;
+	char			*home_directory;
+	char			*working_directory;
+	char			*intermediate_path;
+	static char		*cached_prompt_path;
 
 	home_env = find_env_var("HOME", shell_data->env);
 	working_directory = getcwd(NULL, 0);

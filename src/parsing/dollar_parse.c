@@ -82,10 +82,10 @@
 // 	*s = new;
 // }
 //ZROBIONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-static char	*get_env_var_value(char *input_string, int *i, t_env_lst *env)
+static char	*get_env_var_value(char *input_string, int *i, t_env_variable *env)
 {
-	char		*target_variable;
-	t_env_lst	*target_list;
+	char			*target_variable;
+	t_env_variable	*target_list;
 
 	target_variable = find_variable_name(&input_string[*i]);
 	target_list = find_environment_variable(target_variable, env);

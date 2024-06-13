@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:40 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:50:11 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:09:16 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 void	shell_env(t_args *shell_data)
 {
-	t_env_lst	*tmp;
+	t_env_variable	*tmp;
 
 	tmp = shell_data->env;
 	if (!shell_data->export)

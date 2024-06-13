@@ -36,31 +36,31 @@ typedef struct s_token
 typedef struct s_cmd_arr_str
 {
 	char					**args;
+	int						input_length;
+	int						output_length;
 	t_token					*input_tokens;
 	t_token					*output_tokens;
-	int						inp_l;
-	int						out_l;
 }							t_cmd_arr_str;
 
-typedef struct s_count
+typedef struct s_data_counter
 {
-	int						arg;
-	int						in;
-	int						out;
-}							t_count;
+	int						arg_count;//arg;
+	int						input_count;//in;
+	int						output_count;//out;
+}							t_data_counter;
 
-typedef struct s_env_lst
+typedef struct s_env_variable
 {
 	char					*val;
 	char					*name;
-	struct s_env_lst		*next;
-}							t_env_lst;
+	struct s_env_variable	*next;
+}							t_env_variable;
 
 
 //to nie do parsingu find_env, proccesss, initialize - do exec
-t_env_lst *find_env_var(char *name, t_env_lst *env_list);
+t_env_variable				*find_env_var(char *name, t_env_variable *env_list);
 void						initialize_environment(t_args *shell_data, char **env);
-int							process_and_store_env_var(char *input_str, t_env_lst **env_list);
+int							process_and_store_env_var(char *input_str, t_env_variable **env_list);
 void						dollar_value_subst(char **s, char *q,
 								t_args *shell_data);
 int							get_char_position(char *input_str, int target_char);
@@ -107,7 +107,7 @@ char			**divide_and_store(char *input_string, char separator);
 void			free_string_array(char **string_array);
 void			expand_dollar_variables(char **input_string, char *quote_status, t_args *shell_data);
 char			*find_variable_name(char *input_string);
-t_env_lst		*find_environment_variable(char *name, t_env_lst *env);
+t_env_variable	*find_environment_variable(char *name, t_env_variable *env);
 void			initialize_token_array(char *input_string, t_args *shell_data);
 int				skip_special_characters(char *input_string);
 int				validate_token_order(t_args *shell_data);
@@ -115,7 +115,7 @@ int				handle_heredoc_tokens(t_args *shell_data, int err_i);
 void			remove_all_quotes(t_args *shell_data);
 void			initialize_command_array(t_args *shell_data);
 void			initialize_command(int command_counter, int *token_counter, t_args *shell_data);
-void 			allocate_command_memory(t_count cmd_sizes, t_cmd_arr_str *command);
+void 			allocate_command_memory(t_data_counter cmd_sizes, t_cmd_arr_str *command);
 void			parse_and_fill_command(int cmd, int *tok, t_args *shell_data);
 void 			handle_double_redirection(t_token *redirection_token, t_token *token_array, int *token_index);
 void			set_redirection_type(t_token *redirection_token, t_token *token_array, int *token_index);

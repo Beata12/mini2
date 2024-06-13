@@ -46,10 +46,10 @@ void	close_pipe_descriptors(t_args *shell_data, int **pipe_array)
 //zrobione
 void	ft_execve(t_args *shell_data)
 {
-	char *executable_path;
-    char **command_args;
-    char **envp_array;
-    t_env_lst *env_node;
+	char			*executable_path;
+    char			**command_args;
+    char			**envp_array;
+    t_env_variable 	*env_node;
 
     executable_path = NULL;
     envp_array = generate_envp_array(shell_data->env);

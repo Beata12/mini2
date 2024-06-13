@@ -97,7 +97,7 @@ char	*find_variable_name(char *input_string)
 	return (variable_name);
 }
 
-t_env_lst	*find_environment_variable(char *name, t_env_lst *env)
+t_env_variable	*find_environment_variable(char *name, t_env_variable *env)
 {
 	while (env)
 	{

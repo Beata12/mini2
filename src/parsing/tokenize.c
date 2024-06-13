@@ -234,7 +234,7 @@ int	handle_heredoc_tokens(t_args *shell_data, int end_index)
 	// Alokowanie pamięci dla cmdarr i ustawienie wartości
 	shell_data->cmdarr = ft_malloc(sizeof(t_cmd_arr_str) * 1);
 	shell_data->cmdarr_l = 1;
-	allocate_command_memory((t_count){.arg = 0, .in = heredoc_count, .out = 0}, shell_data->cmdarr);
+	allocate_command_memory((t_data_counter){.arg_count = 0, .input_count = heredoc_count, .output_count = 0}, shell_data->cmdarr);
 
 	// Wypełnianie cmdarr danymi z heredoc
 	i = 0;

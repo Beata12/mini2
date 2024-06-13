@@ -3,7 +3,7 @@
 
 static void	set_shlvl(t_args *shell_data)
 {
-	t_env_lst	*shlvl_node;
+	t_env_variable	*shlvl_node;
 	int			shlvl;
 
 	shlvl_node = find_env_var("SHLVL", shell_data->env);
@@ -17,7 +17,7 @@ static void	set_shlvl(t_args *shell_data)
 	shlvl_node->val = ft_itoa(shlvl + 1);
 }
 
-int	process_and_store_env_var(char *input_str, t_env_lst **env_list)
+int	process_and_store_env_var(char *input_str, t_env_variable **env_list)
 {
 	int		split_index;
 	int		error_flag;

@@ -25,8 +25,8 @@ static void	free_command_array(t_args *shell_data)
 	while (i < shell_data->cmdarr_l && shell_data->cmdarr)
 	{
 		ft_free(shell_data->cmdarr[i].args);
-		free_token_array(&shell_data->cmdarr[i].input_tokens, &shell_data->cmdarr[i].inp_l);
-		free_token_array(&shell_data->cmdarr[i].output_tokens, &shell_data->cmdarr[i].out_l);
+		free_token_array(&shell_data->cmdarr[i].input_tokens, &shell_data->cmdarr[i].input_length);
+		free_token_array(&shell_data->cmdarr[i].output_tokens, &shell_data->cmdarr[i].output_length);
 		i++;
 	}
 	shell_data->cmdarr_l = 0;

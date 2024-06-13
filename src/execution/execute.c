@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:31 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 15:38:57 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 17:37:16 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	execute(t_args *shell_data)
 
 	pipe_array = ft_malloc(sizeof(int *) * (shell_data->cmdarr_l - 1));
 	i = identify_builtin_command(shell_data->cmdarr[0].args[0]);
-	if (shell_data->cmdarr_l == 1 && i != -1 && (shell_data->cmdarr[0].inp_l == 0)
-		&& (shell_data->cmdarr[0].out_l == 0))
+	if (shell_data->cmdarr_l == 1 && i != -1 && (shell_data->cmdarr[0].input_length == 0)
+		&& (shell_data->cmdarr[0].output_length == 0))
 		shell_data->builtin[i].fn_ptr(shell_data);
 	else
 	{

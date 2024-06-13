@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:35 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 13:50:05 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 18:08:46 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void shell_cd(t_args *shell_data)
 {
-    char *target_path = NULL;
-    t_env_lst *home_node = NULL;
+    char           *target_path = NULL;
+    t_env_variable  *home_node = NULL;
 
     if (shell_data->cmdarr[shell_data->cmd_num].args[1] == NULL)
 	{

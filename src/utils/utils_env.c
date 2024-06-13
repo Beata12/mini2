@@ -31,7 +31,7 @@ char	*cut_name(char *s)
 //     return NULL;
 // }
 //ZROBIONE
-t_env_lst	*find_env_var(char *name, t_env_lst *env_list)
+t_env_variable	*find_env_var(char *name, t_env_variable *env_list)
 {
 	while (env_list)
 	{
@@ -44,11 +44,11 @@ t_env_lst	*find_env_var(char *name, t_env_lst *env_list)
 }
 
 //ZMIENIONE 
-char **generate_envp_array(t_env_lst *env_list)
+char **generate_envp_array(t_env_variable *env_list)
 {
-	int			i;
-	char		**env_array;
-	t_env_lst	*current_env;
+	int				i;
+	char			**env_array;
+	t_env_variable	*current_env;
 
 	i = 0;
 	current_env = env_list;

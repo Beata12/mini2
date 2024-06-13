@@ -2,11 +2,11 @@
 #include "../../incl/minishell.h"
 
 //DZIALA, WSYZTSKO OK
-static void	reset_count(t_count *token_counter)
+static void	reset_count(t_data_counter *token_counter)
 {
-	token_counter->arg = 0;
-	token_counter->in = 0;
-	token_counter->out = 0;
+	token_counter->arg_count = 0;
+	token_counter->input_count = 0;
+	token_counter->output_count = 0;
 }
 // void	alloc_cmd(t_count sizes, t_cmdarr *cmd)
 // {
@@ -27,63 +27,63 @@ static void	reset_count(t_count *token_counter)
 // 	cmd->out_l = sizes.out;
 // }
 //to to samo co alloc_cmd, ale musze pozmieniac w innych miejscach jeszcze
-void allocate_command_memory(t_count cmd_sizes, t_cmd_arr_str *command)
+void allocate_command_memory(t_data_counter cmd_sizes, t_cmd_arr_str *command)
 {
-    command->args = ft_malloc(sizeof(char *) * (cmd_sizes.arg + 1));
+    command->args = ft_malloc(sizeof(char *) * (cmd_sizes.arg_count + 1));
     if (!command->args)
     {
         // Obsługa błędu alokacji pamięci
         perror("Failed to allocate memory for command arguments");
         exit(EXIT_FAILURE);
     }
-    command->input_tokens = ft_malloc(sizeof(t_token) * cmd_sizes.in);
+    command->input_tokens = ft_malloc(sizeof(t_token) * cmd_sizes.input_count);
     if (!command->input_tokens)
     {
         // Obsługa błędu alokacji pamięci
         perror("Failed to allocate memory for input redirections");
         exit(EXIT_FAILURE);
     }
-    command->output_tokens = ft_malloc(sizeof(t_token) * cmd_sizes.out);
+    command->output_tokens = ft_malloc(sizeof(t_token) * cmd_sizes.output_count);
     if (!command->output_tokens)
     {
         // Obsługa błędu alokacji pamięci
         perror("Failed to allocate memory for output redirections");
         exit(EXIT_FAILURE);
     }
-    command->args[cmd_sizes.arg] = NULL;
-    command->inp_l = cmd_sizes.in;
-    command->out_l = cmd_sizes.out;
+    command->args[cmd_sizes.arg_count] = NULL;
+    command->input_length = cmd_sizes.input_count;
+    command->output_length = cmd_sizes.output_count;
 }
 
 //DZIALA I JEST GOTOWA
 //100%moja funkcja
-static void update_count(t_token *token, t_count *count)
+static void update_count(t_token *token, t_data_counter *count)
 {
     if (token->type == T_WORD)
     {
-        count->arg++;
+        count->arg_count++;
     }
     else
     {
         if (token->type == T_RED_FROM || token->type == T_DLESS)
         {
-            count->in++;
+            count->input_count++;
         }
         else if (token->type == T_RED_TO || token->type == T_DGREAT)
         {
-            count->out++;
+            count->output_count++;
         }
 
         if (token->type == T_RED_FROM && check_special_symbol(token->word) == 2)
         {
-            count->out++;
+            count->output_count++;
         }
     }
 }
 
 void	initialize_command(int command_counter, int *token_counter, t_args *shell_data)
 {
-	t_count	count;
+	t_data_counter	count;
 
 	reset_count(&count);
 	while (shell_data->tokarr && *token_counter < shell_data->tokarr_l && shell_data->tokarr[*token_counter].word

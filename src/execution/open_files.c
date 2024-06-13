@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:40 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 17:27:16 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 17:37:23 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	process_all_heredocs(t_args *shell_data, int command_index)
 	int	input_index;
 
 	input_index = 0;
-	while (input_index < shell_data->cmdarr[command_index].inp_l)
+	while (input_index < shell_data->cmdarr[command_index].input_length)
 	{
 		if (shell_data->cmdarr[command_index].input_tokens[input_index].type == T_DLESS)
 			execute_heredoc(shell_data, command_index, input_index);
@@ -72,7 +72,7 @@ void	setup_input_redirection(t_args *shell_data, int command_index)
 	int	file;
 
 	input_index = 0;
-	while (input_index < shell_data->cmdarr[command_index].inp_l)
+	while (input_index < shell_data->cmdarr[command_index].input_length)
 	{
 		if (shell_data->cmdarr[command_index].input_tokens[input_index].type == T_DLESS)
 			file = manage_file_access("/tmp/heredoc_tmp", 2);
@@ -90,7 +90,7 @@ void	setup_output_redirection(t_args *shell_data, int command_index)
 	int	file;
 
 	input_index = 0;
-	while (input_index < shell_data->cmdarr[command_index].out_l)
+	while (input_index < shell_data->cmdarr[command_index].output_length)
 	{
 		if (shell_data->cmdarr[command_index].output_tokens[input_index].type == T_DGREAT)
 			file = manage_file_access(shell_data->cmdarr[command_index].output_tokens[input_index].word, 0);

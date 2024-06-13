@@ -1,7 +1,7 @@
 
 #include "../../incl/minishell.h"
 
-// int	env_lst_len(t_env_lst *lst)
+// int	env_lst_len(t_env_variable *lst)
 // {
 // 	int	size;
 
@@ -14,12 +14,12 @@
 // 	return (size);
 // }
 
-void	ft_lstadd_env(t_env_lst **lst, char *name, char *val)
+void	ft_lstadd_env(t_env_variable **lst, char *name, char *val)
 {
-	t_env_lst	*node;
-	t_env_lst	*head;
+	t_env_variable	*node;
+	t_env_variable	*head;
 
-	node = ft_malloc(sizeof(t_env_lst));
+	node = ft_malloc(sizeof(t_env_variable));
 	head = *lst;
 	if (!head)
 		*lst = node;
@@ -34,9 +34,9 @@ void	ft_lstadd_env(t_env_lst **lst, char *name, char *val)
 	node->next = NULL;
 }
 
-void	free_environment_node(t_env_lst **env_list)
+void	free_environment_node(t_env_variable **env_list)
 {
-	t_env_lst	*next_node;
+	t_env_variable	*next_node;
 
 	next_node = (*env_list)->next;
 	ft_free((*env_list)->name);
@@ -47,24 +47,24 @@ void	free_environment_node(t_env_lst **env_list)
 }
 
 //zrobione
-void	clear_environment_list(t_env_lst **env_list)
+void	clear_environment_list(t_env_variable **env_list)
 {
 	while ((*env_list))
 		free_environment_node(env_list);
 }
 //export_utils
 //zrobione
-void	copy_environment_list(t_env_lst *env_list, t_env_lst **new_env_list)
+void	copy_environment_list(t_env_variable *env_list, t_env_variable **new_env_list)
 {
-	t_env_lst	*current_node;
-	t_env_lst	*new_node;
-	t_env_lst	*end_node;
+	t_env_variable	*current_node;
+	t_env_variable	*new_node;
+	t_env_variable	*end_node;
 
 	*new_env_list = NULL;
 	current_node = env_list;
 	while (current_node)
 	{
-		new_node = ft_malloc(sizeof(t_env_lst));
+		new_node = ft_malloc(sizeof(t_env_variable));
 		new_node->name = ft_strdup(current_node->name);
 		new_node->val = ft_strdup(current_node->val);
 		new_node->next = NULL;
@@ -82,10 +82,10 @@ void	copy_environment_list(t_env_lst *env_list, t_env_lst **new_env_list)
 }
 //zrobione
 //dla unset i export
-void	remove_env_var(char *target_variable, t_env_lst **env_list)
+void	remove_env_var(char *target_variable, t_env_variable **env_list)
 {
-	t_env_lst	*current_node;
-	t_env_lst	*previous_node;
+	t_env_variable	*current_node;
+	t_env_variable	*previous_node;
 
 	current_node = *env_list;
 	previous_node = NULL;
@@ -107,9 +107,9 @@ void	remove_env_var(char *target_variable, t_env_lst **env_list)
 	}
 }
 
-void	sort_environment_variables(t_env_lst *env_var)
+void	sort_environment_variables(t_env_variable *env_var)
 {
-	t_env_lst	*current_node;
+	t_env_variable	*current_node;
 	char		*name_to_swap;
 	char		*value_to_swap;
 
