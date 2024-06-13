@@ -6,12 +6,49 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 11:40:03 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:59:02 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
+static int	check_var_validity(char *var, char *name)
+{
+	int	n_l;
+
+	n_l = ft_strlen(name);
+	if (var[n_l] && var[n_l] != '=')
+		return (0);
+	return (1);
+}
+
+void	export_loop(t_args *shell_data, char **args, int i)
+{
+	char		*name;
+	t_env_lst	*env_node;
+	int			divider_pos;
+
+	while (args[i])
+	{
+		name = cut_name(args[i]);
+		if (!check_var_validity(args[i], name))
+			return (handle_error(args[i], shell_data, 1, 0), ft_free(name));
+		env_node = find_env_node(name, shell_data->env);
+		if (!env_node)
+			fill_str(args[i], &shell_data->env);
+		else
+		{
+			divider_pos = ft_strchr_pos(args[i], '=');
+			if (divider_pos >= 0)
+			{
+				if (env_node->val)
+					ft_free(env_node->val);
+				env_node->val = ft_strdup(&args[i][divider_pos]);
+			}
+		}
+		i++;
+	}
+}
 // void	ft_env(t_args *shell_data)
 // {
 // 	t_env_lst	*tmp;
@@ -40,15 +77,6 @@
 // 	shell_data->exit_status = 0;
 // }
 
-static int	check_var_validity(char *var, char *name)
-{
-	int	n_l;
-
-	n_l = ft_strlen(name);
-	if (var[n_l] && var[n_l] != '=')
-		return (0);
-	return (1);
-}
 
 // void	shell_export(t_args *shell_data)
 // {
@@ -91,31 +119,3 @@ static int	check_var_validity(char *var, char *name)
 // 	}
 // 	shell_data->exit_status = 0;
 // }
-
-void	export_loop(t_args *shell_data, char **args, int i)
-{
-	char		*name;
-	t_env_lst	*env_node;
-	int			divider_pos;
-
-	while (args[i])
-	{
-		name = cut_name(args[i]);
-		if (!check_var_validity(args[i], name))
-			return (handle_error(args[i], shell_data, 1, 0), ft_free(name));
-		env_node = find_env_node(name, shell_data->env);
-		if (!env_node)
-			fill_str(args[i], &shell_data->env);
-		else
-		{
-			divider_pos = ft_strchr_pos(args[i], '=');
-			if (divider_pos >= 0)
-			{
-				if (env_node->val)
-					ft_free(env_node->val);
-				env_node->val = ft_strdup(&args[i][divider_pos]);
-			}
-		}
-		i++;
-	}
-}

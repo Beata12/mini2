@@ -6,7 +6,7 @@
 #    By: beata <beata@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 20:57:52 by aneekhra          #+#    #+#              #
-#    Updated: 2024/06/13 11:43:00 by beata            ###   ########.fr        #
+#    Updated: 2024/06/13 12:00:30 by beata            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LFT_F = libft
 FT_DES = ft_destructor
 
 SRC =	minishell.c \
-		execute.c builtins1.c builtins2.c open_files.c \
+		execute.c builtins2.c open_files.c \
 		env_init.c parsing.c dollar_parse.c tokenize.c cmd.c cmd_init.c \
 		utils_signals.c  utils_parsing.c utils_symbol.c utils_path.c utils_execute.c \
 		utils_env.c err_parsing.c env_lst.c split_save_divider.c clean.c print.c \
@@ -37,6 +37,7 @@ SRC =	minishell.c \
 		parsing/utils/errors_utils.c \
 		parsing/utils/string_separator.c \
 		parsing/utils/string_utils.c \
+		execution/initialize_builtins.c \
 		execution/utils/handle_errors.c \
 		execution/shell_commands/cd.c \
 		execution/shell_commands/env.c \

@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 09:58:40 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 11:33:41 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 11:50:11 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,17 @@
 // {
 // 	t_env_lst	*env_iterator;
 
-// 	env_iterator = shell_data->env; // Iterate through the environment list
-// 	// Print environment variables in the format "name=value"
+// 	env_iterator = shell_data->env;
 // 	while (env_iterator)
 // 	{
-// 		if (env_iterator->val) {
+// 		if (env_iterator->val)
 // 			printf("%s=%s\n", env_iterator->name, env_iterator->val);
-// 		} else {
-// 			printf("%s\n", env_iterator->name); // Print only the name if no value
-// 		}
+// 		else
+// 			printf("%s\n", env_iterator->name);
 // 		env_iterator = env_iterator->next;
 // 	}
 
-// 	shell_data->exit_status = 0; // Set exit status to success (0)
+// 	shell_data->exit_status = 0;
 // }
 
 void	shell_env(t_args *shell_data)
