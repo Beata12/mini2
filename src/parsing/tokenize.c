@@ -247,7 +247,7 @@ int	handle_heredoc_tokens(t_args *shell_data, int end_index)
 	        // Zwiększ licznik heredoc_index przed wywołaniem funkcji fill_redir_type
 	        heredoc_index++;
 	        // Wywołaj funkcję fill_redir_type
-	        fill_redir_type(&shell_data->cmdarr[0].inp[heredoc_index], shell_data->tokarr, &i);
+	        set_redirection_type(&shell_data->cmdarr[0].inp[heredoc_index], shell_data->tokarr, &i);
 	    }
 	    // Przejdź do następnego tokena
 	    i++;

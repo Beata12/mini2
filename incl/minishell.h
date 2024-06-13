@@ -61,7 +61,7 @@ int				return_builtin_num(char *cmd);
 char			**convert_env(t_env_lst *env);
 void			wait_in_parent(t_args *shell_data);
 char			*find_path(char *cmd, char *path);
-char			*get_currect_path(t_args *shell_data);
+char			*get_prompt_path(t_args *shell_data);//poprawione
 char			*find_env(t_env_lst *env, char *name);
 char			*ft_remove_substr(char *str, char *sub);
 void			open_fds(t_args *shell_data, int **pipes);

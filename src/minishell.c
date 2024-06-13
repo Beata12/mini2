@@ -41,7 +41,7 @@ static void	minishell_loop(t_args *shell_data)
 	while (1)
 	{
 		// g_signal = 0;
-		path = get_currect_path(shell_data);
+		path = get_prompt_path(shell_data);
 		input = readline(path);
 		if (check_input(input))
 			continue ;

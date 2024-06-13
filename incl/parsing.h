@@ -14,7 +14,7 @@ typedef enum e_token_types
 	T_DGREAT,	//>>
 	T_UNDEFINED,// *notdefined - DO USUNIECIA< NIE UZYWANE
 	T_PIPE,		//|
-}							t_token_types;
+}						t_token_types;
 
 // typedef enum e_type
 // {
@@ -88,31 +88,33 @@ void						fill_redir_type(t_token *rdr, t_token *tarr,
 
 
 //NOWE
-void						my_error(char *c, int type);
-int							parse_input(char *input, t_args *shell_data);
-int							wrong_input(t_args *shell_data, char *input);
-t_token_types				token_typizator(char *input_string);
-void						is_open_quote(char input_string, char *quote_flag);
-int							track_quote(char input_string);
-int							missing_bracccet(char *input_string);
-char						*combine_strings(char **string_array);
-int							is_whitespace(char input_string);
-void						initialize_trimmed_string(char **result_str, char *input_str);
-int							check_special_symbol(char *input_string);
-void						memory_allocation_error(void);
-char						**divide_and_store(char *input_string, char separator);
-void						free_string_array(char **string_array);
-void						expand_dollar_variables(char **input_string, char *quote_status, t_args *shell_data);
-char						*find_variable_name(char *input_string);
-t_env_lst					*find_environment_variable(char *name, t_env_lst *env);
-void						initialize_token_array(char *input_string, t_args *shell_data);
-int							skip_special_characters(char *input_string);
-int							validate_token_order(t_args *shell_data);
-int							handle_heredoc_tokens(t_args *shell_data, int err_i);
-void						remove_all_quotes(t_args *shell_data);
-void						initialize_command_array(t_args *shell_data);
-void						initialize_command(int command_counter, int *token_counter, t_args *shell_data);
-void 						allocate_command_memory(t_count cmd_sizes, t_cmdarr *command);
-void						parse_and_fill_command(int cmd, int *tok, t_args *shell_data);
+void			my_error(char *c, int type);
+int				parse_input(char *input, t_args *shell_data);
+int				wrong_input(t_args *shell_data, char *input);
+t_token_types	token_typizator(char *input_string);
+void			is_open_quote(char input_string, char *quote_flag);
+int				track_quote(char input_string);
+int				missing_bracccet(char *input_string);
+char			*combine_strings(char **string_array);
+int				is_whitespace(char input_string);
+void			initialize_trimmed_string(char **result_str, char *input_str);
+int				check_special_symbol(char *input_string);
+void			memory_allocation_error(void);
+char			**divide_and_store(char *input_string, char separator);
+void			free_string_array(char **string_array);
+void			expand_dollar_variables(char **input_string, char *quote_status, t_args *shell_data);
+char			*find_variable_name(char *input_string);
+t_env_lst		*find_environment_variable(char *name, t_env_lst *env);
+void			initialize_token_array(char *input_string, t_args *shell_data);
+int				skip_special_characters(char *input_string);
+int				validate_token_order(t_args *shell_data);
+int				handle_heredoc_tokens(t_args *shell_data, int err_i);
+void			remove_all_quotes(t_args *shell_data);
+void			initialize_command_array(t_args *shell_data);
+void			initialize_command(int command_counter, int *token_counter, t_args *shell_data);
+void 			allocate_command_memory(t_count cmd_sizes, t_cmdarr *command);
+void			parse_and_fill_command(int cmd, int *tok, t_args *shell_data);
+void 			handle_double_redirection(t_token *redirection_token, t_token *token_array, int *token_index);
+void			set_redirection_type(t_token *redirection_token, t_token *token_array, int *token_index);
 
 #endif
