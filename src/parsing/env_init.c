@@ -6,7 +6,7 @@ static void	set_shlvl(t_args *shell_data)
 	t_env_lst	*shlvl_node;
 	int			shlvl;
 
-	shlvl_node = find_env_node("SHLVL", shell_data->env);
+	shlvl_node = find_env_var("SHLVL", shell_data->env);
 	shlvl = ft_atoi(shlvl_node->val);
 	if (shlvl == 999)
 	{
@@ -17,32 +17,32 @@ static void	set_shlvl(t_args *shell_data)
 	shlvl_node->val = ft_itoa(shlvl + 1);
 }
 
-int	fill_str(char *s, t_env_lst **lst)
+int	process_and_store_env_var(char *input_str, t_env_lst **env_list)
 {
-	int		divider_pos;
-	int		err;
-	char	*val;
-	char	*name;
+	int		split_index;
+	int		error_flag;
+	char	*env_value;
+	char	*env_name;
 
-	err = 0;
-	divider_pos = ft_strchr_pos(s, '=');
-	if (divider_pos >= 0)
+	error_flag = 0;
+	split_index = ft_strchr_pos(input_str, '=');
+	if (split_index >= 0)
 	{
-		name = ft_substr(s, 0, divider_pos - 1);
-		val = ft_strdup(&(s[divider_pos]));
-		if (!val || !name)
-			err = 1;
-		ft_lstadd_env(lst, name, val);
+		env_name = ft_substr(input_str, 0, split_index - 1);
+		env_value = ft_strdup(&(input_str[split_index]));
+		if (!env_value || !env_name)
+			error_flag = 1;
+		ft_lstadd_env(env_list, env_name, env_value);
 	}
 	else
 	{
-		name = ft_strdup((char *)s);
-		val = NULL;
-		if (!name)
-			err = 1;
-		ft_lstadd_env(lst, name, val);
+		env_name = ft_strdup((char *)input_str);
+		env_value = NULL;
+		if (!env_name)
+			error_flag = 1;
+		ft_lstadd_env(env_list, env_name, env_value);
 	}
-	return (err);
+	return (error_flag);
 }
 
 void	initialize_environment(t_args *shell_data, char **env)
@@ -52,7 +52,7 @@ void	initialize_environment(t_args *shell_data, char **env)
 	i = 0;
 	while (env[i])
 	{
-		if (fill_str(env[i], &shell_data->env))
+		if (process_and_store_env_var(env[i], &shell_data->env))
 		{
 			clean_lst_env(&shell_data->env);
 			memory_allocation_error();

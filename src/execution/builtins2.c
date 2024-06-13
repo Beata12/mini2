@@ -6,7 +6,7 @@
 /*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 11:59:02 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/13 13:57:14 by beata            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	export_loop(t_args *shell_data, char **args, int i)
 		name = cut_name(args[i]);
 		if (!check_var_validity(args[i], name))
 			return (handle_error(args[i], shell_data, 1, 0), ft_free(name));
-		env_node = find_env_node(name, shell_data->env);
+		env_node = find_env_var(name, shell_data->env);
 		if (!env_node)
-			fill_str(args[i], &shell_data->env);
+			process_and_store_env_var(args[i], &shell_data->env);
 		else
 		{
 			divider_pos = ft_strchr_pos(args[i], '=');

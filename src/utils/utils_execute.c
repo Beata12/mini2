@@ -44,50 +44,34 @@ void	close_fds(t_args *shell_data, int **pipes)
 	}
 }
 
-int	return_builtin_num(char *cmd)
-{
-	if (!cmd)
-		return (-1);
-	else if (ft_strncmp(cmd, "pwd", 4) == 0)
-		return (0);
-	else if (ft_strncmp(cmd, "cd", 3) == 0)
-		return (1);
-	else if (ft_strncmp(cmd, "echo", 5) == 0)
-		return (2);
-	else if (ft_strncmp(cmd, "unset", 6) == 0)
-		return (3);
-	else if (ft_strncmp(cmd, "export", 7) == 0)
-		return (4);
-	else if (ft_strncmp(cmd, "env", 4) == 0)
-		return (5);
-	return (-1);
-}
-
 
 void	ft_execve(t_args *shell_data)
 {
-	char		*path;
-	char		**cmds;
-	char		**envp;
-	t_env_lst	*env;
+	char *executable_path;
+    char **command_args;
+    char **envp_array;
+    t_env_lst *env_node;
 
-	path = NULL;
-	envp = convert_env(shell_data->env);
-	cmds = shell_data->cmdarr[shell_data->cmd_num].args;
-	env = find_env_node("PATH", shell_data->env);
-	if (ft_strchr(cmds[0], '/') == NULL)
-	{
-		if (!env)
-			exit_with_error(cmds[0], ": command not found", 127);
-		path = find_path(cmds[0], env->val);
-	}
-	else
-		path = ft_strdup(cmds[0]);
-	if (path == NULL)
-		exit_with_error(cmds[0], ": command not found", 127);
-	execve(path, cmds, envp);
-	if (cmds[0] != NULL)
-		exit_with_error(cmds[0], ": command not found", 127);
-	exit(0);
+    executable_path = NULL;
+    envp_array = generate_envp_array(shell_data->env);
+    command_args = shell_data->cmdarr[shell_data->cmd_num].args;
+    env_node = find_env_var("PATH", shell_data->env);
+
+    if (ft_strchr(command_args[0], '/') == NULL)
+    {
+        if (!env_node)
+            exit_with_error(command_args[0], ": command not found", 127);
+        executable_path = find_path(command_args[0], env_node->val);
+    }
+    else
+        executable_path = ft_strdup(command_args[0]);
+    if (executable_path == NULL)
+        exit_with_error(command_args[0], ": command not found", 127);
+    execve(executable_path, command_args, envp_array);
+    exit_with_error(command_args[0], ": command not found", 127);
+    if (command_args[0] != NULL)
+        exit_with_error(command_args[0], ": command not found", 127);
+    exit(0);
 }
+
 

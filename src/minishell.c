@@ -35,21 +35,6 @@ int validate_input(char *user_input)
 	}
 	return 0;
 }
-// int	check_input(char *input)
-// {
-// 	if (!input)
-// 	{
-// 		ft_free(input);
-// 		printf("exit\n");
-// 		exit(0);
-// 	}
-// 	else if (!*input)
-// 	{
-// 		ft_free(input);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 //ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
 static void	display_prompt(t_args *shell_data)
@@ -70,11 +55,50 @@ static void	display_prompt(t_args *shell_data)
 				continue ;
 			execute(shell_data);
 		}
-		clean_command_data(shell_data);
+		free_command_resources(shell_data);
 		ft_free(user_input);
 	}
 	ft_free(current_directory);
 }
+
+int	main(int argc, char **argv, char **envp)
+{
+	(void)argv;
+	t_args	shell_data;
+
+	load_history();
+	ft_alloc_init();
+	setup_signal_handlers();
+	if (argc == 1)
+	{
+		initialize_shell(&shell_data, initialize_envp(envp));
+		display_prompt(&shell_data);
+	}
+	else
+		exit(write(1, RED "No arguments accepted!\n" RE, 32));
+	ft_destructor();
+	save_history();
+	return (0);
+}
+
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_args	shell_data;
+
+// 	ft_alloc_init();
+// 	ignore_signals();
+// 	(void)av;
+// 	(void)ac;
+// 	if (ac != 1)
+// 		exit(write(1, RED "No arguments accepted!\n" RE, 32));
+// 	else
+// 	{
+// 		init_mshell(&shell_data, get_envp(envp));
+// 		minishell_loop(&shell_data);
+// 	}
+// 	ft_destructor();
+// 	return (0);
+// }
 
 // static void	display_prompt(t_args *shell_data)
 // {
@@ -103,41 +127,18 @@ static void	display_prompt(t_args *shell_data)
 // 	// save_history();
 // }
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argv;
-	t_args	shell_data;
-
-	load_history();
-	ft_alloc_init();
-	setup_signal_handlers();
-	if (argc == 1)
-	{
-		initialize_shell(&shell_data, get_envp(envp));
-		display_prompt(&shell_data);
-	}
-	else
-		exit(write(1, RED "No arguments accepted!\n" RE, 32));
-	ft_destructor();
-	save_history();
-	return (0);
-}
-
-// int	main(int ac, char **av, char **envp)
+// int	check_input(char *input)
 // {
-// 	t_args	shell_data;
-
-// 	ft_alloc_init();
-// 	ignore_signals();
-// 	(void)av;
-// 	(void)ac;
-// 	if (ac != 1)
-// 		exit(write(1, RED "No arguments accepted!\n" RE, 32));
-// 	else
+// 	if (!input)
 // 	{
-// 		init_mshell(&shell_data, get_envp(envp));
-// 		minishell_loop(&shell_data);
+// 		ft_free(input);
+// 		printf("exit\n");
+// 		exit(0);
 // 	}
-// 	ft_destructor();
+// 	else if (!*input)
+// 	{
+// 		ft_free(input);
+// 		return (1);
+// 	}
 // 	return (0);
 // }

@@ -53,12 +53,12 @@ typedef struct s_args
 
 //*UTILS
 // void			ignore_signals(void);
-char			**get_envp(char **envp);
+char			**initialize_envp(char **environment);
 // void			child_signal(int signal);
 // void			handle_sigint(int signals);
 void			tmp_sort_env(t_env_lst *env);
-int				return_builtin_num(char *cmd);
-char			**convert_env(t_env_lst *env);
+int				identify_builtin_command(char *cmd);
+char			**generate_envp_array(t_env_lst *env_list);//poprawione
 void			wait_in_parent(t_args *shell_data);
 char			*find_path(char *cmd, char *path);
 char			*get_prompt_path(t_args *shell_data);//poprawione
@@ -80,7 +80,7 @@ char			*arrjoin(char **arr);
 void			ft_free_array(char **array);
 void			clean_lst_env(t_env_lst **lst);
 void			clean_node_env(t_env_lst **lst);
-void			clean_command_data(t_args *shell_data);
+void			free_command_resources(t_args *shell_data);
 char			**split_save_divider(char *s, char c);
 void			initialize_shell(t_args *shell_state, char **environment);//poprawione
 int				leave_heredoc(t_args *shell_data, int err_i);

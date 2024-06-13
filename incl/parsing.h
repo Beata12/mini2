@@ -56,13 +56,16 @@ typedef struct s_env_lst
 	struct s_env_lst		*next;
 }							t_env_lst;
 
-// parsing
+
+//to nie do parsingu find_env, proccesss, initialize - do exec
+t_env_lst *find_env_var(char *name, t_env_lst *env_list);
 void						initialize_environment(t_args *shell_data, char **env);
-int							fill_str(char *s, t_env_lst **lst);
+int							process_and_store_env_var(char *input_str, t_env_lst **env_list);
 void						dollar_value_subst(char **s, char *q,
 								t_args *shell_data);
 int							ft_strchr_pos(char *s, int c);
-t_env_lst					*find_env_node(char *name, t_env_lst *env);
+// t_env_lst					*find_env_node(char *name, t_env_lst *env);
+
 char						*cut_name(char *s);
 void						fill_redir_type(t_token *rdr, t_token *tarr,
 								int *t);

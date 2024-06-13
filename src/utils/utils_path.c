@@ -30,28 +30,50 @@ char	*find_path(char *cmd, char *path)
 	free_string_array(paths);
 	return (NULL);
 }
-
-char	**get_envp(char **envp)
+//ZROBIONE
+char	**create_default_env(void)
 {
-	char	**basic_env;
-
-	if (envp && *envp)
-		return (envp);
-	else
-	{
-		basic_env = ft_malloc(sizeof(char *) * 9);
-		basic_env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
-		basic_env[1] = ft_strdup("PWD=/");
-		basic_env[2] = ft_strdup("SHLVL=1");
-		basic_env[3] = ft_strdup("HOME=/");
-		basic_env[4] = ft_strdup("LOGNAME=user");
-		basic_env[5] = ft_strdup("USER=user");
-		basic_env[6] = ft_strdup("LANG=C");
-		basic_env[7] = ft_strdup("TERM=xterm-256color");
-		basic_env[8] = NULL;
-		return (basic_env);
-	}
+	char **default_env = ft_malloc(sizeof(char *) * 9);
+	default_env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
+	default_env[1] = ft_strdup("PWD=/");
+	default_env[2] = ft_strdup("SHLVL=1");
+	default_env[3] = ft_strdup("HOME=/");
+	default_env[4] = ft_strdup("LOGNAME=user");
+	default_env[5] = ft_strdup("USER=user");
+	default_env[6] = ft_strdup("LANG=C");
+	default_env[7] = ft_strdup("TERM=xterm-256color");
+	default_env[8] = NULL;
+	return default_env;
 }
+//ZROBIONE
+char	**initialize_envp(char **environment)
+{
+	if (environment && *environment)
+		return environment;
+	else
+		return create_default_env();
+}
+// char	**get_envp(char **envp)
+// {
+// 	char	**basic_env;
+
+// 	if (envp && *envp)
+// 		return (envp);
+// 	else
+// 	{
+// 		basic_env = ft_malloc(sizeof(char *) * 9);
+// 		basic_env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
+// 		basic_env[1] = ft_strdup("PWD=/");
+// 		basic_env[2] = ft_strdup("SHLVL=1");
+// 		basic_env[3] = ft_strdup("HOME=/");
+// 		basic_env[4] = ft_strdup("LOGNAME=user");
+// 		basic_env[5] = ft_strdup("USER=user");
+// 		basic_env[6] = ft_strdup("LANG=C");
+// 		basic_env[7] = ft_strdup("TERM=xterm-256color");
+// 		basic_env[8] = NULL;
+// 		return (basic_env);
+// 	}
+// }
 
 // char	*get_brackets(char *str, int color)
 // {
@@ -97,7 +119,7 @@ char *get_prompt_path(t_args *shell_data)
 	char		*intermediate_path;
 	static char	*cached_prompt_path;
 
-	home_env = find_env_node("HOME", shell_data->env);
+	home_env = find_env_var("HOME", shell_data->env);
 	working_directory = getcwd(NULL, 0);
 	if (!working_directory)
 	{
