@@ -6,7 +6,7 @@
 #    By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 20:57:52 by aneekhra          #+#    #+#              #
-#    Updated: 2024/06/14 10:28:33 by bmarek           ###   ########.fr        #
+#    Updated: 2024/06/14 10:46:11 by bmarek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LFT_F = libft
 FT_DES = ft_destructor
 
 SRC =	minishell.c \
-		execute.c builtins2.c open_files.c \
+		execute.c open_files.c \
 		env_init.c parsing.c dollar_parse.c tokenize.c cmd.c cmd_init.c \
 		utils_signals.c  utils_parsing.c utils_path.c utils_execute.c \
 		utils_env.c env_lst.c \
@@ -39,6 +39,7 @@ SRC =	minishell.c \
 		src/parsing/utils/string_separator.c \
 		src/parsing/utils/string_utils.c \
 		src/execution/initialize_builtins.c \
+		src/execution/utils/export_utils.c \
 		src/execution/utils/handle_errors.c \
 		src/execution/shell_commands/cd.c \
 		src/execution/shell_commands/env.c \

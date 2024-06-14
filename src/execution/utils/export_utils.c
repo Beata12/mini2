@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins2.c                                        :+:      :+:    :+:   */
+/*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/14 10:38:29 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:54:20 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static char	*get_variable_name(char *input_str)
 {
@@ -37,36 +37,75 @@ static int	is_variable_valid(char *variable_value, char *target_name)
 	return (1);
 }
 
-void	process_environment_variables(t_args *shell_data,
-	char **input_arguments, int i)
+static void	update_environment_variable(char *input_argument,
+	t_args *shell_data)
 {
 	char			*name;
 	t_env_variable	*env_node;
-	int				separator_position;
+	int				seperator_pos;
 
+	name = get_variable_name(input_argument);
+	if (!is_variable_valid(input_argument, name))
+	{
+		handle_error(input_argument, shell_data, 1, 0);
+		ft_free(name);
+		return ;
+	}
+	env_node = find_env_var(name, shell_data->env);
+	if (!env_node)
+		process_and_store_env_var(input_argument, &shell_data->env);
+	else
+	{
+		seperator_pos = get_char_position(input_argument, '=');
+		if (seperator_pos >= 0)
+		{
+			if (env_node->value)
+				ft_free(env_node->value);
+			env_node->value = ft_strdup(&input_argument[seperator_pos + 1]);
+		}
+	}
+	ft_free(name);
+}
+
+void	process_environment_variables(t_args *shell_data,
+	char **input_arguments, int i)
+{
 	while (input_arguments[i])
 	{
-		name = get_variable_name(input_arguments[i]);
-		if (!is_variable_valid(input_arguments[i], name))
-			return (handle_error(input_arguments[i], shell_data, 1, 0),
-				ft_free(name));
-		env_node = find_env_var(name, shell_data->env);
-		if (!env_node)
-			process_and_store_env_var(input_arguments[i], &shell_data->env);
-		else
-		{
-			separator_position = get_char_position(input_arguments[i], '=');
-			if (separator_position >= 0)
-			{
-				if (env_node->value)
-					ft_free(env_node->value);
-				env_node->value = ft_strdup(&input_arguments[i]
-					[separator_position]);
-			}
-		}
+		update_environment_variable(input_arguments[i], shell_data);
 		i++;
 	}
 }
+// void	process_environment_variables(t_args *shell_data,
+// 	char **input_arguments, int i)
+// {
+// 	char			*name;
+// 	t_env_variable	*env_node;
+// 	int				separator_position;
+
+// 	while (input_arguments[i])
+// 	{
+// 		name = get_variable_name(input_arguments[i]);
+// 		if (!is_variable_valid(input_arguments[i], name))
+// 			return (handle_error(input_arguments[i], shell_data, 1, 0),
+// 				ft_free(name));
+// 		env_node = find_env_var(name, shell_data->env);
+// 		if (!env_node)
+// 			process_and_store_env_var(input_arguments[i], &shell_data->env);
+// 		else
+// 		{
+// 			separator_position = get_char_position(input_arguments[i], '=');
+// 			if (separator_position >= 0)
+// 			{
+// 				if (env_node->value)
+// 					ft_free(env_node->value);
+// 				env_node->value = ft_strdup(&input_arguments[i]
+// 					[separator_position]);
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
 
 // void	ft_env(t_args *shell_data)
 // {

@@ -6,36 +6,63 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:09 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/14 08:25:16 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 11:01:01 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
-//zrobione
+
 void	initialize_builtins(t_args *shell_data)
 {
-	int	i;
-	int	num_builtins;
+	int			i;
+	int			num_builtins;
+	t_builtin	*builtins;
 
 	i = 0;
 	num_builtins = 6;
+	builtins = (t_builtin[])
+	{
+	{"pwd", shell_pwd},
+	{"cd", shell_cd},
+	{"echo", shell_echo},
+	{"unset", shell_unset},
+	{"export", shell_export},
+	{"env", shell_env},
+	{NULL, NULL}
+	};
 	shell_data->builtin_cmds = ft_malloc(sizeof(t_builtin)
 			* (num_builtins + 1));
-	t_builtin	builtins[] = {
-		{"pwd", shell_pwd},
-		{"cd", shell_cd},
-		{"echo", shell_echo},
-		{"unset", shell_unset},
-		{"export", shell_export},
-		{"env", shell_env},
-		{NULL, NULL}
-	};
 	while (i <= num_builtins)
 	{
 		shell_data->builtin_cmds[i] = builtins[i];
 		i++;
 	}
 }
+
+// void	initialize_builtins(t_args *shell_data)
+// {
+// 	int	i;
+// 	int	num_builtins;
+
+// 	i = 0;
+// 	num_builtins = 6;
+// 	shell_data->builtin_cmds = ft_malloc(sizeof(t_builtin)
+// 			* (num_builtins + 1));
+// 	t_builtin	builtins[] = {
+// 	{"pwd", shell_pwd},
+// 	{"cd", shell_cd},
+// 	{"echo", shell_echo},
+// 	{"unset", shell_unset},
+// 	{"export", shell_export},
+// 	{"env", shell_env},
+// 	{NULL, NULL}
+// 	};
+// 	while (i <= num_builtins)
+// 	{
+// 		shell_data->builtin_cmds[i] = builtins[i];
+// 		i++;
+// 	}
+// }
 
 // void	initialize_builtins(t_args *shell_data)
 // {

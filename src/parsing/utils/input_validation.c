@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:12:16 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:31:17 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 11:06:35 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,36 +50,36 @@ static int	unvalid_symbols(char *input_string)
 	return (0);
 }
 
-int	unvalid_bracket(char *input_string)
+static int	check_bracket_error(char *input_string)
 {
 	int	i;
 	int	dif;
 
 	i = 0;
 	dif = 0;
-	if (missing_bracccet(input_string))
+	while (input_string[i])
 	{
-		while (input_string[i])
+		if ((input_string[i] != ' ' && input_string[i] != ')'))
+			dif = 1;
+		if (input_string[i] == ')')
+			return (0);
+		else if (dif == 0)
 		{
-			if ((input_string[i] != ' ' && input_string[i] != ')'))
-				dif = 1;
-			{
-				if (input_string[i] == ')')
-					return (0);
-				else if (dif == 0)
-				{
-					printf("minishell: \
-                        syntax error near unexpected token ')' \n");
-					return (1);
-				}
-				dif = 0;
-			}
-			i++;
+			printf("minishell: syntax error near unexpected token ')' \n");
+			return (1);
 		}
+		dif = 0;
+		i++;
 	}
+	return (0);
+}
+
+int	unvalid_bracket(char *input_string)
+{
+	if (missing_bracccet(input_string))
+		return (check_bracket_error(input_string));
 	else
 		return (1);
-	return (0);
 }
 
 int	wrong_input(t_args *shell_data, char *input)
@@ -104,6 +104,36 @@ int	wrong_input(t_args *shell_data, char *input)
 	return (1);
 }
 
+// int	unvalid_bracket(char *input_string)
+// {
+// 	int	i;
+// 	int	dif;
+// 	i = 0;
+// 	dif = 0;
+// 	if (missing_bracccet(input_string))
+// 	{
+// 		while (input_string[i])
+// 		{
+// 			if ((input_string[i] != ' ' && input_string[i] != ')'))
+// 				dif = 1;
+// 			{
+// 				if (input_string[i] == ')')
+// 					return (0);
+// 				else if (dif == 0)
+// 				{
+// 					printf("minishell: \
+//                         syntax error near unexpected token ')' \n");
+// 					return (1);
+// 				}
+// 				dif = 0;
+// 			}
+// 			i++;
+// 		}
+// 	}
+// 	else
+// 		return (1);
+// 	return (0);
+// }
 // int	wrong_input(t_args *shell_data, char *input)
 // {
 // 	(void)shell_data;
