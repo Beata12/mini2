@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btvildia <btvildia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 15:47:26 by btvildia          #+#    #+#             */
-/*   Updated: 2023/11/27 23:51:20 by btvildia         ###   ########.fr       */
+/*   Created: 2023/11/14 16:51:45 by aneekhra          #+#    #+#             */
+/*   Updated: 2023/11/16 22:59:07 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+	return (c >= 0 && c <= 127);
 }

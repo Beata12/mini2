@@ -3,45 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btvildia <btvildia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 16:47:28 by btvildia          #+#    #+#             */
-/*   Updated: 2024/05/12 20:18:19 by btvildia         ###   ########.fr       */
+/*   Created: 2023/11/15 20:59:22 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/06/11 21:29:43 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned int	i;
+	unsigned int	length;
+	unsigned int	j;
 
-	i = 0;
-	if (dstsize >= 1)
+	length = 0;
+	if (size > 0)
 	{
-		while (src[i] != '\0' && i < dstsize - 1)
+		j = 0;
+		while (src[j] && j < size - 1)
 		{
-			dst[i] = src[i];
-			i++;
+			dest[j] = src[j];
+			j++;
 		}
-		dst[i] = '\0';
+		dest[j] = '\0';
 	}
-	return (ft_strlen(src));
-}
-
-void	ft_strcpy(char *d, char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return ;
-	while (s[i])
+	while (src[length])
 	{
-		d[i] = s[i];
-		i++;
+		length++;
 	}
-	d[i] = '\0';
+	return (length);
 }
 
 char	*ft_strncpy(char *s1, char *s2, int n)
