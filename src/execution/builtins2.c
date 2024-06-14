@@ -6,11 +6,26 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 21:07:39 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:38:29 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+static char	*get_variable_name(char *input_str)
+{
+	int		i;
+	char	*var_name;
+
+	i = 0;
+	while (input_str[i] && (ft_isalnum(input_str[i])
+			|| input_str[i] == '_'))
+		i++;
+	var_name = ft_substr(input_str, 0, i);
+	if (!var_name)
+		memory_allocation_error();
+	return (var_name);
+}
 
 static int	is_variable_valid(char *variable_value, char *target_name)
 {
@@ -22,7 +37,8 @@ static int	is_variable_valid(char *variable_value, char *target_name)
 	return (1);
 }
 
-void	process_environment_variables(t_args *shell_data, char **input_arguments, int i)
+void	process_environment_variables(t_args *shell_data,
+	char **input_arguments, int i)
 {
 	char			*name;
 	t_env_variable	*env_node;
@@ -32,7 +48,8 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 	{
 		name = get_variable_name(input_arguments[i]);
 		if (!is_variable_valid(input_arguments[i], name))
-			return (handle_error(input_arguments[i], shell_data, 1, 0), ft_free(name));
+			return (handle_error(input_arguments[i], shell_data, 1, 0),
+				ft_free(name));
 		env_node = find_env_var(name, shell_data->env);
 		if (!env_node)
 			process_and_store_env_var(input_arguments[i], &shell_data->env);
@@ -43,7 +60,8 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 			{
 				if (env_node->value)
 					ft_free(env_node->value);
-				env_node->value = ft_strdup(&input_arguments[i][separator_position]);
+				env_node->value = ft_strdup(&input_arguments[i]
+					[separator_position]);
 			}
 		}
 		i++;

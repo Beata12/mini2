@@ -6,26 +6,11 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:16:51 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:13:01 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:34:56 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-char	*get_variable_name(char *input_str)
-{
-	int		i;
-	char	*var_name;
-
-	i = 0;
-	while (input_str[i] && (ft_isalnum(input_str[i])
-			|| input_str[i] == '_'))
-		i++;
-	var_name = ft_substr(input_str, 0, i);
-	if (!var_name)
-		memory_allocation_error();
-	return (var_name);
-}
 
 t_env_variable	*find_env_var(char *name, t_env_variable *env_list)
 {

@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 20:39:50 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:40:11 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int					process_and_store_env_var(char *input_str,
 void				dollar_value_subst(char **s, char *q,
 						t_args *shell_data);
 int					get_char_position(char *input_str, int target_char);
-char				*get_variable_name(char *input_str);
+// char				*get_variable_name(char *input_str);
 void				fill_redir_type(t_token *rdr, t_token *tarr,
 						int *t);
 

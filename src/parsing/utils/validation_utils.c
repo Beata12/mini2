@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:58:10 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 08:33:53 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:32:11 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	is_open_quote(char input_string, char *quote_flag)
 void	my_error(char *s, int status)
 {
 	printf("minishell: ");
-	// if (status == 19)
-	// 	printf("syntax error unable to locate closing bracket\n");
 	if (status == 2)
 		printf("syntax error near unexpected token `%s'\n", s);
 	if (status == 39)
@@ -42,6 +40,8 @@ void	my_error(char *s, int status)
 	if (status == 0)
 		printf("warning: shell level (1000) too high, resetting to 1\n");
 }
+	// if (status == 19)
+	// 	printf("syntax error unable to locate closing bracket\n");
 
 int	missing_bracccet(char *input_string)
 {

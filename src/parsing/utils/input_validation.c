@@ -6,13 +6,13 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:12:16 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 08:31:38 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:31:17 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-int	unvalid_quotes(char *input_string)
+static int	unvalid_quotes(char *input_string)
 {
 	int	i;
 	int	single_quote_flag;
