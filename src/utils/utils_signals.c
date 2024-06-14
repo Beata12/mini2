@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_signals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:14:12 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/12 21:22:46 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 10:23:08 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	// g_exit_status = 130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
+	// Do nothing on Ctrl-
 void	handle_sigquit(int sig)
 {
 	(void)sig;
-	// Do nothing on Ctrl-
 }
 
 void	setup_signal_handlers(void)

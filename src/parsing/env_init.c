@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/25 15:13:11 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/14 09:49:59 by bmarek           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-//zrobione
+
 static void	update_shell_level(t_args *shell_data)
 {
 	int				shell_level_count;
@@ -16,7 +27,7 @@ static void	update_shell_level(t_args *shell_data)
 	ft_free(shell_level_var->value);
 	shell_level_var->value = ft_itoa(shell_level_count + 1);
 }
-//zrobione
+
 int	process_and_store_env_var(char *input_str, t_env_variable **env_list)
 {
 	int		split_index;
@@ -44,7 +55,7 @@ int	process_and_store_env_var(char *input_str, t_env_variable **env_list)
 	}
 	return (error_flag);
 }
-//zrobione
+
 void	initialize_environment(t_args *shell_data, char **env)
 {
 	int	i;

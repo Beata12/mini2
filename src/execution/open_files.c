@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:12:40 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 18:50:01 by beata            ###   ########.fr       */
+/*   Updated: 2024/06/14 08:27:37 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
-//zrobione
+
 int	manage_file_access(char *file_path, int file_flags)
 {
 	int	file;
@@ -29,14 +29,15 @@ int	manage_file_access(char *file_path, int file_flags)
 		exit_with_error(file_path, ": No such file or directory", 1);
 	return (file);
 }
-//zrobione
+
 void	execute_heredoc(t_args *shell_data, int command_index, int input_index)
 {
 	char	*delimiter;
 	char	*user_input;
 	int		heredoc_file;
 
-	delimiter = shell_data->command_array[command_index].input_tokens[input_index].word;
+	delimiter = shell_data->command_array[command_index].input_tokens
+	[input_index].word;
 	heredoc_file = manage_file_access("/tmp/heredoc_tmp", 3);
 	while (1)
 	{
@@ -52,7 +53,7 @@ void	execute_heredoc(t_args *shell_data, int command_index, int input_index)
 	}
 	close(heredoc_file);
 }
-//zrobione
+
 void	process_all_heredocs(t_args *shell_data, int command_index)
 {
 	int	input_index;
@@ -60,12 +61,13 @@ void	process_all_heredocs(t_args *shell_data, int command_index)
 	input_index = 0;
 	while (input_index < shell_data->command_array[command_index].input_length)
 	{
-		if (shell_data->command_array[command_index].input_tokens[input_index].type == T_DLESS)
+		if (shell_data->command_array[command_index].input_tokens
+			[input_index].type == T_DLESS)
 			execute_heredoc(shell_data, command_index, input_index);
 		input_index++;
 	}
 }
-//zrobione
+
 void	setup_input_redirection(t_args *shell_data, int command_index)
 {
 	int	input_index;
@@ -74,16 +76,18 @@ void	setup_input_redirection(t_args *shell_data, int command_index)
 	input_index = 0;
 	while (input_index < shell_data->command_array[command_index].input_length)
 	{
-		if (shell_data->command_array[command_index].input_tokens[input_index].type == T_DLESS)
+		if (shell_data->command_array[command_index].input_tokens
+			[input_index].type == T_DLESS)
 			file = manage_file_access("/tmp/heredoc_tmp", 2);
 		else
-			file = manage_file_access(shell_data->command_array[command_index].input_tokens[input_index].word, 2);
+			file = manage_file_access(shell_data->command_array
+				[command_index].input_tokens[input_index].word, 2);
 		dup2(file, 0);
 		close(file);
 		input_index++;
 	}
 }
-//zrobione
+
 void	setup_output_redirection(t_args *shell_data, int command_index)
 {
 	int	input_index;
@@ -92,10 +96,13 @@ void	setup_output_redirection(t_args *shell_data, int command_index)
 	input_index = 0;
 	while (input_index < shell_data->command_array[command_index].output_length)
 	{
-		if (shell_data->command_array[command_index].output_tokens[input_index].type == T_DGREAT)
-			file = manage_file_access(shell_data->command_array[command_index].output_tokens[input_index].word, 0);
+		if (shell_data->command_array[command_index].output_tokens
+			[input_index].type == T_DGREAT)
+			file = manage_file_access(shell_data->command_array
+				[command_index].output_tokens[input_index].word, 0);
 		else
-			file = manage_file_access(shell_data->command_array[command_index].output_tokens[input_index].word, 1);
+			file = manage_file_access(shell_data->command_array
+				[command_index].output_tokens[input_index].word, 1);
 		dup2(file, 1);
 		close(file);
 		input_index++;

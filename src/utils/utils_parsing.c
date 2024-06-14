@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 06:41:52 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/14 10:17:13 by bmarek           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
 // finds position from start of s.
 // Not iteration(from 0), iterates from 1!
 //zrobione
-//sprawdz ta iteracje od 0 i od 1
+//sprawdz ta iteracje od 0 i od 1!!!!!!!!!!!!!!!!!!!!!!!!
 int	get_char_position(char *input_str, int target_char)
 {
 	int	i;
@@ -38,7 +49,8 @@ int	get_char_position(char *input_str, int target_char)
 // 	heredoc = 0;
 // 	while (++i < err_i)
 // 	{
-// 		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type == T_DLESS && (i + 1) < shell_data->tokarr_l
+// 		if ((shell_data->tokarr_l > i) && shell_data->tokarr[i].type
+//== T_DLESS && (i + 1) < shell_data->tokarr_l
 // 			&& shell_data->tokarr[i + 1].type == T_WORD)
 // 			heredoc++;
 // 	}
@@ -52,7 +64,8 @@ int	get_char_position(char *input_str, int target_char)
 // 	while (++i < err_i)
 // 	{
 // 		if (shell_data->tokarr[i].type == T_DLESS)
-// 			fill_redir_type(&shell_data->cmdarr[0].inp[++in], shell_data->tokarr, &i);
+// 			fill_redir_type(&shell_data->cmdarr[0].inp[++in],
+//shell_data->tokarr, &i);
 // 	}
 // 	return (heredoc);
 // }
@@ -72,7 +85,8 @@ int	get_char_position(char *input_str, int target_char)
 // 	{
 // 		is_open_quote(src[i], &q);
 // 		// quote_opened_type(src[i], &q);
-// 		if (!(((is_whitespace(src[i]) && is_whitespace(src[i + 1])) || (is_whitespace(src[i]) && (!d
+// 		if (!(((is_whitespace(src[i]) && is_whitespace(src[i + 1]))
+//|| (is_whitespace(src[i]) && (!d
 // 							|| !src[i + 1]))) && !q))
 // 			d++;
 // 	}

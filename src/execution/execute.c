@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 21:12:31 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 19:21:53 by beata            ###   ########.fr       */
+/*   Created: 2024/05/22 19:12:31 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/06/14 10:15:20 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/execute.h"
 
-//zrobione
 int	identify_builtin_command(char *builtin_command)
 {
 	if (!builtin_command)
@@ -31,7 +30,7 @@ int	identify_builtin_command(char *builtin_command)
 		return (5);
 	return (-1);
 }
-//zrobione
+
 void	execute(t_args *shell_data)
 {
 	int	i;
@@ -39,7 +38,8 @@ void	execute(t_args *shell_data)
 
 	pipe_array = ft_malloc(sizeof(int *) * (shell_data->command_count - 1));
 	i = identify_builtin_command(shell_data->command_array[0].args[0]);
-	if (shell_data->command_count == 1 && i != -1 && (shell_data->command_array[0].input_length == 0)
+	if (shell_data->command_count == 1 && i != -1
+		&& (shell_data->command_array[0].input_length == 0)
 		&& (shell_data->command_array[0].output_length == 0))
 		shell_data->builtin_cmds[i].command_executor(shell_data);
 	else
@@ -50,7 +50,7 @@ void	execute(t_args *shell_data)
 		wait_for_child_processes(shell_data);
 	}
 }
-//zrobione
+
 void	execute_pipeline(t_args *shell_data, int **pipe_array)
 {
 	int		i;
@@ -79,12 +79,13 @@ void	execute_pipeline(t_args *shell_data, int **pipe_array)
 		i++;
 	}
 }
-//zrobione
+
 void	ft_execute(t_args *shell_data)
 {
 	int	i;
 
-	i = identify_builtin_command(shell_data->command_array[shell_data->command_index].args[0]);
+	i = identify_builtin_command(shell_data->command_array
+		[shell_data->command_index].args[0]);
 	if (i == -1)
 		ft_execve(shell_data);
 	else

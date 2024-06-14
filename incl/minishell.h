@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/13 20:35:37 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/13 21:04:04 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void			remove_env_var(char *str, t_env_variable **env);
 void			exit_with_error(char *str, char *str2, int status);
 void			process_environment_variables(t_args *shell_data,
 					char **args, int i);
-void			handle_error(const char *error_message, t_args *shell_state,
+void			handle_error(const char *error_message, t_args *s_state,
 					int exit_status_code, int modification_flag);
 void			alloc_err(void);
 int				is_empty_str(char *input_string);

@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_path.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/14 10:21:34 by bmarek           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-//zrobione
+
 char	*locate_file_in_path(char *file_name, char *path_to_search)
 {
 	int		i;
 	int		fd;
-	char	*full_path;//full_path
-	char	*current_path;//current_path
-	char	**search_paths;//search_path
+	char	*full_path;
+	char	*current_path;
+	char	**search_paths;
 
 	i = 0;
 	search_paths = ft_split(path_to_search, ':');
@@ -29,10 +40,12 @@ char	*locate_file_in_path(char *file_name, char *path_to_search)
 	free_string_array(search_paths);
 	return (NULL);
 }
-//ZROBIONE
+
 char	**create_default_env(void)
 {
-	char **default_env = ft_malloc(sizeof(char *) * 9);
+	char	**default_env;
+
+	default_env = ft_malloc(sizeof(char *) * 9);
 	default_env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
 	default_env[1] = ft_strdup("PWD=/");
 	default_env[2] = ft_strdup("SHLVL=1");
@@ -42,56 +55,17 @@ char	**create_default_env(void)
 	default_env[6] = ft_strdup("LANG=C");
 	default_env[7] = ft_strdup("TERM=xterm-256color");
 	default_env[8] = NULL;
-	return default_env;
+	return (default_env);
 }
-//ZROBIONE
+
 char	**initialize_envp(char **environment)
 {
 	if (environment && *environment)
-		return environment;
+		return (environment);
 	else
-		return create_default_env();
+		return (create_default_env());
 }
-// char	**get_envp(char **envp)
-// {
-// 	char	**basic_env;
 
-// 	if (envp && *envp)
-// 		return (envp);
-// 	else
-// 	{
-// 		basic_env = ft_malloc(sizeof(char *) * 9);
-// 		basic_env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
-// 		basic_env[1] = ft_strdup("PWD=/");
-// 		basic_env[2] = ft_strdup("SHLVL=1");
-// 		basic_env[3] = ft_strdup("HOME=/");
-// 		basic_env[4] = ft_strdup("LOGNAME=user");
-// 		basic_env[5] = ft_strdup("USER=user");
-// 		basic_env[6] = ft_strdup("LANG=C");
-// 		basic_env[7] = ft_strdup("TERM=xterm-256color");
-// 		basic_env[8] = NULL;
-// 		return (basic_env);
-// 	}
-// }
-
-// char	*get_brackets(char *str, int color)
-// {
-// 	char	*tmp;
-
-// 	if (color == 1)
-// 		tmp = ft_strjoin(BLUE, str);
-// 	else
-// 		tmp = ft_strjoin(RED, str);
-// 	ft_free(str);
-// 	str = ft_strjoin(tmp, RE);
-// 	ft_free(tmp);
-// 	tmp = ft_strjoin("[", str);
-// 	ft_free(str);
-// 	str = ft_strjoin(tmp, "]" RE);
-// 	ft_free(tmp);
-// 	return (str);
-// }
-//zrobione
 static char	*generate_command_prompt(char *exit_code)
 {
 	char	*prompt;
@@ -99,18 +73,14 @@ static char	*generate_command_prompt(char *exit_code)
 	char	*exit_status;
 
 	exit_status = NULL;
-	// if (shell_data->exit_status == 0)
-	// 	exit_status = get_brackets(ft_itoa(shell_data->exit_status), 1);
-	// else
-	// 	exit_status = get_brackets(ft_itoa(shell_data->exit_status), 0);
 	prefix_part = ft_strjoin(exit_status, YELLOW "Minishell:" RE);
 	prompt = ft_strjoin(prefix_part, exit_code);
 	ft_free(prefix_part);
 	ft_free(exit_status);
 	return (prompt);
 }
-//zrobione
-char *get_prompt_path(t_args *shell_data)
+
+char	*get_prompt_path(t_args *shell_data)
 {
 	t_env_variable	*home_env;
 	char			*home_directory;
@@ -129,12 +99,67 @@ char *get_prompt_path(t_args *shell_data)
 		home_directory = "/";
 	else
 		home_directory = home_env->value;
-	intermediate_path = ft_strjoin(ft_remove_substr(working_directory, home_directory), "$ ");
+	intermediate_path = ft_strjoin(ft_remove_substr(working_directory,
+				home_directory), "$ ");
 	ft_free(working_directory);
 	cached_prompt_path = generate_command_prompt(intermediate_path);
 	ft_free(intermediate_path);
 	return (cached_prompt_path);
 }
+
+//zrobione
+// static char	*generate_command_prompt(char *exit_code)
+// {
+// 	char	*prompt;
+// 	char	*prefix_part;
+// 	char	*exit_status;
+// 	exit_status = NULL;
+// 	// if (shell_data->exit_status == 0)
+// 	// 	exit_status = get_brackets(ft_itoa(shell_data->exit_status), 1);
+// 	// else
+// 	// 	exit_status = get_brackets(ft_itoa(shell_data->exit_status), 0);
+// 	prefix_part = ft_strjoin(exit_status, YELLOW "Minishell:" RE);
+// 	prompt = ft_strjoin(prefix_part, exit_code);
+// 	ft_free(prefix_part);
+// 	ft_free(exit_status);
+// 	return (prompt);
+// }
+// char	**get_envp(char **envp)
+// {
+// 	char	**basic_env;
+// 	if (envp && *envp)
+// 		return (envp);
+// 	else
+// 	{
+// 		basic_env = ft_malloc(sizeof(char *) * 9);
+// 		basic_env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
+// 		basic_env[1] = ft_strdup("PWD=/");
+// 		basic_env[2] = ft_strdup("SHLVL=1");
+// 		basic_env[3] = ft_strdup("HOME=/");
+// 		basic_env[4] = ft_strdup("LOGNAME=user");
+// 		basic_env[5] = ft_strdup("USER=user");
+// 		basic_env[6] = ft_strdup("LANG=C");
+// 		basic_env[7] = ft_strdup("TERM=xterm-256color");
+// 		basic_env[8] = NULL;
+// 		return (basic_env);
+// 	}
+// }
+// char	*get_brackets(char *str, int color)
+// {
+// 	char	*tmp;
+// 	if (color == 1)
+// 		tmp = ft_strjoin(BLUE, str);
+// 	else
+// 		tmp = ft_strjoin(RED, str);
+// 	ft_free(str);
+// 	str = ft_strjoin(tmp, RE);
+// 	ft_free(tmp);
+// 	tmp = ft_strjoin("[", str);
+// 	ft_free(str);
+// 	str = ft_strjoin(tmp, "]" RE);
+// 	ft_free(tmp);
+// 	return (str);
+// }
 // char	*get_currect_path(t_args *shell_data)
 // {
 // 	static char	*path;
@@ -142,7 +167,6 @@ char *get_prompt_path(t_args *shell_data)
 // 	char		*tmp3;
 // 	t_env_lst	*user;
 // 	char		*home;
-
 // 	user = find_env_node("HOME", shell_data->env);
 // 	tmp3 = getcwd(NULL, 0);
 // 	if (!tmp3)
@@ -160,19 +184,6 @@ char *get_prompt_path(t_args *shell_data)
 // 	ft_free(tmp2);
 // 	return (path);
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
 // char	*find_path(char *cmd, char *path)
 // {
 // 	char	*c;
@@ -180,7 +191,6 @@ char *get_prompt_path(t_args *shell_data)
 // 	char	**paths;
 // 	int		i;
 // 	int		fd;
-
 // 	i = 0;
 // 	paths = ft_split(path, ':');
 // 	while (paths[i] != NULL)
@@ -201,11 +211,9 @@ char *get_prompt_path(t_args *shell_data)
 // 	free_string_array(paths);
 // 	return (NULL);
 // }
-
 // char	**get_envp(char **envp)
 // {
 // 	char	**basic_env;
-
 // 	if (envp && *envp)
 // 		return (envp);
 // 	else
@@ -223,11 +231,9 @@ char *get_prompt_path(t_args *shell_data)
 // 		return (basic_env);
 // 	}
 // }
-
 // char	*get_brackets(char *str, int color)
 // {
 // 	char	*tmp;
-
 // 	if (color == 1)
 // 		tmp = ft_strjoin(BLUE, str);
 // 	else
@@ -241,13 +247,11 @@ char *get_prompt_path(t_args *shell_data)
 // 	ft_free(tmp);
 // 	return (str);
 // }
-
 // char	*exit_status_smile(char *tmp2, t_args *shell_data)
 // {
 // 	char	*tmp;
 // 	char	*exit_status;
 // 	char	*tmp1;
-
 // 	exit_status = NULL;
 // 	if (shell_data->exit_status == 0)
 // 		exit_status = get_brackets(ft_itoa(shell_data->exit_status), 1);
@@ -259,7 +263,6 @@ char *get_prompt_path(t_args *shell_data)
 // 	ft_free(exit_status);
 // 	return (tmp);
 // }
-
 // char	*get_currect_path(t_args *shell_data)
 // {
 // 	static char	*path;
@@ -267,7 +270,6 @@ char *get_prompt_path(t_args *shell_data)
 // 	char		*tmp3;
 // 	t_env_lst	*user;
 // 	char		*home;
-
 // 	user = find_env_node("HOME", shell_data->env);
 // 	tmp3 = getcwd(NULL, 0);
 // 	if (!tmp3)

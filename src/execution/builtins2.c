@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: beata <beata@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 21:12:16 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/13 20:22:40 by beata            ###   ########.fr       */
+/*   Created: 2024/05/20 21:12:16 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/06/13 21:07:39 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-//zrobione
+
 static int	is_variable_valid(char *variable_value, char *target_name)
 {
 	int	name_length;
@@ -21,7 +21,7 @@ static int	is_variable_valid(char *variable_value, char *target_name)
 		return (0);
 	return (1);
 }
-//zrobione//to do exekucji
+
 void	process_environment_variables(t_args *shell_data, char **input_arguments, int i)
 {
 	char			*name;
@@ -49,10 +49,10 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 		i++;
 	}
 }
+
 // void	ft_env(t_args *shell_data)
 // {
 // 	t_env_lst	*tmp;
-
 // 	tmp = shell_data->env;
 // 	if (!shell_data->export)
 // 	{
@@ -76,12 +76,9 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 // 	}
 // 	shell_data->exit_status = 0;
 // }
-
-
 // void	shell_export(t_args *shell_data)
 // {
 // 	char	**args;
-
 // 	args = shell_data->cmdarr[shell_data->cmd_num].args;
 // 	if (args[1] == NULL)
 // 	{
@@ -95,12 +92,10 @@ void	process_environment_variables(t_args *shell_data, char **input_arguments, i
 // 	else
 // 		export_loop(shell_data, args, 1);
 // }
-
 // void	ft_unset(t_args *shell_data)
 // {
 // 	int		i;
 // 	char	**rm_names;
-
 // 	rm_names = shell_data->cmdarr[shell_data->cmd_num].args;
 // 	if (rm_names[1] == NULL)
 // 	{

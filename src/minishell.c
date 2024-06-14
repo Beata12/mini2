@@ -1,27 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
+/*   Updated: 2024/06/14 10:24:58 by bmarek           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../incl/minishell.h"
-//ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
-void initialize_shell(t_args *shell_state, char **environment)
+
+void	initialize_shell(t_args *shell_state, char **environment)
 {
 	shell_state->env = NULL;
 	shell_state->exported_vars = NULL;
 	shell_state->builtin_cmds = NULL;
 	shell_state->token_array = NULL;
 	shell_state->command_array = NULL;
-	// Inicjalizuj zmienne liczbowe na wartości początkowe
 	shell_state->exec_result = 0;
 	shell_state->token_count = 0;
 	shell_state->command_count = 0;
 	shell_state->command_index = 0;
-	// Inicjalizacja środowiska i wbudowanych poleceń
 	initialize_environment(shell_state, environment);
 	initialize_builtins(shell_state);
-	// 	init_env(shell_data, env);
-// 	init_builtin_arr(shell_data);
 }
 
-//ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
-int validate_input(char *user_input)
+int	validate_input(char *user_input)
 {
 	if (user_input == NULL)
 	{
@@ -31,17 +37,16 @@ int validate_input(char *user_input)
 	if (user_input[0] == '\0')
 	{
 		free(user_input);
-		return 1;
+		return (1);
 	}
-	return 0;
+	return (0);
 }
 
-//ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
 static void	display_prompt(t_args *shell_data)
 {
 	char	*user_input;
 	char	*current_directory;
-	
+
 	while (1)
 	{
 		current_directory = get_prompt_path(shell_data);
@@ -63,9 +68,9 @@ static void	display_prompt(t_args *shell_data)
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void)argv;
 	t_args	shell_data;
 
+	(void)argv;
 	load_history();
 	ft_alloc_init();
 	setup_signal_handlers();
@@ -81,10 +86,28 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
+// //ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
+// void initialize_shell(t_args *shell_state, char **environment)
+// {
+// 	shell_state->env = NULL;
+// 	shell_state->exported_vars = NULL;
+// 	shell_state->builtin_cmds = NULL;
+// 	shell_state->token_array = NULL;
+// 	shell_state->command_array = NULL;
+// 	// Inicjalizuj zmienne liczbowe na wartości początkowe
+// 	shell_state->exec_result = 0;
+// 	shell_state->token_count = 0;
+// 	shell_state->command_count = 0;
+// 	shell_state->command_index = 0;
+// 	// Inicjalizacja środowiska i wbudowanych poleceń
+// 	initialize_environment(shell_state, environment);
+// 	initialize_builtins(shell_state);
+// 	// 	init_env(shell_data, env);
+// // 	init_builtin_arr(shell_data);
+// }
 // int	main(int ac, char **av, char **envp)
 // {
 // 	t_args	shell_data;
-
 // 	ft_alloc_init();
 // 	ignore_signals();
 // 	(void)av;
@@ -99,12 +122,10 @@ int	main(int argc, char **argv, char **envp)
 // 	ft_destructor();
 // 	return (0);
 // }
-
 // static void	display_prompt(t_args *shell_data)
 // {
 // 	char	*input;
 // 	char	*path;
-	
 // 	// load_history();
 // 	while (1)
 // 	{
@@ -126,7 +147,6 @@ int	main(int argc, char **argv, char **envp)
 // 	ft_free(path);
 // 	// save_history();
 // }
-
 // int	check_input(char *input)
 // {
 // 	if (!input)
