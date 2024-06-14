@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btvildia <btvildia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 20:34:03 by btvildia          #+#    #+#             */
-/*   Updated: 2023/12/04 13:56:34 by btvildia         ###   ########.fr       */
+/*   Created: 2023/11/29 18:30:51 by aneekhra          #+#    #+#             */
+/*   Updated: 2023/11/30 17:13:34 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*a;
-	t_list	*ls;
+	t_list	*ret;
+	t_list	*tmp;
+	void	*content;
 
-	ls = NULL;
+	ret = NULL;
 	if (!lst || !f || !del)
-	{
 		return (NULL);
-	}
 	while (lst)
 	{
-		a = ft_malloc(sizeof(t_list));
-		if (!a)
+		content = f(lst->content);
+		tmp = ft_lstnew(content);
+		if (!tmp)
 		{
-			ft_lstclear(&ls, (*del));
+			free(content);
+			ft_lstclear(&ret, del);
 			return (NULL);
 		}
-		a->content = f(lst->content);
-		a->next = NULL;
-		ft_lstadd_back(&ls, a);
+		ft_lstadd_back(&ret, tmp);
 		lst = lst->next;
 	}
-	return (ls);
+	return (ret);
 }

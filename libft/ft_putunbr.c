@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btvildia <btvildia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 17:15:53 by btvildia          #+#    #+#             */
-/*   Updated: 2024/05/12 20:13:41 by btvildia         ###   ########.fr       */
+/*   Created: 2024/04/26 18:47:58 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/04/26 18:48:01 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_putunbr(unsigned int nb)
 {
-	t_list	*a;
+	int	i;
+	int	f;
 
-	a = ft_malloc(sizeof(t_list));
-	if (a == NULL)
+	i = 0;
+	f = 0;
+	if (nb > 9)
 	{
-		return (NULL);
-	}
-	if (!content)
-	{
-		a->content = NULL;
+		f = ft_putnbr(nb / 10);
+		if (f == -1)
+			return (-1);
+		i = i + f;
+		f = ft_putnbr(nb % 10);
+		if (f == -1)
+			return (-1);
+		i = i + f;
 	}
 	else
 	{
-		a->content = content;
+		if (ft_putchar(nb + '0') == -1)
+			return (-1);
+		i++;
 	}
-	a->next = NULL;
-	return (a);
+	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btvildia <btvildia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 18:55:14 by btvildia          #+#    #+#             */
-/*   Updated: 2024/05/12 20:21:22 by btvildia         ###   ########.fr       */
+/*   Created: 2023/11/14 15:54:31 by aneekhra          #+#    #+#             */
+/*   Updated: 2023/11/24 18:40:21 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 
 int	ft_toupper(int c)
 {
-	int	i;
-
-	i = 0;
-	if (c >= 97 && c <= 122)
-	{
-		i = c - 32;
-	}
-	else
-	{
-		i = c;
-	}
-	return (i);
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
 }
