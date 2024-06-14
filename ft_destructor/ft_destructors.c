@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_destructors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:12:49 by escura            #+#    #+#             */
-/*   Updated: 2024/05/25 16:42:48 by escura           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:47:57 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free(void *ptr)
 	t_allocs	*lst;
 	t_allocs	*tmp;
 
-	if(ptr == NULL)
+	if (ptr == NULL)
 		return ;
 	lst = ft_allocs(NULL);
 	tmp = NULL;
