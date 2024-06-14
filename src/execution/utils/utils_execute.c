@@ -6,11 +6,11 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:16:15 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 12:28:52 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 void	wait_for_child_processes(t_args *shell_data)
 {

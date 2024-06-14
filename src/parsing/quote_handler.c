@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:31:17 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 09:58:39 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 12:21:24 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*allocate_unquoted_string(t_token current_token)
 	return (processed_word);
 }
 
-static void	remove_token_quotes(t_token *current_token)
+static char	*process_word(t_token current_token)
 {
 	int		i;
 	int		new_index;
@@ -48,23 +48,32 @@ static void	remove_token_quotes(t_token *current_token)
 	i = 0;
 	new_index = 0;
 	quote_status = '\0';
-	if (current_token->type > T_WORD)
-		return ;
-	processed_word = allocate_unquoted_string(*current_token);
-	while (current_token->word[i])
+	processed_word = allocate_unquoted_string(current_token);
+	while (current_token.word[i])
 	{
-		if (quote_status == current_token->word[i])
-			is_open_quote(current_token->word[i], &quote_status);
-		else if (!quote_status && current_token->word[i]
-			== track_quote(current_token->word[i]))
-			is_open_quote(current_token->word[i], &quote_status);
+		if (quote_status == current_token.word[i])
+			is_open_quote(current_token.word[i], &quote_status);
+		else if (!quote_status && current_token.word[i]
+			== track_quote(current_token.word[i]))
+			is_open_quote(current_token.word[i], &quote_status);
 		else
 		{
-			processed_word[new_index] = current_token->word[i];
+			processed_word[new_index] = current_token.word[i];
 			new_index++;
 		}
 		i++;
 	}
+	processed_word[new_index] = '\0';
+	return (processed_word);
+}
+
+static void	remove_token_quotes(t_token *current_token)
+{
+	char	*processed_word;
+
+	if (current_token->type > T_WORD)
+		return ;
+	processed_word = process_word(*current_token);
 	ft_free(current_token->word);
 	current_token->word = processed_word;
 }
@@ -81,6 +90,35 @@ void	remove_all_quotes(t_args *shell_data)
 	}
 }
 
+// static void	remove_token_quotes(t_token *current_token)
+// {
+// 	int		i;
+// 	int		new_index;
+// 	char	quote_status;
+// 	char	*processed_word;
+// 	i = 0;
+// 	new_index = 0;
+// 	quote_status = '\0';
+// 	if (current_token->type > T_WORD)
+// 		return ;
+// 	processed_word = allocate_unquoted_string(*current_token);
+// 	while (current_token->word[i])
+// 	{
+// 		if (quote_status == current_token->word[i])
+// 			is_open_quote(current_token->word[i], &quote_status);
+// 		else if (!quote_status && current_token->word[i]
+// 			== track_quote(current_token->word[i]))
+// 			is_open_quote(current_token->word[i], &quote_status);
+// 		else
+// 		{
+// 			processed_word[new_index] = current_token->word[i];
+// 			new_index++;
+// 		}
+// 		i++;
+// 	}
+// 	ft_free(current_token->word);
+// 	current_token->word = processed_word;
+// }
 // //zrobione
 // static char	*allocate_unquoted_string(t_token current_token)
 // {

@@ -6,24 +6,21 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 06:36:10 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 09:54:57 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 11:52:10 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-static char	*remove_extra_spaces(char *src)
+static void	process_string(char *src, char *result)
 {
 	int		i;
 	int		output_index;
 	char	quote_status;
-	char	*result;
 
 	i = 0;
 	output_index = 0;
 	quote_status = '\0';
-	result = NULL;
-	initialize_trimmed_string(&result, src);
 	while (src[i])
 	{
 		is_open_quote(src[i], &quote_status);
@@ -41,6 +38,16 @@ static char	*remove_extra_spaces(char *src)
 		result[output_index++] = src[i];
 		i++;
 	}
+	result[output_index] = '\0';
+}
+
+static char	*remove_extra_spaces(char *src)
+{
+	char	*result;
+
+	result = NULL;
+	initialize_trimmed_string(&result, src);
+	process_string(src, result);
 	return (result);
 }
 
@@ -127,6 +134,36 @@ int	parse_input(char *input, t_args *shell_data)
 	return (ft_free(processed_input), 1);
 }
 
+// static char	*remove_extra_spaces(char *src)
+// {
+// 	int		i;
+// 	int		output_index;
+// 	char	quote_status;
+// 	char	*result;
+// 	i = 0;
+// 	output_index = 0;
+// 	quote_status = '\0';
+// 	result = NULL;
+// 	initialize_trimmed_string(&result, src);
+// 	while (src[i])
+// 	{
+// 		is_open_quote(src[i], &quote_status);
+// 		if (is_whitespace(src[i]) && is_whitespace(src[i + 1]) && !quote_status)
+// 		{
+// 			i++;
+// 			continue ;
+// 		}
+// 		if (is_whitespace(src[i]) && (!output_index || !src[i + 1])
+// 			&& !quote_status)
+// 		{
+// 			i++;
+// 			continue ;
+// 		}
+// 		result[output_index++] = src[i];
+// 		i++;
+// 	}
+// 	return (result);
+// }
 // shell_data->exit_status = 2;
 // #include "../../incl/minishell.h"
 // //zrobione
@@ -136,7 +173,6 @@ int	parse_input(char *input, t_args *shell_data)
 // 	int		output_index;
 // 	char	quote_status;
 // 	char	*result;
-
 // 	i = 0;
 // 	output_index = 0;
 // 	quote_status = '\0';

@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 11:20:06 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 12:27:13 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,23 @@ typedef struct s_token
 	t_token_types			type;
 }							t_token;
 
-typedef struct	s_parse_state
+typedef struct s_parse_state
 {
 	int	*current_input;
 	int	*current_output;
 	int	*current_arg;
 	int	*token_index;
 }				t_parse_state;
+
+typedef struct s_should_not_replace_vars
+{
+	int	is_first_char_dollar;
+	int	is_whitespace_or_empty;
+	int	is_quote_status_single_quote;
+	int	is_quote_status_valid;
+	int	is_alnum_or_special_symbol;
+	int	is_quote_status_allowed;
+}				t_should_not_replace_vars;
 
 typedef struct s_cmd_arr_str
 {

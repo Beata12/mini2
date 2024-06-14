@@ -6,7 +6,7 @@
 #    By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/12 20:57:52 by aneekhra          #+#    #+#              #
-#    Updated: 2024/06/14 10:46:11 by bmarek           ###   ########.fr        #
+#    Updated: 2024/06/14 12:28:43 by bmarek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,11 @@ FT_DES = ft_destructor
 
 SRC =	minishell.c \
 		execute.c open_files.c \
-		env_init.c parsing.c dollar_parse.c tokenize.c cmd.c cmd_init.c \
-		utils_signals.c  utils_parsing.c utils_path.c utils_execute.c \
+		env_init.c parsing.c tokenize.c cmd.c cmd_init.c \
+		utils_signals.c  utils_parsing.c utils_path.c \
 		utils_env.c env_lst.c \
 		src/utils/shell_data_cleaner.c \
+		src/parsing/dollar_var_expander.c \
 		src/parsing/quote_handler.c \
 		src/parsing/utils/input_validation.c \
 		src/parsing/utils/validation_utils.c \
@@ -41,6 +42,7 @@ SRC =	minishell.c \
 		src/execution/initialize_builtins.c \
 		src/execution/utils/export_utils.c \
 		src/execution/utils/handle_errors.c \
+		src/execution/utils/utils_execute.c \
 		src/execution/shell_commands/cd.c \
 		src/execution/shell_commands/env.c \
 		src/execution/shell_commands/pwd.c \

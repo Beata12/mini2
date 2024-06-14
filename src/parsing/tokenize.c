@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 10:16:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:06:06 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 12:12:33 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,9 @@ int	validate_token_order(t_args *shell_data)
 	return (-1);
 }
 
-int	handle_heredoc_tokens(t_args *shell_data, int end_index)
+static int	count_heredoc_tokens(t_args *shell_data, int end_index)
 {
 	int	i;
-	int	heredoc_index;
 	int	heredoc_count;
 
 	i = 0;
@@ -115,17 +114,29 @@ int	handle_heredoc_tokens(t_args *shell_data, int end_index)
 			{
 				if ((i + 1) < shell_data->token_count
 					&& shell_data->token_array[i + 1].type == T_WORD)
+				{
 					heredoc_count++;
+				}
 			}
 		}
 		i++;
 	}
-	if (!heredoc_count)
-		return (0);
+	return (heredoc_count);
+}
+
+static void	process_heredoc_tokens(t_args *shell_data, int end_index,
+	int heredoc_count)
+{
+	int	i;
+	int	heredoc_index;
+
 	shell_data->command_array = ft_malloc(sizeof(t_cmd_arr_str) * 1);
 	shell_data->command_count = 1;
-	allocate_command_memory((t_data_counter){.arg_count = 0, .input_count
-		= heredoc_count, .output_count = 0}, shell_data->command_array);
+	allocate_command_memory((t_data_counter){
+		.arg_count = 0,
+		.input_count = heredoc_count,
+		.output_count = 0
+	}, shell_data->command_array);
 	i = 0;
 	heredoc_index = -1;
 	while (i < end_index)
@@ -133,14 +144,66 @@ int	handle_heredoc_tokens(t_args *shell_data, int end_index)
 		if (shell_data->token_array[i].type == T_DLESS)
 		{
 			heredoc_index++;
-			set_redirection_type(&shell_data->command_array[0].input_tokens
-			[heredoc_index], shell_data->token_array, &i);
+			set_redirection_type(
+				&shell_data->command_array[0].input_tokens[heredoc_index],
+				shell_data->token_array, &i);
 		}
 		i++;
 	}
+}
+
+int	handle_heredoc_tokens(t_args *shell_data, int end_index)
+{
+	int	heredoc_count;
+
+	heredoc_count = count_heredoc_tokens(shell_data, end_index);
+	if (!heredoc_count)
+		return (0);
+	process_heredoc_tokens(shell_data, end_index, heredoc_count);
 	return (heredoc_count);
 }
 
+// int	handle_heredoc_tokens(t_args *shell_data, int end_index)
+// {
+// 	int	i;
+// 	int	heredoc_index;
+// 	int	heredoc_count;
+
+// 	i = 0;
+// 	heredoc_count = 0;
+// 	while (i < end_index)
+// 	{
+// 		if (shell_data->token_count > i)
+// 		{
+// 			if (shell_data->token_array[i].type == T_DLESS)
+// 			{
+// 				if ((i + 1) < shell_data->token_count
+// 					&& shell_data->token_array[i + 1].type == T_WORD)
+// 					heredoc_count++;
+// 			}
+// 		}
+// 		i++;
+// 	}
+// 	if (!heredoc_count)
+// 		return (0);
+// 	shell_data->command_array = ft_malloc(sizeof(t_cmd_arr_str) * 1);
+// 	shell_data->command_count = 1;
+// 	allocate_command_memory((t_data_counter){.arg_count = 0, .input_count
+// 		= heredoc_count, .output_count = 0}, shell_data->command_array);
+// 	i = 0;
+// 	heredoc_index = -1;
+// 	while (i < end_index)
+// 	{
+// 		if (shell_data->token_array[i].type == T_DLESS)
+// 		{
+// 			heredoc_index++;
+// 			set_redirection_type(&shell_data->command_array[0].input_tokens
+// 			[heredoc_index], shell_data->token_array, &i);
+// 		}
+// 		i++;
+// 	}
+// 	return (heredoc_count);
+// }
 // int	pass_quoted_str(char *s, char *q)
 // {
 // 	int	i;

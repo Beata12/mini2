@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:31:17 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 09:49:22 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 11:42:37 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,35 @@ static char	*substitute_special_cases(char *input_string,
 	return (ft_strjoin(modified_string, &input_string[i]));
 }
 
-static int	should_not_replace(char *input_string, char quote_status)
+void	init_should_not_replace_vars(t_should_not_replace_vars *vars,
+	char *input_string, char quote_status)
 {
-	int	is_first_char_dollar;
-	int	is_whitespace_or_empty;
-	int	is_quote_status_single_quote;
-	int	is_quote_status_valid;
-	int	is_alnum_or_special_symbol;
-	int	is_quote_status_allowed;
-
-	is_first_char_dollar = (input_string[0] == '$');
-	is_whitespace_or_empty = (is_whitespace(input_string[1])
+	vars->is_first_char_dollar = (input_string[0] == '$');
+	vars->is_whitespace_or_empty = (is_whitespace(input_string[1])
 			|| !input_string[1]);
-	is_quote_status_single_quote = (quote_status == '\'');
-	is_quote_status_valid = (quote_status
+	vars->is_quote_status_single_quote = (quote_status == '\'');
+	vars->is_quote_status_valid = (quote_status
 			&& (check_special_symbol(&input_string[1])
 				|| track_quote(input_string[1])));
-	is_alnum_or_special_symbol = (!ft_isalnum(input_string[1])
+	vars->is_alnum_or_special_symbol = (!ft_isalnum(input_string[1])
 			&& !track_quote(input_string[1])
 			&& !check_special_symbol(&input_string[1])
 			&& (input_string[1] != '?'));
-	is_quote_status_allowed = (!quote_status
+	vars->is_quote_status_allowed = (!quote_status
 			&& (check_special_symbol(&input_string[1])
 				|| track_quote(input_string[1])));
-	if (is_first_char_dollar && !is_whitespace_or_empty
-		&& !is_quote_status_single_quote
-		&& !is_quote_status_valid && !is_alnum_or_special_symbol)
+}
+
+static int	should_not_replace(char *input_string, char quote_status)
+{
+	t_should_not_replace_vars	vars;
+
+	init_should_not_replace_vars(&vars, input_string, quote_status);
+	if (vars.is_first_char_dollar && !vars.is_whitespace_or_empty
+		&& !vars.is_quote_status_single_quote
+		&& !vars.is_quote_status_valid && !vars.is_alnum_or_special_symbol)
 	{
-		if (is_quote_status_allowed)
+		if (vars.is_quote_status_allowed)
 			return (1);
 		else
 			return (-1);
@@ -116,6 +117,39 @@ void	expand_dollar_variables(char **input_string,
 	*input_string = updated_string;
 }
 
+// static int	should_not_replace(char *input_string, char quote_status)
+// {
+// 	int	is_first_char_dollar;
+// 	int	is_whitespace_or_empty;
+// 	int	is_quote_status_single_quote;
+// 	int	is_quote_status_valid;
+// 	int	is_alnum_or_special_symbol;
+// 	int	is_quote_status_allowed;
+// 	is_first_char_dollar = (input_string[0] == '$');
+// 	is_whitespace_or_empty = (is_whitespace(input_string[1])
+// 			|| !input_string[1]);
+// 	is_quote_status_single_quote = (quote_status == '\'');
+// 	is_quote_status_valid = (quote_status
+// 			&& (check_special_symbol(&input_string[1])
+// 				|| track_quote(input_string[1])));
+// 	is_alnum_or_special_symbol = (!ft_isalnum(input_string[1])
+// 			&& !track_quote(input_string[1])
+// 			&& !check_special_symbol(&input_string[1])
+// 			&& (input_string[1] != '?'));
+// 	is_quote_status_allowed = (!quote_status
+// 			&& (check_special_symbol(&input_string[1])
+// 				|| track_quote(input_string[1])));
+// 	if (is_first_char_dollar && !is_whitespace_or_empty
+// 		&& !is_quote_status_single_quote
+// 		&& !is_quote_status_valid && !is_alnum_or_special_symbol)
+// 	{
+// 		if (is_quote_status_allowed)
+// 			return (1);
+// 		else
+// 			return (-1);
+// 	}
+// 	return (0);
+// }
 // finds part with env_var name in *s, updates *i
 //(to pass back in strjoin)
 // return env_var value
