@@ -6,7 +6,7 @@
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:14:27 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/11 21:26:43 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:59:57 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	unsigned char	*str1;

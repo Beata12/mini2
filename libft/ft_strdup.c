@@ -6,7 +6,7 @@
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 23:41:07 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/05 15:09:16 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:45:21 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 char	*ft_strdup(char *s1)
 {
-	size_t	l;
-	char	*s2;
+	char	*buffer;
+	int		i;
 
-	l = ft_strlen(s1) + 1;
-	s2 = malloc(l * sizeof(char));
-	if (!s2)
+	buffer = ft_malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!buffer || !s1)
 		return (NULL);
-	ft_memcpy(s2, s1, l);
-	return (s2);
+	i = 0;
+	while (s1[i])
+	{
+		buffer[i] = s1[i];
+		i++;
+	}
+	buffer[i] = '\0';
+	return (buffer);
 }

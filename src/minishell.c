@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:24:58 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 12:15:20 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minishell.h"
+
+extern char	**environ;
+extern int	g_exit_status;
 
 void	initialize_shell(t_args *shell_state, char **environment)
 {
@@ -47,8 +50,11 @@ static void	display_prompt(t_args *shell_data)
 	char	*user_input;
 	char	*current_directory;
 
+	load_history();
+	setup_signal_handlers();
 	while (1)
 	{
+		// g_signal = 0;
 		current_directory = get_prompt_path(shell_data);
 		user_input = readline(current_directory);
 		if (validate_input(user_input))
@@ -64,6 +70,7 @@ static void	display_prompt(t_args *shell_data)
 		ft_free(user_input);
 	}
 	ft_free(current_directory);
+	save_history();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -71,9 +78,8 @@ int	main(int argc, char **argv, char **envp)
 	t_args	shell_data;
 
 	(void)argv;
-	load_history();
-	ft_alloc_init();
 	setup_signal_handlers();
+	ft_alloc_init();
 	if (argc == 1)
 	{
 		initialize_shell(&shell_data, initialize_envp(envp));
@@ -82,8 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	else
 		exit(write(1, RED "No arguments accepted!\n" RE, 32));
 	ft_destructor();
-	save_history();
-	return (0);
+	return (g_exit_status);
 }
 
 // //ZMIENIONE !!!!!!!!!!!!!!!!!!!!!

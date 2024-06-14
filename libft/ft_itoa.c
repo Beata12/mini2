@@ -6,50 +6,58 @@
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:18:14 by aneekhra          #+#    #+#             */
-/*   Updated: 2023/11/24 23:34:21 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:01:10 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_create_str(long nbr, size_t i)
+size_t	ft_int_lent(int nb)
 {
-	char	*str;
+	int	s;
 
-	str = (char *)malloc(i + 1);
-	if (!str)
-		return (NULL);
-	str[i--] = '\0';
-	while (nbr > 0)
+	if (nb == 0)
 	{
-		str[i--] = (nbr % 10) + '0';
-		nbr = nbr / 10;
+		return (1);
 	}
-	if (i == 0 && str[1] == '\0')
-		str[i] = '0';
-	else if (i == 0 && str[1] != '\0')
-		str[i] = '-';
-	return (str);
+	s = 0;
+	if (nb < 0)
+	{
+		s = 1;
+	}
+	while (nb)
+	{
+		s++;
+		nb = nb / 10;
+	}
+	return (s);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t	i;
-	long	nbr;
-	char	*str;
+	unsigned int	i;
+	char			*a;
+	int				x;
 
-	nbr = n;
-	i = 0;
-	if (nbr <= 0)
+	x = ft_int_lent(n);
+	a = ft_malloc((x + 1) * sizeof(char));
+	if (!a)
+		return (NULL);
+	if (n < 0)
 	{
-		nbr = -nbr;
-		i++;
+		a[0] = '-';
+		i = -n;
 	}
-	while (n)
+	else
 	{
-		n = n / 10;
-		i++;
+		i = n;
 	}
-	str = ft_create_str(nbr, i);
-	return (str);
+	a[x - 1] = '0';
+	a[x] = '\0';
+	while (i)
+	{
+		a[--x] = (i % 10) + '0';
+		i = i / 10;
+	}
+	return (a);
 }

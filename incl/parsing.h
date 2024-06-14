@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:40:11 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 11:20:06 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ typedef struct s_token
 	char					*word;
 	t_token_types			type;
 }							t_token;
+
+typedef struct	s_parse_state
+{
+	int	*current_input;
+	int	*current_output;
+	int	*current_arg;
+	int	*token_index;
+}				t_parse_state;
 
 typedef struct s_cmd_arr_str
 {

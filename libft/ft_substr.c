@@ -6,39 +6,39 @@
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:09:13 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/11 21:28:53 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:52:12 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	char	*sub;
+	char	*buffer;
 	size_t	i;
-	size_t	j;
-	size_t	l;
+	size_t	s_len;
 
+	s_len = ft_strlen(s);
 	if (!s)
 		return (NULL);
-	l = ft_strlen(s);
-	if (start > l)
+	if (s_len < start)
+	{
+		start = 0;
 		len = 0;
-	else if ((len + start) > l)
-		len = l - start;
-	sub = (char *) malloc((len + 1));
-	if (!sub)
+	}
+	if ((s_len - start) < len)
+		len = s_len - start;
+	buffer = (char *)ft_malloc(sizeof(char) * len + 1);
+	if (!buffer)
 		return (NULL);
 	i = 0;
-	j = start;
-	while (i < len && j < l)
+	while (i < len)
 	{
-		sub[i] = s[j];
+		buffer[i] = s[start + i];
 		i++;
-		j++;
 	}
-	sub[i] = '\0';
-	return (sub);
+	buffer[i] = '\0';
+	return (buffer);
 }
 
 char	*ft_remove_substr(char *str, char *sub)

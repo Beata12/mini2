@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 20:33:34 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/11 21:30:26 by aneekhra         ###   ########.fr       */
+/*   Created: 2024/06/14 11:50:43 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/06/14 12:00:21 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*ft_strnstr(char *big_str, char *small, size_t len)
 	}
 	return (NULL);
 }
+
 char	*ft_strstr(char *haystack, char *needle)
 {
 	size_t	len;
