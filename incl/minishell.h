@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:56:31 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 16:55:22 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
 
 typedef struct s_args
 {
-	t_env_variable		*exported_vars;
 	t_env_variable		*env;
+	t_env_variable		*exported_vars;
 	t_token				*token_array;
 	t_cmd_arr_str		*command_array;
 	t_builtin			*builtin_cmds;

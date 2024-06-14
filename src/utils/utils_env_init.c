@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:16:51 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 13:15:41 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 16:48:59 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**generate_envp_array(t_env_variable *env_list)
 		i++;
 		current_env = current_env->next_env_var;
 	}
-	env_array = ft_malloc(sizeof(char *) * (i + 1));
+	env_array = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	current_env = env_list;
 	while (current_env)
@@ -37,6 +37,7 @@ char	**generate_envp_array(t_env_variable *env_list)
 		current_env = current_env->next_env_var;
 	}
 	env_array[i] = NULL;
+	printf("here %s", env_array[i]);
 	return (env_array);
 }
 

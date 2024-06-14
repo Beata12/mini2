@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_alloc.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: escura <escura@student.42wolfsburg.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 12:26:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:26:04 by bmarek           ###   ########.fr       */
+/*   Created: 2024/05/04 14:06:08 by escura            #+#    #+#             */
+/*   Updated: 2024/05/08 15:20:22 by escura           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #  define DEBUG 0
 # endif
 
-# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 typedef struct t_allocs
 {
@@ -44,6 +44,5 @@ int					ft_allocsize(void);
 /* destructors */
 void				ft_free(void *ptr);
 void				ft_destructor(void);
-void				ft_alloc_exit(int status);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 13:38:25 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 16:49:59 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ typedef struct s_builtin	t_builtin;
 
 typedef enum e_token_types
 {
+	T_UNDEFINED,// *notdefined - DO USUNIECIA< NIE UZYWANE
 	T_WORD,
 	T_RED_TO,	//>
 	T_RED_FROM,	//<
 	T_DLESS,	//<<
 	T_DGREAT,	//>>
-	// T_UNDEFINED,// *notdefined - DO USUNIECIA< NIE UZYWANE
 	T_PIPE,		//|
 }						t_token_types;
 
