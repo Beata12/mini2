@@ -6,11 +6,23 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:58:10 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:32:11 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:10:11 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+int	get_char_position(char *input_str, int target_char)
+{
+	int	i;
+
+	i = 0;
+	while (input_str[i] != (unsigned char)target_char && input_str[i])
+		i++;
+	if (input_str[i] == (unsigned char)target_char)
+		return (++i);
+	return (-1);
+}
 
 int	track_quote(char input_string)
 {

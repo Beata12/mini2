@@ -6,7 +6,7 @@
 #    By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 12:41:20 by bmarek            #+#    #+#              #
-#    Updated: 2024/06/14 12:41:27 by bmarek           ###   ########.fr        #
+#    Updated: 2024/06/14 13:32:53 by bmarek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,19 +26,27 @@ LFT_F = libft
 FT_DES = ft_destructor
 
 SRC =	minishell.c \
-		execute.c open_files.c \
-		env_init.c parsing.c tokenize.c cmd.c cmd_init.c \
-		utils_signals.c  utils_parsing.c utils_path.c \
-		utils_env.c env_lst.c \
+		execute.c \
+		tokenize.c \
+		cmd.c \
+		cmd_init.c \
+		src/utils/signal_handlers.c \
+		src/utils/errors_utils.c \
 		src/utils/shell_data_cleaner.c \
+		src/utils/utils_env_init.c \
+		src/utils/env_operations.c \
+		src/utils/shell_env_initializer.c \
+		src/utils/environment_handler.c \
+		src/parsing/parsing.c \
 		src/parsing/dollar_var_expander.c \
 		src/parsing/quote_handler.c \
 		src/parsing/utils/input_validation.c \
 		src/parsing/utils/validation_utils.c \
 		src/parsing/utils/utils.c \
-		src/parsing/utils/errors_utils.c \
+		src/parsing/utils/tokenization_utils.c \
 		src/parsing/utils/string_separator.c \
 		src/parsing/utils/string_utils.c \
+		src/execution/manage_file_access.c \
 		src/execution/initialize_builtins.c \
 		src/execution/utils/export_utils.c \
 		src/execution/utils/handle_errors.c \

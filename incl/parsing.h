@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:27:13 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:38:25 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,7 @@ void				handle_double_redirection(t_token *redirection_token,
 						t_token *token_array, int *token_index);
 void				set_redirection_type(t_token *redirection_token,
 						t_token *token_array, int *token_index);
+void				process_string(char *src, char *result);
+int					process_question_mark(char *input_string);
 
 #endif

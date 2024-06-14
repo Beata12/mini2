@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dollar_parse.c                                     :+:      :+:    :+:   */
+/*   dollar_var_expander.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 12:31:17 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 11:42:37 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:38:00 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ static char	*get_env_var_value(char *input_string, int *i,
 	else
 		target_variable = ft_strdup(target_list->value);
 	return (target_variable);
-}
-
-static int	process_question_mark(char *input_string)
-{
-	if (input_string[2])
-		return (2);
-	else
-		return (ft_strlen(input_string));
 }
 
 static char	*substitute_special_cases(char *input_string,

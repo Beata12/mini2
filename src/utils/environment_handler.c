@@ -6,32 +6,11 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:12:16 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:10:19 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:15:58 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-void	add_environment_variable(t_env_variable **env_list,
-		char *env_name, char *env_value)
-{
-	t_env_variable	*new_env_var;
-	t_env_variable	*current_node;
-
-	new_env_var = ft_malloc(sizeof(t_env_variable));
-	current_node = *env_list;
-	if (!current_node)
-		*env_list = new_env_var;
-	else
-	{
-		while (current_node->next_env_var)
-			current_node = current_node->next_env_var;
-		current_node->next_env_var = new_env_var;
-	}
-	new_env_var->env_name = env_name;
-	new_env_var->value = env_value;
-	new_env_var->next_env_var = NULL;
-}
 
 void	free_environment_node(t_env_variable **env_list)
 {

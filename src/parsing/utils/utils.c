@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 08:12:12 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 11:16:20 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:37:10 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,40 +68,33 @@ int	check_special_symbol(char *input_string)
 	return (0);
 }
 
-//TO JEST DLA PARSINGU I EXEkucji
-// ONE NIE BEDA TUTAJ ALE NA RAZIE SA
-char	*find_variable_name(char *input_string)
+void	process_string(char *src, char *result)
 {
 	int		i;
-	char	*variable_name;
+	int		output_index;
+	char	quote_status;
 
 	i = 0;
-	while (1)
+	output_index = 0;
+	quote_status = '\0';
+	while (src[i])
 	{
-		if (!input_string[i] || !(ft_isalnum(input_string[i])
-				|| input_string[i] == '_'))
-			break ;
+		is_open_quote(src[i], &quote_status);
+		if (is_whitespace(src[i]) && is_whitespace(src[i + 1]) && !quote_status)
+		{
+			i++;
+			continue ;
+		}
+		if (is_whitespace(src[i]) && (!output_index || !src[i + 1])
+			&& !quote_status)
+		{
+			i++;
+			continue ;
+		}
+		result[output_index++] = src[i];
 		i++;
 	}
-	while (input_string[i] && (ft_isalnum(input_string[i])
-			|| input_string[i] == '_'))
-		i++;
-	variable_name = ft_substr(input_string, 0, i);
-	if (!variable_name)
-		memory_allocation_error();
-	return (variable_name);
-}
-
-t_env_variable	*find_environment_variable(char *name, t_env_variable *env)
-{
-	while (env)
-	{
-		if (ft_strlen(name) == ft_strlen(env->env_name) && !ft_strncmp(name,
-				env->env_name, ft_strlen(name)))
-			return (env);
-		env = env->next_env_var;
-	}
-	return (NULL);
+	result[output_index] = '\0';
 }
 
 // void	initialize_trimmed_string(char **result_str, char *input_str)

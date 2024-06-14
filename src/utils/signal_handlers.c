@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   utils_signals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 21:14:12 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/14 12:12:11 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:57:09 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-int		g_exit_status = 0;
-
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	// g_exit_status = 130;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-	// Do nothing on Ctrl-
+// Do nothing on Ctrl-
 void	handle_sigquit(int sig)
 {
 	(void)sig;

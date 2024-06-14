@@ -1,16 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_init.c                                         :+:      :+:    :+:   */
+/*   shell_env_initializer.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 15:13:11 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:40:13 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:15:25 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+void	add_environment_variable(t_env_variable **env_list,
+		char *env_name, char *env_value)
+{
+	t_env_variable	*new_env_var;
+	t_env_variable	*current_node;
+
+	new_env_var = ft_malloc(sizeof(t_env_variable));
+	current_node = *env_list;
+	if (!current_node)
+		*env_list = new_env_var;
+	else
+	{
+		while (current_node->next_env_var)
+			current_node = current_node->next_env_var;
+		current_node->next_env_var = new_env_var;
+	}
+	new_env_var->env_name = env_name;
+	new_env_var->value = env_value;
+	new_env_var->next_env_var = NULL;
+}
+
+t_env_variable	*find_env_var(char *name, t_env_variable *env_list)
+{
+	while (env_list)
+	{
+		if (ft_strlen(name) == ft_strlen(env_list->env_name)
+			&& !ft_strncmp(name, env_list->env_name, ft_strlen(name)))
+			return (env_list);
+		env_list = env_list->next_env_var;
+	}
+	return (NULL);
+}
 
 static void	update_shell_level(t_args *shell_data)
 {

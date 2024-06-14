@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_env.c                                        :+:      :+:    :+:   */
+/*   utils_env_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:16:51 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:34:56 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:15:41 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-t_env_variable	*find_env_var(char *name, t_env_variable *env_list)
-{
-	while (env_list)
-	{
-		if (ft_strlen(name) == ft_strlen(env_list->env_name)
-			&& !ft_strncmp(name, env_list->env_name, ft_strlen(name)))
-			return (env_list);
-		env_list = env_list->next_env_var;
-	}
-	return (NULL);
-}
 
 char	**generate_envp_array(t_env_variable *env_list)
 {
@@ -50,6 +38,40 @@ char	**generate_envp_array(t_env_variable *env_list)
 	}
 	env_array[i] = NULL;
 	return (env_array);
+}
+
+char	*find_variable_name(char *input_string)
+{
+	int		i;
+	char	*variable_name;
+
+	i = 0;
+	while (1)
+	{
+		if (!input_string[i] || !(ft_isalnum(input_string[i])
+				|| input_string[i] == '_'))
+			break ;
+		i++;
+	}
+	while (input_string[i] && (ft_isalnum(input_string[i])
+			|| input_string[i] == '_'))
+		i++;
+	variable_name = ft_substr(input_string, 0, i);
+	if (!variable_name)
+		memory_allocation_error();
+	return (variable_name);
+}
+
+t_env_variable	*find_environment_variable(char *name, t_env_variable *env)
+{
+	while (env)
+	{
+		if (ft_strlen(name) == ft_strlen(env->env_name) && !ft_strncmp(name,
+				env->env_name, ft_strlen(name)))
+			return (env);
+		env = env->next_env_var;
+	}
+	return (NULL);
 }
 
 // //zrobione

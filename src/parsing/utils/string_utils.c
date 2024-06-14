@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 07:32:02 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 08:37:00 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 13:38:10 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ char	*combine_strings(char **string_array)
 		i++;
 	}
 	return (final_string);
+}
+
+int	process_question_mark(char *input_string)
+{
+	if (input_string[2])
+		return (2);
+	else
+		return (ft_strlen(input_string));
 }

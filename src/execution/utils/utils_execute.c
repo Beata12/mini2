@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:28:52 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 12:55:47 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	close_pipe_descriptors(t_args *shell_data, int **pipe_array)
 	}
 }
 
+//tutaj
 void	ft_execve(t_args *shell_data)
 {
 	char			*executable_path;

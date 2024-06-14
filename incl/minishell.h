@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:07:29 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:56:31 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
-extern int		g_signal;
 
 typedef struct s_args
 {

@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:15:20 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/14 12:55:28 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minishell.h"
-
-extern char	**environ;
-extern int	g_exit_status;
 
 void	initialize_shell(t_args *shell_state, char **environment)
 {
@@ -54,7 +51,6 @@ static void	display_prompt(t_args *shell_data)
 	setup_signal_handlers();
 	while (1)
 	{
-		// g_signal = 0;
 		current_directory = get_prompt_path(shell_data);
 		user_input = readline(current_directory);
 		if (validate_input(user_input))
@@ -88,7 +84,7 @@ int	main(int argc, char **argv, char **envp)
 	else
 		exit(write(1, RED "No arguments accepted!\n" RE, 32));
 	ft_destructor();
-	return (g_exit_status);
+	return (0);
 }
 
 // //ZMIENIONE !!!!!!!!!!!!!!!!!!!!!
