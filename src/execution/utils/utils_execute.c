@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 16:55:33 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 17:49:57 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_execve(t_args *shell_data)
 	t_env_variable	*env_node;
 
 	executable_path = NULL;
-	printf("shell data %s", shell_data->env->env_name);
 	envp_array = generate_envp_array(shell_data->env);
 	command_args = shell_data->command_array[shell_data->command_index].args;
 	env_node = find_env_var("PATH", shell_data->env);

@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:12:16 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 11:06:35 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 17:47:16 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	wrong_input(t_args *shell_data, char *input)
 	int	symbol_error_flag;
 
 	(void)shell_data;
+	// if(ft_strlen(input) == 1)
+	// 	return(1);
 	quote_error_flag = 0;
 	symbol_error_flag = 0;
 	quote_error_flag = unvalid_quotes(input);
@@ -99,6 +101,8 @@ int	wrong_input(t_args *shell_data, char *input)
 		else if (symbol_error_flag)
 			my_error((char *)&symbol_error_flag, 2);
 	}
+	else if (ft_strlen(input) == 1)
+		printf("command not found\n");
 	else
 		return (0);
 	return (1);

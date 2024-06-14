@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 12:55:28 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 17:26:51 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ static void	display_prompt(t_args *shell_data)
 			execute(shell_data);
 		}
 		free_command_resources(shell_data);
-		ft_free(user_input);
+		ft_free(current_directory);
+		free(user_input);
 	}
+	free(user_input);
 	ft_free(current_directory);
 	save_history();
 }

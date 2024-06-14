@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_path.c                                       :+:      :+:    :+:   */
+/*   env_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 10:21:34 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 17:32:07 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	*generate_command_prompt(char *exit_code)
 	char	*exit_status;
 
 	exit_status = NULL;
-	prefix_part = ft_strjoin(exit_status, YELLOW "Minishell:" RE);
+	prefix_part = ft_strjoin(exit_status, GREEN "Minishell:" RE);
 	prompt = ft_strjoin(prefix_part, exit_code);
 	ft_free(prefix_part);
 	ft_free(exit_status);
@@ -101,7 +101,7 @@ char	*get_prompt_path(t_args *shell_data)
 		home_directory = home_env->value;
 	intermediate_path = ft_strjoin(ft_remove_substr(working_directory,
 				home_directory), "$ ");
-	ft_free(working_directory);
+	free(working_directory);
 	cached_prompt_path = generate_command_prompt(intermediate_path);
 	ft_free(intermediate_path);
 	return (cached_prompt_path);

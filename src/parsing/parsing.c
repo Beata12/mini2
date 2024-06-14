@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 06:36:10 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 15:40:06 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 17:50:25 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	split_tokens(char *input_string, t_args *shell_data)
 	{
 		if (is_whitespace(input_string[i]))
 			continue ;
-		shell_data->token_array[token_index].type = token_typizator(&input_string[i]);
+		shell_data->token_array[token_index].type
+			= token_typizator(&input_string[i]);
 		token_length = check_special_symbol(&input_string[i]);
 		if (!token_length)
 			token_length = skip_special_characters(&input_string[i]);

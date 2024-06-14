@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 15:00:05 by aneekhra          #+#    #+#             */
-/*   Updated: 2024/06/14 16:47:51 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 17:18:14 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = ft_strlen(s1);
 	j = ft_strlen(s2);
-	a = malloc(i + j + 1);
+	a = ft_malloc(i + j + 1);
 	if (!a || !s2)
 		return (NULL);
 	ft_strcpy(a, s1);
