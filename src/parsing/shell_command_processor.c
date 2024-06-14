@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 07:15:52 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 11:26:30 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:54:51 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_redirection_type(t_token *redirection_token,
 	redirection_token->word = ft_strdup(token_array[*token_index].word);
 }
 
-void	handle_double_redirection(t_token *redirection_token,
+static void	handle_double_redirection(t_token *redirection_token,
 		t_token *token_array, int *token_index)
 {
 	set_redirection_type(redirection_token, token_array, token_index);

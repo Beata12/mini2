@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:01 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 18:45:47 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:55:40 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,7 @@ void			expand_dollar_variables(char **input_string,
 					char *quote_status, t_args *shell_data);
 char			*find_variable_name(char *input_string);
 void			free_string_array(char **string_array);
-void			handle_double_redirection(t_token *redirection_token,
-					t_token *token_array, int *token_index);
 void			is_open_quote(char input_string, char *quote_flag);
-void			initialize_command(int command_counter,
-					int *token_counter, t_args *shell_data);
 void			initialize_command_array(t_args *shell_data);
 void			initialize_token_array(char *input_string,
 					t_args *shell_data);

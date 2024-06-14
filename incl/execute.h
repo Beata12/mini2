@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:07 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 18:46:57 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:50:00 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,3 @@ void	setup_output_redirection(t_args *shell_data,
 			int command_index);
 
 #endif
-
-// int		manage_file_access(char *file_path, int file_flags);
-// void	execute_heredoc(t_args *shell_data,
-// 			int command_index, int input_index);

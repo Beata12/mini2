@@ -6,7 +6,7 @@
 #    By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 12:41:20 by bmarek            #+#    #+#              #
-#    Updated: 2024/06/14 13:32:53 by bmarek           ###   ########.fr        #
+#    Updated: 2024/06/14 18:58:13 by bmarek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ FT_DES = ft_destructor
 SRC =	minishell.c \
 		execute.c \
 		tokenize.c \
-		cmd.c \
-		cmd_init.c \
 		src/utils/signal_handlers.c \
 		src/utils/errors_utils.c \
 		src/utils/shell_data_cleaner.c \
@@ -40,6 +38,8 @@ SRC =	minishell.c \
 		src/parsing/parsing.c \
 		src/parsing/dollar_var_expander.c \
 		src/parsing/quote_handler.c \
+		src/parsing/shell_command_parser.c \
+		src/parsing/shell_command_processor.c \
 		src/parsing/utils/input_validation.c \
 		src/parsing/utils/validation_utils.c \
 		src/parsing/utils/utils.c \

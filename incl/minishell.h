@@ -6,7 +6,7 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 18:45:24 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:49:53 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,3 @@ void			wait_for_child_processes(t_args *shell_data);
 t_env_variable	*find_env_var(char *name, t_env_variable *env_list);
 
 #endif
-
-// char			*find_env(t_env_variable *env, char *name);
-// char			*ft_remove_substr(char *str, char *sub);
-// int				identify_builtin_command(char *cmd);
-// int				is_empty_str(char *input_string);
-// int				leave_heredoc(t_args *shell_data, int err_i);
-// void			alloc_err(void);
-// void			add_environment_variable(t_env_variable **env_list,
-// 					char *env_name, char *env_value);
-// void			dollar_value_subst(char **s, char *q,
-// 					t_args *shell_data);
-// void			fill_redir_type(t_token *rdr, t_token *tarr,
-// 					int *t);
-// void			ft_free_array(char **array);
-// void			free_environment_node(t_env_variable **env_list);
-// void			handle_sigint(int sig);
