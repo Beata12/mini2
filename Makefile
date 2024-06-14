@@ -3,27 +3,34 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+         #
+#    By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 12:41:20 by bmarek            #+#    #+#              #
-#    Updated: 2024/06/14 13:32:53 by bmarek           ###   ########.fr        #
+#    Updated: 2024/06/14 18:57:00 by aneekhra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GREEN = \033[0;32m
 RED = \033[0;31m
 CYAN = \033[0;36m
+PINK = \033[0;35m
 MAGENTA = \033[0;35m
 ENDCOLOR = \033[0m
 
 NAME = minishell
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Iincl
-LFLAGS = -lreadline -Ireadline -L$(LFT_F) -lft -I$(LFT_F)
-# HEADERS = incl/minishell.h incl/execute.h incl/parsing.h
-LFT_F = libft
+LFLAGS = -lreadline -Ireadline -L$(LFT_F) -lft -I$(LFT_F) ./ft_destructor/ft_alloc.a
+
+RM = rm -rf
 FT_DES = ft_destructor
+LFT_F = libft
+LIBFT = $(LFT_F)/libft.a
+
+SRC_F = src/
+OBJ_F = obj/
+VPATH = $(SRC_F) $(SRC_F)execution/ $(SRC_F)utils/ $(SRC_F)parsing/ 
+OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 
 SRC =	minishell.c \
 		execute.c \
@@ -59,38 +66,41 @@ SRC =	minishell.c \
 		src/execution/shell_commands/unset.c \
 		src/execution/shell_commands/export.c \
 
-SRC_F = src/
-OBJ_F = obj/
-VPATH = $(SRC_F) $(SRC_F)execution/ $(SRC_F)utils/ $(SRC_F)parsing/ 
-OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(MAKE) -C $(FT_DES) --silent
-	@$(MAKE) -C $(LFT_F) --silent
-
-	@printf "\n"
+$(NAME): $(OBJ) $(LIBFT)
 	@echo "${MAGENTA}				🚀 Compiling $(NAME)... 🚀${ENDCOLOR}"
-	$(CC) -o $@ $(OBJ) $(LFLAGS) $(CFLAGS) ./ft_destructor/ft_alloc.a
-	@echo "${GREEN}\n			✅ $(NAME) Compilation completed successfully! ✅${ENDCOLOR}"
-	@echo "${CYAN}				🚀 Run with ./minishell 🚀\n${ENDCOLOR}"
-	
-$(OBJ_F)%.o: %.c  Makefile
-	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	$(MAKE) -C $(FT_DES) --silent
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
+	clear
+	@echo "${GREEN}			✅ $(NAME) Compilation completed successfully! ✅${ENDCOLOR}"
+	@echo "${RED}				🚀 Run with ./minishell 🚀\n${ENDCOLOR}"
+
+$(LIBFT):
+	$(MAKE) -C $(LFT_F) --silent
+
+$(OBJ_F)%.o: %.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@  
 
 
 v: all
-	@valgrind --leak-check=full ./minishell
+	./$(NAME)
 clean:
+	$(RM) $(OBJ_F)
+	$(RM) $(FT_DES)/*.
+	$(RM) $(LFT_F)/*.o
+	clear
 	@echo "${RED}🧹 Cleaning objects... 🧹${ENDCOLOR}"
-	@rm -rf $(OBJ_F)
 
 fclean: clean
-	@echo "${RED}🧹 Cleaning $(NAME)... 🧹${ENDCOLOR}"
-	@rm -f $(NAME)
-
+	$(RM) $(NAME)
+	$(RM) $(FT_DES)/ft_alloc.a
+	$(RM) $(LFT_F)/libft.a
+	clear
+	@echo "${RED}🧹 Deep Cleaning $(NAME)... 🧹${ENDCOLOR}"
+	
 re: fclean all
 
 .PHONY:	all clean fclean re bonus

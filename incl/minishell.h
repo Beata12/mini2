@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 16:55:22 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:56:38 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@
 # define HISTORY_FILE "./.minishell_history"
 # define RE "\001\033[0m\002"
 # define RED "\001\033[1;31m\002"
-# define BLUE "\001\033[1;34m\002"
+# define BOLDBLUE "\001\033[1;34m\002" 
 # define GREEN "\001\033[0;32m\002"
 # define YELLOW "\001\033[1;33m\002"
 # define MAGENTA "\001\033[0;35m\002"
 # define LIGHTGREEN "\001\033[1;32m\002"
+# define CYAN "\001\033[0;36m\002"
+# define WHITE "\001\033[1;37m\002"
+# define BOLDMAROON "\001\033[1;31m\002"
+# define BOLDYELLOW "\001\033[1;33m\002"
+# define BOLDMAGENTA "\001\033[1;35m\002"
 
 # include "../ft_destructor/ft_alloc.h"
 # include "../libft/libft.h"

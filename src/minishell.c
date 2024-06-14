@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 17:26:51 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:56:43 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_alloc_init();
 	if (argc == 1)
 	{
+		ft_printf(BOLDMAGENTA " 				🎉 WELCOME TO MINISHELL! 🎉		\n" RE);
 		initialize_shell(&shell_data, initialize_envp(envp));
 		display_prompt(&shell_data);
 	}
