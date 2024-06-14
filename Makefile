@@ -6,7 +6,7 @@
 #    By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 12:41:20 by bmarek            #+#    #+#              #
-#    Updated: 2024/06/14 18:57:00 by aneekhra         ###   ########.fr        #
+#    Updated: 2024/06/14 19:03:04 by aneekhra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,6 @@ OBJ = $(addprefix $(OBJ_F), $(SRC:%.c=%.o))
 SRC =	minishell.c \
 		execute.c \
 		tokenize.c \
-		cmd.c \
-		cmd_init.c \
 		src/utils/signal_handlers.c \
 		src/utils/errors_utils.c \
 		src/utils/shell_data_cleaner.c \
@@ -47,6 +45,8 @@ SRC =	minishell.c \
 		src/parsing/parsing.c \
 		src/parsing/dollar_var_expander.c \
 		src/parsing/quote_handler.c \
+		src/parsing/shell_command_parser.c \
+		src/parsing/shell_command_processor.c \
 		src/parsing/utils/input_validation.c \
 		src/parsing/utils/validation_utils.c \
 		src/parsing/utils/utils.c \

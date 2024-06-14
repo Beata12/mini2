@@ -6,13 +6,12 @@
 /*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 07:58:10 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 09:25:08 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/14 18:55:55 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-//DZIALA, WSYZTSKO OK
 static void	reset_count(t_data_counter *token_counter)
 {
 	token_counter->arg_count = 0;
@@ -62,7 +61,7 @@ static void	update_count(t_token *token, t_data_counter *count)
 	}
 }
 
-void	initialize_command(int command_counter, int *token_counter,
+static void	initialize_command(int command_counter, int *token_counter,
 	t_args *shell_data)
 {
 	t_data_counter	count;

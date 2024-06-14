@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 15:30:13 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 18:56:38 by aneekhra         ###   ########.fr       */
+/*   Created: 2024/06/14 19:00:25 by aneekhra          #+#    #+#             */
+/*   Updated: 2024/06/14 19:00:29 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,39 +63,35 @@ typedef struct s_args
 }						t_args;
 
 char			**initialize_envp(char **environment);
-void			sort_environment_variables(t_env_variable *env_var);
-int				identify_builtin_command(char *cmd);
 char			**generate_envp_array(t_env_variable *env_list);
-void			wait_for_child_processes(t_args *shell_data);
 char			*locate_file_in_path(char *file_name, char *path_to_search);
 char			*get_prompt_path(t_args *shell_data);
-char			*find_env(t_env_variable *env, char *name);
-char			*ft_remove_substr(char *str, char *sub);
-void			initialize_pipes(t_args *shell_data, int **pipe_array);
+
+int				get_char_position(char *input_str, int target_char);
+int				process_and_store_env_var(char *input_str,
+					t_env_variable **env_list);
+
+void			clear_environment_list(t_env_variable **env_list);
 void			close_pipe_descriptors(t_args *shell_data, int **pipes);
 void			copy_environment_list(t_env_variable *env_list,
 					t_env_variable **new_env_list);
-void			remove_env_var(char *str, t_env_variable **env);
 void			exit_with_error(char *str, char *str2, int status);
-void			process_environment_variables(t_args *shell_data,
-					char **args, int i);
+void			free_command_resources(t_args *shell_data);
 void			handle_error(const char *error_message, t_args *s_state,
 					int exit_status_code, int modification_flag);
-void			alloc_err(void);
-int				is_empty_str(char *input_string);
-char			*arrjoin(char **arr);
-void			ft_free_array(char **array);
-void			clear_environment_list(t_env_variable **env_list);
-void			free_environment_node(t_env_variable **env_list);
-void			free_command_resources(t_args *shell_data);
-void			initialize_shell(t_args *shell_state, char **environment);
-int				leave_heredoc(t_args *shell_data, int err_i);
-void			add_environment_variable(t_env_variable **env_list,
-					char *env_name, char *env_value);
-void			save_history(void);
-void			load_history(void);
-void			setup_signal_handlers(void);
 void			handle_sigquit(int sig);
-void			handle_sigint(int sig);
+void			initialize_environment(t_args *shell_data, char **env);
+void			initialize_pipes(t_args *shell_data, int **pipe_array);
+void			initialize_shell(t_args *shell_state, char **environment);
+void			load_history(void);
+void			process_environment_variables(t_args *shell_data,
+					char **args, int i);
+void			remove_env_var(char *str, t_env_variable **env);
+void			save_history(void);
+void			setup_signal_handlers(void);
+void			sort_environment_variables(t_env_variable *env_var);
+void			wait_for_child_processes(t_args *shell_data);
+
+t_env_variable	*find_env_var(char *name, t_env_variable *env_list);
 
 #endif
