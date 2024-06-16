@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 17:49:57 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:58:10 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	ft_execve(t_args *shell_data)
 		exit_with_error(command_args[0], ": command not found", 127);
 	execve(executable_path, command_args, envp_array);
 	exit_with_error(command_args[0], ": command not found", 127);
-	if (command_args[0] != NULL)
-		exit_with_error(command_args[0], ": command not found", 127);
+	// if (command_args[0] != NULL)
+	// 	exit_with_error(command_args[0], ": command not found", 127);
 	free(envp_array);
 	exit(0);
 }

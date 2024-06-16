@@ -6,7 +6,7 @@
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 18:56:43 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/15 14:14:36 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ int	validate_input(char *user_input)
 	}
 	return (0);
 }
+// static int insert_tab(int count, int key) {
+//     (void)count; // Unused parameter
+//     (void)key;   // Unused parameter
+
+//     // Insert a literal tab character at the cursor position
+//     rl_insert_text("\t");
+// 	// free(key);
+//     return 0;
+// }
+// static int insert_space(int count, int key) {
+//     (void)count; // Unused parameter
+//     (void)key;   // Unused parameter
+
+//     // Insert a literal space character at the cursor position
+//     rl_insert_text(" ");
+//     return 0;
+// }
 
 static void	display_prompt(t_args *shell_data)
 {
@@ -49,6 +66,9 @@ static void	display_prompt(t_args *shell_data)
 
 	load_history();
 	setup_signal_handlers();
+	//  rl_bind_key('\t', insert_tab);
+	 
+	// rl_bind_key(' ', insert_space);
 	while (1)
 	{
 		current_directory = get_prompt_path(shell_data);

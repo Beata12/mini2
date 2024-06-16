@@ -1,3 +1,33 @@
+shell_command_processor;
+
+void	set_redirection_type(t_token *redirection_token,
+		t_token *token_array, int *token_index)
+{
+	if (!redirection_token || !token_array || !token_index) {
+		exit_with_error("RED", "Error: Null pointer passed to set_redirection_type\n",1);
+        return;
+    }
+	redirection_token->type = token_array[*token_index].type;
+	(*token_index)++;
+	if (!token_array[*token_index].word)
+	{	
+	memory_allocation_error(); 
+		if (redirection_token->word != NULL)
+        {
+            free(redirection_token->word);
+            redirection_token->word = NULL;
+        }
+        return;
+	}
+	redirection_token->word = ft_strdup(token_array[*token_index].word);
+	if(!redirection_token->word)
+	{
+		exit_with_error("stderr", "Error: Memory allocation error in set_redirection_type\n",1);
+		memory_allocation_error();
+		}
+}
+
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +36,7 @@
 /*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:32:06 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/16 16:36:45 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:40:48 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +51,27 @@ char	*locate_file_in_path(char *file_name, char *path_to_search)
 	char	**search_paths;
 
 	i = 0;
+	 if (file_name == NULL || path_to_search == NULL)
+        return (NULL);
 	search_paths = ft_split(path_to_search, ':');
+	if(search_paths == NULL)
+		return (NULL);
 	while (search_paths[i] != NULL)
 	{
 		current_path = ft_strjoin(search_paths[i], "/");
+		if (current_path == NULL)
+        {
+            free_string_array(search_paths);
+            return (NULL);
+        }
 		full_path = ft_strjoin(current_path, file_name);
 		ft_free(current_path);
+		if (full_path == NULL)
+        {
+            free_string_array(search_paths);
+            return (NULL);
+        }
+        printf("Trying to open: %s\n", full_path);
 		fd = open(full_path, O_RDONLY);
 		if (fd != -1)
 		{

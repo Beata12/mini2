@@ -6,7 +6,7 @@
 #    By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 12:41:20 by bmarek            #+#    #+#              #
-#    Updated: 2024/06/14 19:03:04 by aneekhra         ###   ########.fr        #
+#    Updated: 2024/06/16 16:16:55 by aneekhra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ $(OBJ_F)%.o: %.c
 
 
 v: all
-	./$(NAME)
+	valgrind --leak-check=full ./$(NAME)
 clean:
 	$(RM) $(OBJ_F)
 	$(RM) $(FT_DES)/*.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 11:12:16 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 13:01:55 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:40:16 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	memory_allocation_error(void)
 {
-	exit(printf(RED "Allocation failed\n" RE));
+	exit(printf(WHITE "Allocation failed\n" RE));
 }

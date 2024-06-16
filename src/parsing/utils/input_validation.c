@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 12:12:16 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/14 17:47:16 by bmarek           ###   ########.fr       */
+/*   Updated: 2024/06/15 13:27:35 by aneekhra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	wrong_input(t_args *shell_data, char *input)
 		else if (symbol_error_flag)
 			my_error((char *)&symbol_error_flag, 2);
 	}
+	else if (*input == ' ' || *input == '\t')
+		printf("");
 	else if (ft_strlen(input) == 1)
 		printf("command not found\n");
 	else
