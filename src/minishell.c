@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 07:15:00 by bmarek            #+#    #+#             */
-/*   Updated: 2024/06/15 14:14:36 by aneekhra         ###   ########.fr       */
+/*   Updated: 2024/06/17 07:46:58 by bmarek           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ static void	display_prompt(t_args *shell_data)
 
 	load_history();
 	setup_signal_handlers();
-	//  rl_bind_key('\t', insert_tab);
-	 
-	// rl_bind_key(' ', insert_space);
 	while (1)
 	{
 		current_directory = get_prompt_path(shell_data);
@@ -100,7 +97,8 @@ int	main(int argc, char **argv, char **envp)
 	ft_alloc_init();
 	if (argc == 1)
 	{
-		ft_printf(BOLDMAGENTA " 				🎉 WELCOME TO MINISHELL! 🎉		\n" RE);
+		printf(BOLDMAGENTA " 				" RE);
+		printf(BOLDMAGENTA " 🎉 WELCOME TO MINISHELL! 🎉		\n" RE);
 		initialize_shell(&shell_data, initialize_envp(envp));
 		display_prompt(&shell_data);
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aneekhra <aneekhra@student.42.fr>          +#+  +:+       +#+         #
+#    By: bmarek <bmarek@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/14 12:41:20 by bmarek            #+#    #+#              #
-#    Updated: 2024/06/16 16:16:55 by aneekhra         ###   ########.fr        #
+#    Updated: 2024/06/16 20:13:28 by bmarek           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ v: all
 	valgrind --leak-check=full ./$(NAME)
 clean:
 	$(RM) $(OBJ_F)
-	$(RM) $(FT_DES)/*.
+	$(RM) $(FT_DES)/*.o
 	$(RM) $(LFT_F)/*.o
 	clear
 	@echo "${RED}🧹 Cleaning objects... 🧹${ENDCOLOR}"
